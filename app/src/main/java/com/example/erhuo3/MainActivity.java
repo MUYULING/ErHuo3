@@ -1,5 +1,6 @@
 package com.example.erhuo3;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
                     mTextMessage.setText(R.string.title_homepage);
                     return true;
                 case R.id.navigation_search:
-                    mTextMessage.setText(R.string.title_search);
+                    startActivity(new Intent(MainActivity.this, SearchActivity.class));
                     return true;
                 case R.id.navigation_me:
                     mTextMessage.setText(R.string.title_me);
