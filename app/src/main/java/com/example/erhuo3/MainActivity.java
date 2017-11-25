@@ -3,14 +3,13 @@ package com.example.erhuo3;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -70,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
             public void onPageScrollStateChanged(int state) {
             }
         });
+
         setupViewPager(viewPager);
     }
 
@@ -78,10 +78,12 @@ public class MainActivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         adapter.addFragment(new HomeFragment());
-        adapter.addFragment(BaseFragment.newInstance("搜索"));
+        adapter.addFragment(new SearchFragment());
         adapter.addFragment(BaseFragment.newInstance("我"));
         viewPager.setAdapter(adapter);
     }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar, menu);

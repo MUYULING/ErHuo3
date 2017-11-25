@@ -8,4 +8,5 @@
     <color name="colorText">#797979</color>
     <color name="tab_checked">#3F51B5</color>
     <color name="tab_unchecked">#757575</color>
+    <color name="searchmenu">#757575</color>
 </resources>
