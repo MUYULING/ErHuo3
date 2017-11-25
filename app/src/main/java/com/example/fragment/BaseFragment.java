@@ -1,4 +1,4 @@
-package com.example.erhuo3;
+package com.example.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.erhuo3.R;
 
 /**
  * Created by bruce on 2016/11/1.

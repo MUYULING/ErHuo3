@@ -1,4 +1,4 @@
-package com.example.erhuo3;
+package com.example.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

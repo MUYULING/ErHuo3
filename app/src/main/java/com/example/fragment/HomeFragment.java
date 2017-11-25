@@ -1,4 +1,4 @@
-package com.example.erhuo3;
+package com.example.fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -8,6 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import com.example.erhuo3.MainActivity;
+import com.example.erhuo3.R;
 
 /**
  * Created by Gary on 2017/11/25.
