@@ -1,4 +1,4 @@
-package com.example.searchview;
+package com.erhuo.searchview;
 
 import android.content.Context;
 import android.util.AttributeSet;

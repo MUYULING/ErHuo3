@@ -1,4 +1,4 @@
-package com.example.erhuo3;
+package com.erhuo.erhuo3;
 
 /**
  * Created by mac on 2017/11/18.
@@ -8,9 +8,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.searchview.ICallBack;
-import com.example.searchview.SearchView;
-import com.example.searchview.bCallBack;
+import com.erhuo.searchview.ICallBack;
+import com.erhuo.searchview.SearchView;
+import com.erhuo.searchview.bCallBack;
 
 /**
  * Created by Carson_Ho on 17/8/11.

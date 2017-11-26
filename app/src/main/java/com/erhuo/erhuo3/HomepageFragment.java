@@ -1,4 +1,4 @@
-package com.example.erhuo3;
+package com.erhuo.erhuo3;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,14 +15,6 @@ import android.widget.TextView;
  */
 
 public class HomepageFragment extends Fragment {
-
-    public static BaseFragment newInstance(String info) {
-        Bundle args = new Bundle();
-        BaseFragment fragment = new BaseFragment();
-        args.putString("info", info);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Nullable
     @Override

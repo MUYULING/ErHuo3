@@ -21,7 +21,7 @@
             android:padding="10dp"
             android:src="@drawable/back" />
 
-        <com.example.searchview.EditText_Clear
+        <com.erhuo.searchview.EditText_Clear
             android:id="@+id/et_search"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
@@ -45,12 +45,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.example.searchview.SearchListView
+            <com.erhuo.searchview.SearchListView
                 android:id="@+id/listView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-            </com.example.searchview.SearchListView>
+            </com.erhuo.searchview.SearchListView>
 
             <TextView
                 android:id="@+id/tv_clear"

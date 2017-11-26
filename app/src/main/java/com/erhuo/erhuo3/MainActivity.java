@@ -1,4 +1,4 @@
-package com.example.erhuo3;
+package com.erhuo.erhuo3;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,6 +10,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.erhuo.adapter.ViewPagerAdapter;
+import com.erhuo.fragment.BaseFragment;
+import com.erhuo.fragment.HomeFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -69,21 +72,17 @@ public class MainActivity extends AppCompatActivity {
             public void onPageScrollStateChanged(int state) {
             }
         });
-
         setupViewPager(viewPager);
     }
 
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-
         adapter.addFragment(new HomeFragment());
         adapter.addFragment(new SearchFragment());
         adapter.addFragment(BaseFragment.newInstance("我"));
         viewPager.setAdapter(adapter);
     }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar, menu);
