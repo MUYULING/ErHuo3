@@ -36,12 +36,12 @@
                     android:src="@drawable/ic_search" />
 
                 <TextView
+                    android:id="@+id/search_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_margin="10dp"
                     android:layout_toRightOf="@id/search"
-                    android:text="搜索话题、问题或人"
                     android:textSize="16sp" />
 
             </RelativeLayout>

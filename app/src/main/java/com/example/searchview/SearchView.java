@@ -67,6 +67,7 @@ public class SearchView extends LinearLayout {
      * 构造函数
      * 作用：对搜索框进行初始化
      */
+
     public SearchView(Context context) {
         super(context);
         this.context = context;
@@ -160,7 +161,7 @@ public class SearchView extends LinearLayout {
                     if (!(mCallBack == null)){
                         mCallBack.SearchAciton(et_search.getText().toString());
                     }
-                    Toast.makeText(context, "需要搜索的是" + et_search.getText(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "需要搜索的是" + mCallBack, Toast.LENGTH_SHORT).show();
 
                     // 2. 点击搜索键后，对该搜索字段在数据库是否存在进行检查（查询）->> 关注1
                     boolean hasData = hasData(et_search.getText().toString().trim());
@@ -169,6 +170,7 @@ public class SearchView extends LinearLayout {
                         insertData(et_search.getText().toString().trim());
                         queryData("");
                     }
+
                 }
                 return false;
             }
@@ -213,7 +215,11 @@ public class SearchView extends LinearLayout {
                 TextView textView = (TextView) view.findViewById(android.R.id.text1);
                 String name = textView.getText().toString();
                 et_search.setText(name);
-                Toast.makeText(context, name, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, name, Toast.LENGTH_SHORT).show();
+                if (!(mCallBack == null)){
+                    mCallBack.SearchAciton(et_search.getText().toString());
+                }
+                Toast.makeText(context, "需要搜索的是" + mCallBack, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -292,7 +298,7 @@ public class SearchView extends LinearLayout {
         }
         else {
             tv_clear.setVisibility(INVISIBLE);
-        };
+        }
 
     }
 
