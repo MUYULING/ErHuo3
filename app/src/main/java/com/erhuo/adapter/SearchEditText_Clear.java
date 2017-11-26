@@ -12,7 +12,7 @@ import com.erhuo.erhuo3.R;
  * Created by Carson_Ho on 17/8/10.
  */
 
-public class EditText_Clear extends android.support.v7.widget.AppCompatEditText {
+public class SearchEditText_Clear extends android.support.v7.widget.AppCompatEditText {
 
 
     /**
@@ -20,18 +20,18 @@ public class EditText_Clear extends android.support.v7.widget.AppCompatEditText 
      */
     private Drawable clearDrawable,searchDrawable;
 
-    public EditText_Clear(Context context) {
+    public SearchEditText_Clear(Context context) {
         super(context);
         init();
         // 初始化该组件时，对EditText_Clear进行初始化 ->>步骤2
     }
 
-    public EditText_Clear(Context context, AttributeSet attrs) {
+    public SearchEditText_Clear(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public EditText_Clear(Context context, AttributeSet attrs, int defStyleAttr) {
+    public SearchEditText_Clear(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
