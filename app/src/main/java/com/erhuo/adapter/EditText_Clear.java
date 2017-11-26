@@ -1,4 +1,4 @@
-package com.erhuo.searchview;
+package com.erhuo.adapter;
 
 import android.content.Context;
 import android.graphics.Rect;

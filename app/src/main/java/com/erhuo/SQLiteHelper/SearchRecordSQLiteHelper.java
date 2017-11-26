@@ -1,4 +1,4 @@
-package com.erhuo.searchview;
+package com.erhuo.SQLiteHelper;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,12 +9,12 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 
 // 继承自SQLiteOpenHelper数据库类的子类
-public class RecordSQLiteOpenHelper extends SQLiteOpenHelper {
+public class SearchRecordSQLiteHelper extends SQLiteOpenHelper {
 
     private static String name = "temp.db";
     private static Integer version = 1;
 
-    public RecordSQLiteOpenHelper(Context context) {
+    public SearchRecordSQLiteHelper(Context context) {
         super(context, name, null, version);
     }
 

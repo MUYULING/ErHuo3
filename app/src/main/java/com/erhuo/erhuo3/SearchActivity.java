@@ -8,9 +8,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.erhuo.searchview.ICallBack;
-import com.erhuo.searchview.SearchView;
-import com.erhuo.searchview.bCallBack;
+
+import com.erhuo.interfaces.bCallBack;
+import com.erhuo.interfaces.ICallBack;
+import com.erhuo.adapter.SearchView;
 
 /**
  * Created by Carson_Ho on 17/8/11.

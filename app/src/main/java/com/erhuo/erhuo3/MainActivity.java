@@ -10,9 +10,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.erhuo.adapter.BottomNavigationViewHelper;
 import com.erhuo.adapter.ViewPagerAdapter;
 import com.erhuo.fragment.BaseFragment;
 import com.erhuo.fragment.HomeFragment;
+import com.erhuo.fragment.SearchFragment;
+
 
 public class MainActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.erhuo.searchview;
+package com.erhuo.interfaces;
 
 /**
  * Created by Carson_Ho on 17/8/11.

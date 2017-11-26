@@ -8,7 +8,7 @@
     android:background="@color/colorBackground"
     tools:context="com.erhuo.erhuo3.MainActivity">
 
-    <com.erhuo.searchview.SearchView
+    <com.erhuo.adapter.SearchView
         android:id="@+id/search_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

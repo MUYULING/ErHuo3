@@ -1,4 +1,4 @@
-package com.erhuo.searchview;
+package com.erhuo.adapter;
 
 /**
  * Created by mac on 2017/11/18.
@@ -25,6 +25,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.erhuo.erhuo3.R;
+import com.erhuo.interfaces.ICallBack;
+import com.erhuo.interfaces.bCallBack;
+import com.erhuo.SQLiteHelper.SearchRecordSQLiteHelper;
+
 
 public class SearchView extends LinearLayout {
 
@@ -46,11 +50,11 @@ public class SearchView extends LinearLayout {
 
     // 数据库变量
     // 用于存放历史搜索记录
-    private RecordSQLiteOpenHelper helper ;
+    private SearchRecordSQLiteHelper helper ;
     private SQLiteDatabase db;
 
     // 回调接口
-    private  ICallBack mCallBack;// 搜索按键回调接口
+    private ICallBack mCallBack;// 搜索按键回调接口
     private  bCallBack bCallBack; // 返回按键回调接口
 
     // 自定义属性设置
@@ -129,7 +133,7 @@ public class SearchView extends LinearLayout {
         initView();
 
         // 2. 实例化数据库SQLiteOpenHelper子类对象
-        helper = new RecordSQLiteOpenHelper(context);
+        helper = new SearchRecordSQLiteHelper(context);
 
         // 3. 第1次进入时查询所有的历史搜索记录
         queryData("");
