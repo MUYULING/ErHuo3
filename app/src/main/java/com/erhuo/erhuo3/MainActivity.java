@@ -1,20 +1,18 @@
-package com.example.erhuo3;
+package com.erhuo.erhuo3;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
-import com.example.adapter.ViewPagerAdapter;
-import com.example.fragment.BaseFragment;
-import com.example.fragment.HomeFragment;
+import com.erhuo.adapter.ViewPagerAdapter;
+import com.erhuo.fragment.BaseFragment;
+import com.erhuo.fragment.HomeFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -80,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-
         adapter.addFragment(new HomeFragment());
         adapter.addFragment(new SearchFragment());
         adapter.addFragment(BaseFragment.newInstance("我"));

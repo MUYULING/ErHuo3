@@ -1,4 +1,4 @@
-package com.example.erhuo3;
+package com.erhuo.erhuo3;
 
 import android.annotation.SuppressLint;
 import android.support.design.internal.BottomNavigationItemView;

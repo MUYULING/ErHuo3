@@ -1,4 +1,4 @@
-package com.example.util;
+package com.erhuo.util;
 
 /**
  * Created by Gary on 2017/11/25.
@@ -6,7 +6,7 @@ package com.example.util;
 
 enum TAG{food, book, toiletry, drink, digital, clothes, cosmetic, bag, shoes};
 
-public class Commodity_Home {
+public class CommodityHome {
     private String user_name;       //用户登录名
     private String commodity_name;  //商品名称
     private int commodity_id;       //商品id
@@ -15,7 +15,12 @@ public class Commodity_Home {
     private String description;     //商品描述
     private int imageID;            //图片ID
 
-    public Commodity_Home(String user_name, String commodity_name, int commodity_id, double price, TAG tag, String description, int imageID) {
+    public CommodityHome(String commodity_name, int imageID) {
+        this.commodity_name = commodity_name;
+        this.imageID = imageID;
+    }
+
+    public CommodityHome(String user_name, String commodity_name, int commodity_id, double price, TAG tag, String description, int imageID) {
         this.user_name = user_name;
         this.commodity_name = commodity_name;
         this.commodity_id = commodity_id;

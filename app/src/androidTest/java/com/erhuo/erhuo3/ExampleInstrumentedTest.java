@@ -1,4 +1,4 @@
-package com.example.erhuo3;
+package com.erhuo.erhuo3;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

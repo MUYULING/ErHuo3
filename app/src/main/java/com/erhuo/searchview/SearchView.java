@@ -1,4 +1,4 @@
-package com.example.searchview;
+package com.erhuo.searchview;
 
 /**
  * Created by mac on 2017/11/18.
@@ -24,7 +24,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.erhuo3.R;
+import com.erhuo.erhuo3.R;
 
 public class SearchView extends LinearLayout {
 

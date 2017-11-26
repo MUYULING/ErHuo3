@@ -1,4 +1,4 @@
-package com.example.erhuo3;
+package com.erhuo.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,12 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.erhuo.erhuo3.R;
+
 /**
  * Created by bruce on 2016/11/1.
  * BaseFragment
  */
 
-public class HomepageFragment extends Fragment {
+public class BaseFragment extends Fragment {
 
     public static BaseFragment newInstance(String info) {
         Bundle args = new Bundle();
@@ -27,7 +29,7 @@ public class HomepageFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_homepage, null);
+        View view = inflater.inflate(R.layout.fragment_base, null);
         TextView tvInfo = (TextView) view.findViewById(R.id.textView);
         tvInfo.setText(getArguments().getString("info"));
         tvInfo.setOnClickListener(new View.OnClickListener() {
