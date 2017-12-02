@@ -5,4 +5,5 @@
     <string name="title_me">我</string>
     <string name="com_image">COM_IMAGE</string>
     <string name="see">查看详情</string>
+    <string name="user_image">USER_IMAGE</string>
 </resources>

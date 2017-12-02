@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -39,7 +40,7 @@ public class SearchView extends LinearLayout {
 
     // 搜索框组件
     private EditText et_search; // 搜索按键
-    private TextView tv_clear;  // 删除搜索记录按键
+    private Button tv_clear;  // 删除搜索记录按键
     private LinearLayout search_block; // 搜索框布局
     private ImageView searchBack; // 返回按键
 
@@ -239,7 +240,7 @@ public class SearchView extends LinearLayout {
                 }
 
                 //根据输入的内容模糊查询商品，并跳转到另一个界面，这个根据需求实现
-                Toast.makeText(context, "返回到上一页", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "返回到上一页", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -271,7 +272,7 @@ public class SearchView extends LinearLayout {
         listView = (SearchListView) findViewById(R.id.listView);
 
         // 5. 删除历史搜索记录 按钮
-        tv_clear = (TextView) findViewById(R.id.tv_clear);
+        tv_clear = (Button) findViewById(R.id.tv_clear);
         tv_clear.setVisibility(INVISIBLE);
 
         // 6. 返回按键

@@ -6,10 +6,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.erhuo.erhuo3.MainActivity;
 import com.erhuo.erhuo3.R;
 import com.erhuo.util.CommodityHome;
 
@@ -21,6 +24,8 @@ import java.util.List;
  */
 
 public class ComHomeAdapter extends RecyclerView.Adapter<ComHomeAdapter.ViewHolder> {
+
+    View view;
 
     private Context mContext;
     private List<CommodityHome> mCommodityHome;
@@ -56,13 +61,13 @@ public class ComHomeAdapter extends RecyclerView.Adapter<ComHomeAdapter.ViewHold
         if(mContext == null){
             mContext = parent.getContext();
         }
-        View view = LayoutInflater.from(mContext).inflate(R.layout.home_commodity_itemcard, parent, false);
+        view = LayoutInflater.from(mContext).inflate(R.layout.home_commodity_itemcard, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        CommodityHome commodityHome = mCommodityHome.get(position);
+        final CommodityHome commodityHome = mCommodityHome.get(position);
         holder.com_name.setText(commodityHome.getCommodityName());
         holder.com_des.setText(commodityHome.getDescription());
         DecimalFormat df = new DecimalFormat("#####0.00");
@@ -76,6 +81,13 @@ public class ComHomeAdapter extends RecyclerView.Adapter<ComHomeAdapter.ViewHold
         holder.com_downTime.setText(temp);
         temp = "http://123.207.161.20" + commodityHome.getImageID();
         Glide.with(mContext).load(temp).into(holder.com_image);
+        Button button = (Button) view.findViewById(R.id.click);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(), "hahaha from: " + commodityHome.getCommodityName(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override

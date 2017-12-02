@@ -18,10 +18,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.erhuo.adapter.ComHomeAdapter;
+import com.erhuo.adapter.UserHomeAdapter;
 import com.erhuo.erhuo3.MainActivity;
 import com.erhuo.erhuo3.R;
 import com.erhuo.erhuo3.SearchActivity;
 import com.erhuo.util.CommodityHome;
+import com.erhuo.util.UserHome;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,6 +48,9 @@ public class SearchFragment extends Fragment {
 
     private List<CommodityHome> comList = new ArrayList<>();
     private ComHomeAdapter adapter;
+    private List<UserHome>userList = new ArrayList<>();
+    private UserHomeAdapter adapter2;
+    private RecyclerView recyclerView;
 
 
     private View view;
@@ -55,6 +60,7 @@ public class SearchFragment extends Fragment {
 
     private String key;
     private List<CommodityHome> tmpList = new ArrayList<>();
+    private List<UserHome> tmpList2 = new ArrayList<>();
 
     private static final String[] name={"出售商品","求购商品","用户"};
     private Spinner spinner;
@@ -78,12 +84,20 @@ public class SearchFragment extends Fragment {
             }
         });
         MainActivity activity2 = (MainActivity) getActivity();
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.search_rev);
+        recyclerView = (RecyclerView) view.findViewById(R.id.search_rev);
         recyclerView.setLayoutManager(new LinearLayoutManager(activity2));
-        adapter = new ComHomeAdapter(comList);
-        recyclerView.setAdapter(adapter);
-
-
+        switch (itemSelectedNo){
+            case 0:
+            case 1:
+                adapter = new ComHomeAdapter(comList);
+                recyclerView.setAdapter(adapter);
+                break;
+            case 2:
+                adapter2 = new UserHomeAdapter(userList);
+                recyclerView.setAdapter(adapter2);
+                break;
+            default:break;
+        }
         MainActivity activity3 = (MainActivity) getActivity();
         spinner = (Spinner) view.findViewById(R.id.search_spinner);
         //将可选内容与ArrayAdapter连接起来，simple_spinner_item是android系统自带样式
@@ -105,16 +119,22 @@ public class SearchFragment extends Fragment {
             itemSelectedNo = itemNo;
             switch (itemSelectedNo){
                 case 0:
+                    adapter = new ComHomeAdapter(comList);
+                    recyclerView.setAdapter(adapter);
                     if(key != null && !key.equals("")){
                         getSearchResult(itemSelectedNo);
                     }
                     break;
                 case 1:
+                    adapter = new ComHomeAdapter(comList);
+                    recyclerView.setAdapter(adapter);
                     if(key != null && !key.equals("")){
                         getSearchResult(itemSelectedNo);
                     }
                     break;
                 case 2:
+                    adapter2 = new UserHomeAdapter(userList);
+                    recyclerView.setAdapter(adapter2);
                     if(key != null && !key.equals("")){
                         getSearchResult(itemSelectedNo);
                     }
@@ -190,6 +210,9 @@ public class SearchFragment extends Fragment {
                                 adapter.notifyDataSetChanged();
                                 break;
                             case 2:
+                                userList.clear();
+                                userList.addAll(tmpList2);
+                                adapter2.notifyDataSetChanged();
                                 break;
                             default:break;
                         }
@@ -202,30 +225,58 @@ public class SearchFragment extends Fragment {
 
     private void parseJSONWithJSONObject(String jsonData, int no){
         try{
-            tmpList.clear();
-            JSONArray jsonArray = new JSONArray(jsonData);
-            for(int i = 0; i < jsonArray.length(); i++){
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                String name = jsonObject.getString("name");
-                String user_name = jsonObject.getString("user_name");
-                int comId = jsonObject.getInt("com_id");
-                String type = jsonObject.getString("type");
-                String images = jsonObject.getString("images");
-                double price = jsonObject.getDouble("price");
-                String upTime = jsonObject.getString("up_time");
-                String downTime = jsonObject.getString("down_time");
-                String description = jsonObject.getString("description");
-                CommodityHome msg = new CommodityHome(user_name, name, comId, price, type, description, images, upTime, downTime);
-                tmpList.add(msg);
-                Log.d("WebWebWeb", "name: " + name);
-                Log.d("WebWebWeb", "user_name: " + user_name);
-                Log.d("WebWebWeb", "type: " + type);
-                Log.d("WebWebWeb", "com_id：" + comId);
-                Log.d("WebWebWeb", "price: " + price);
-                Log.d("WebWebWeb", "up_time: " + upTime);
-                Log.d("WebWebWeb", "down_time: " + downTime);
-                Log.d("WebWebWeb", "description: " + description);
-                Log.d("WebWebWeb", "image: " + images);
+            switch (no){
+                case 0:
+                case 1:
+                    tmpList.clear();
+                    JSONArray jsonArray = new JSONArray(jsonData);
+                    for(int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        String name = jsonObject.getString("name");
+                        String userName = jsonObject.getString("user_name");
+                        int comId = jsonObject.getInt("com_id");
+                        String type = jsonObject.getString("type");
+                        String images = jsonObject.getString("images");
+                        double price = jsonObject.getDouble("price");
+                        String upTime = jsonObject.getString("up_time");
+                        String downTime = jsonObject.getString("down_time");
+                        String description = jsonObject.getString("description");
+                        CommodityHome msg = new CommodityHome(userName, name, comId, price, type, description, images, upTime, downTime);
+                        tmpList.add(msg);
+                        Log.d("WebWebWeb", "name: " + name);
+                        Log.d("WebWebWeb", "user_name: " + userName);
+                        Log.d("WebWebWeb", "type: " + type);
+                        Log.d("WebWebWeb", "com_id：" + comId);
+                        Log.d("WebWebWeb", "price: " + price);
+                        Log.d("WebWebWeb", "up_time: " + upTime);
+                        Log.d("WebWebWeb", "down_time: " + downTime);
+                        Log.d("WebWebWeb", "description: " + description);
+                        Log.d("WebWebWeb", "image: " + images);
+                    }
+                    break;
+                case 2:
+                    tmpList2.clear();
+                    JSONArray jsonArray2 = new JSONArray(jsonData);
+                    for(int i = 0; i < jsonArray2.length(); i++){
+                        JSONObject jsonObject = jsonArray2.getJSONObject(i);
+                        String userName = jsonObject.getString("user_name");
+                        String images = jsonObject.getString("head_image");
+                        String nickName = jsonObject.getString("nick_name");
+                        String gender = jsonObject.getString("sex");
+                        double mark = jsonObject.getDouble("mark");
+                        String stuID = jsonObject.getString("student_id");
+                        String school = jsonObject.getString("school");
+                        String phone = jsonObject.getString("phone");
+                        String QQ = jsonObject.getString("qq");
+                        String weChat = jsonObject.getString("wechat");
+                        String email = jsonObject.getString("email");
+                        UserHome msg = new UserHome(userName, nickName, gender, mark, stuID, school, images, phone, QQ, weChat, email);
+                        tmpList2.add(msg);
+                        Log.d("WebWebWeb", "username: " + userName);
+                    }
+                    break;
+                default:
+                    break;
             }
         } catch (JSONException e) {
             e.printStackTrace();
