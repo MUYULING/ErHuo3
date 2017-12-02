@@ -53,13 +53,14 @@ public class HomeFragment extends android.support.v4.app.Fragment {
         view = inflater.inflate(R.layout.fragment_home, container, false);
         FloatingActionButton button = (FloatingActionButton) view.findViewById(R.id.home_add);
         MainActivity activity = (MainActivity) getActivity();
-        if(comList.size() == 0){
-            refreshItem(true);
-        }
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.home_rev);
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
         adapter = new ComHomeAdapter(comList);
         recyclerView.setAdapter(adapter);
+        if(comList.size() == 0){
+            //Toast.makeText(activity, "hahha", Toast.LENGTH_SHORT).show();
+            refreshItem(true);
+        }
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,24 +80,31 @@ public class HomeFragment extends android.support.v4.app.Fragment {
     }
 
     private void refreshItem(final boolean isFirst){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                getItem();
-                MainActivity activity = (MainActivity) getActivity();
-                activity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        comList.clear();
-                        comList.addAll(tmpList);
-                        adapter.notifyDataSetChanged();
-                        if(!isFirst){
-                            swipeRefreshLayout.setRefreshing(false);
-                        }
-                    }
-                });
-            }
-        }).start();
+        getItem();
+        comList.clear();
+        for(int i = 0; i < tmpList.size(); i++){
+            Log.d("TEMP", "name: " + tmpList.get(i).getCommodityName());
+            Log.d("TEMP", "user_name: " + tmpList.get(i).getUserName());
+            Log.d("TEMP", "type: " + tmpList.get(i).getTag());
+            Log.d("TEMP", "price: " + tmpList.get(i).getPrice());
+            Log.d("TEMP", "up_time: " + tmpList.get(i).getUpTime());
+            Log.d("TEMP", "down_time: " + tmpList.get(i).getDownTime());
+            Log.d("TEMP", "description: " + tmpList.get(i).getDescription());
+        }
+        comList.addAll(tmpList);
+        for(int i = 0; i < comList.size(); i++){
+            Log.d("COM", "name: " + tmpList.get(i).getCommodityName());
+            Log.d("COM", "user_name: " + tmpList.get(i).getUserName());
+            Log.d("COM", "type: " + tmpList.get(i).getTag());
+            Log.d("COM", "price: " + tmpList.get(i).getPrice());
+            Log.d("COM", "up_time: " + tmpList.get(i).getUpTime());
+            Log.d("COM", "down_time: " + tmpList.get(i).getDownTime());
+            Log.d("COM", "description: " + tmpList.get(i).getDescription());
+        }
+        adapter.notifyDataSetChanged();
+        if(!isFirst){
+            swipeRefreshLayout.setRefreshing(false);
+        }
     }
 
     private void getItem(){
@@ -106,7 +114,7 @@ public class HomeFragment extends android.support.v4.app.Fragment {
                 try{
                     OkHttpClient client = new OkHttpClient();
                     Request request = new Request.Builder()
-                            .url("http://123.207.161.20/suntong/mainPage.php?pages=30")
+                            .url("http://123.207.161.20/suntong/mainPage.php?pages=10")
                             .build();
                     Response response = null;
                     response = client.newCall(request).execute();
@@ -118,7 +126,7 @@ public class HomeFragment extends android.support.v4.app.Fragment {
                         @Override
                         public void run() {
                             MainActivity activity = (MainActivity) getActivity();
-                            Toast.makeText(activity, "无网络连接", Toast.LENGTH_LONG).show();
+                            Toast.makeText(activity, "无网络连接", Toast.LENGTH_SHORT).show();
                         }
                     });
                     e.printStackTrace();
