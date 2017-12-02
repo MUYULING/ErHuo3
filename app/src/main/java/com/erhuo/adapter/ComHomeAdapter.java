@@ -26,8 +26,6 @@ import java.util.List;
 
 public class ComHomeAdapter extends RecyclerView.Adapter<ComHomeAdapter.ViewHolder> {
 
-    View view;
-
     private Context mContext;
     private List<CommodityHome> mCommodityHome;
     static class ViewHolder extends RecyclerView.ViewHolder{
@@ -39,6 +37,7 @@ public class ComHomeAdapter extends RecyclerView.Adapter<ComHomeAdapter.ViewHold
         TextView com_tag;
         TextView com_upTime;
         TextView com_downTime;
+        Button button;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -50,6 +49,7 @@ public class ComHomeAdapter extends RecyclerView.Adapter<ComHomeAdapter.ViewHold
             com_tag = (TextView) itemView.findViewById(R.id.com_home_itemcard_tag);
             com_upTime = (TextView) itemView.findViewById(R.id.com_home_itemcard_up_time);
             com_downTime = (TextView) itemView.findViewById(R.id.com_home_itemcard_down_time);
+            button = (Button) itemView.findViewById(R.id.click);
         }
     }
 
@@ -62,7 +62,7 @@ public class ComHomeAdapter extends RecyclerView.Adapter<ComHomeAdapter.ViewHold
         if(mContext == null){
             mContext = parent.getContext();
         }
-        view = LayoutInflater.from(mContext).inflate(R.layout.home_commodity_itemcard, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.home_commodity_itemcard, parent, false);
         return new ViewHolder(view);
     }
 
@@ -82,8 +82,7 @@ public class ComHomeAdapter extends RecyclerView.Adapter<ComHomeAdapter.ViewHold
         holder.com_downTime.setText(temp);
         temp = "http://123.207.161.20" + commodityHome.getImageID();
         Glide.with(mContext).load(temp).into(holder.com_image);
-        Button button = (Button) view.findViewById(R.id.click);
-        button.setOnClickListener(new View.OnClickListener() {
+        holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("RORORO", commodityHome.getCommodityName());

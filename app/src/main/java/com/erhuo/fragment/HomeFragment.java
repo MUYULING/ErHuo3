@@ -58,8 +58,7 @@ public class HomeFragment extends android.support.v4.app.Fragment {
         adapter = new ComHomeAdapter(comList);
         recyclerView.setAdapter(adapter);
         if(comList.size() == 0){
-            //Toast.makeText(activity, "hahha", Toast.LENGTH_SHORT).show();
-            refreshItem(true);
+            getItem(true);
         }
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,41 +72,13 @@ public class HomeFragment extends android.support.v4.app.Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                refreshItem(false);
+                getItem(false);
             }
         });
         return view;
     }
 
-    private void refreshItem(final boolean isFirst){
-        getItem();
-        comList.clear();
-        for(int i = 0; i < tmpList.size(); i++){
-            Log.d("TEMP", "name: " + tmpList.get(i).getCommodityName());
-            Log.d("TEMP", "user_name: " + tmpList.get(i).getUserName());
-            Log.d("TEMP", "type: " + tmpList.get(i).getTag());
-            Log.d("TEMP", "price: " + tmpList.get(i).getPrice());
-            Log.d("TEMP", "up_time: " + tmpList.get(i).getUpTime());
-            Log.d("TEMP", "down_time: " + tmpList.get(i).getDownTime());
-            Log.d("TEMP", "description: " + tmpList.get(i).getDescription());
-        }
-        comList.addAll(tmpList);
-        for(int i = 0; i < comList.size(); i++){
-            Log.d("COM", "name: " + tmpList.get(i).getCommodityName());
-            Log.d("COM", "user_name: " + tmpList.get(i).getUserName());
-            Log.d("COM", "type: " + tmpList.get(i).getTag());
-            Log.d("COM", "price: " + tmpList.get(i).getPrice());
-            Log.d("COM", "up_time: " + tmpList.get(i).getUpTime());
-            Log.d("COM", "down_time: " + tmpList.get(i).getDownTime());
-            Log.d("COM", "description: " + tmpList.get(i).getDescription());
-        }
-        adapter.notifyDataSetChanged();
-        if(!isFirst){
-            swipeRefreshLayout.setRefreshing(false);
-        }
-    }
-
-    private void getItem(){
+    private void getItem(final boolean isFirst){
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -120,6 +91,18 @@ public class HomeFragment extends android.support.v4.app.Fragment {
                     response = client.newCall(request).execute();
                     String responseData = response.body().string();
                     parseJSONWithJSONObject(responseData);
+                    MainActivity activity = (MainActivity) getActivity();
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            comList.clear();
+                            comList.addAll(tmpList);
+                            adapter.notifyDataSetChanged();
+                            if(!isFirst){
+                                swipeRefreshLayout.setRefreshing(false);
+                            }
+                        }
+                    });
                 } catch (IOException e) {
                     MainActivity activity = (MainActivity) getActivity();
                     activity.runOnUiThread(new Runnable() {
