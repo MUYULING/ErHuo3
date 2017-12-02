@@ -12,8 +12,8 @@ import android.widget.Toast;
 
 import com.erhuo.adapter.BottomNavigationViewHelper;
 import com.erhuo.adapter.ViewPagerAdapter;
-import com.erhuo.fragment.BaseFragment;
 import com.erhuo.fragment.HomeFragment;
+import com.erhuo.fragment.MeFragment;
 import com.erhuo.fragment.SearchFragment;
 
 
@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private MenuItem menuItem;
     private BottomNavigationView bottomNavigationView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new HomeFragment());
         adapter.addFragment(new SearchFragment());
-        adapter.addFragment(BaseFragment.newInstance("我"));
+        adapter.addFragment(new MeFragment());
         viewPager.setAdapter(adapter);
     }
     @Override
