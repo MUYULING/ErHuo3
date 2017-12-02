@@ -8,7 +8,7 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffff"
+        android:background="@color/colorPrimary"
         android:gravity="center"
         android:padding="20dp">
 
@@ -16,15 +16,18 @@
             android:id="@+id/my_photo"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_centerHorizontal="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
             android:src="@drawable/zuozhu" />
 
         <RelativeLayout
             android:id="@+id/mine"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/my_photo"
-            android:background="#ffffff"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="15dp"
+            android:layout_toEndOf="@+id/my_photo"
+            android:background="@color/colorPrimary"
             android:padding="10dp">
 
             <TextView
@@ -32,6 +35,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="名字"
+                android:textColor="@color/colorDefault"
                 android:textSize="16sp" />
 
             <TextView
@@ -42,63 +46,67 @@
                 android:layout_marginTop="10dp"
                 android:clickable="true"
                 android:text="贰货号"
+                android:textColor="@color/colorDefault"
                 android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/my_xiugaiziliaoGO"
+                android:layout_width="15dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/right_arrow" />
 
         </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/my_xiugaiziliaoGO"
-            android:layout_width="15dp"
-            android:layout_height="20dp"
-            android:layout_toRightOf="@id/mine"
-            android:layout_marginLeft="135dp"
-            android:layout_centerVertical="true"
-            android:background="@drawable/right_arrow" />
     </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/my_tongzhi"
-        android:layout_marginTop="25dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
+        android:layout_marginTop="25dp"
         android:background="#ffffff"
-        android:padding="5dp"
-        >
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="12dp"
+        android:paddingStart="5dp"
+        android:paddingTop="12dp">
 
         <TextView
-            android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:text="查看通知"
-            android:textSize="16sp"
-            />
+            android:textSize="16sp" />
 
         <ImageView
             android:id="@+id/my_tongzhiGO"
-            android:layout_marginLeft="295dp"
             android:layout_width="15dp"
             android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="5dp"
             android:background="@drawable/right_arrow"
 
             />
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@drawable/bottom_shadow" />
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/my_jiaoyijilu"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:background="#ffffff"
-        android:padding="5dp"
+        android:paddingBottom="12dp"
+        android:paddingStart="5dp"
+        android:paddingTop="12dp"
 
         >
         <TextView
@@ -111,27 +119,30 @@
 
         <ImageView
             android:id="@+id/my_jiaoyijiluGO"
-            android:layout_marginLeft="263dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="5dp"
             android:layout_width="15dp"
             android:layout_height="20dp"
             android:background="@drawable/right_arrow"
 
             />
-    </LinearLayout>
+    </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@drawable/bottom_shadow" />
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/my_sellCommodity"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:background="#ffffff"
-        android:padding="5dp"
+        android:paddingBottom="12dp"
+        android:paddingStart="5dp"
+        android:paddingTop="12dp"
 
         >
         <TextView
@@ -144,28 +155,31 @@
 
         <ImageView
             android:id="@+id/my_sellCommodityGO"
-            android:layout_marginLeft="263dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="5dp"
             android:layout_width="15dp"
             android:layout_height="20dp"
             android:background="@drawable/right_arrow"
 
             />
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@drawable/bottom_shadow" />
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/my_requireCommodity"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:background="#ffffff"
-        android:padding="5dp"
+        android:paddingBottom="12dp"
+        android:paddingStart="5dp"
+        android:paddingTop="12dp"
 
         >
         <TextView
@@ -178,27 +192,30 @@
 
         <ImageView
             android:id="@+id/my_requireCommodityGO"
-            android:layout_marginLeft="263dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="5dp"
             android:layout_width="15dp"
             android:layout_height="20dp"
             android:background="@drawable/right_arrow"
             />
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@drawable/bottom_shadow" />
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/my_favorite"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:background="#ffffff"
-        android:padding="5dp"
+        android:paddingBottom="12dp"
+        android:paddingStart="5dp"
+        android:paddingTop="12dp"
 
         >
         <TextView
@@ -211,16 +228,17 @@
 
         <ImageView
             android:id="@+id/my_favoriteGO"
-            android:layout_marginLeft="279dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="5dp"
             android:layout_width="15dp"
             android:layout_height="20dp"
             android:background="@drawable/right_arrow"
 
             />
 
-    </LinearLayout>
+    </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/LogOut"
         android:layout_marginTop="50dp"
         android:layout_width="fill_parent"
@@ -228,7 +246,9 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:background="#ffffff"
-        android:padding="5dp"
+        android:paddingBottom="12dp"
+        android:paddingStart="5dp"
+        android:paddingTop="12dp"
 
         >
         <TextView
@@ -241,14 +261,15 @@
 
         <ImageView
             android:id="@+id/my_LogOutGO"
-            android:layout_marginLeft="327dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="5dp"
             android:layout_width="15dp"
             android:layout_height="20dp"
             android:background="@drawable/right_arrow"
 
             />
 
-    </LinearLayout>
+    </RelativeLayout>
 
 
 </LinearLayout>

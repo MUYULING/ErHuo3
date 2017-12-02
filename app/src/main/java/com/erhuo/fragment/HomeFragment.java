@@ -54,7 +54,7 @@ public class HomeFragment extends android.support.v4.app.Fragment {
         FloatingActionButton button = (FloatingActionButton) view.findViewById(R.id.home_add);
         MainActivity activity = (MainActivity) getActivity();
         if(comList.size() == 0){
-            refreshItem();
+            refreshItem(true);
         }
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.home_rev);
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
@@ -72,21 +72,17 @@ public class HomeFragment extends android.support.v4.app.Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                refreshItem();
+                refreshItem(false);
             }
         });
         return view;
     }
 
-    private void refreshItem(){
+    private void refreshItem(final boolean isFirst){
         new Thread(new Runnable() {
             @Override
             public void run() {
-                try {
-                    getItem();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                getItem();
                 MainActivity activity = (MainActivity) getActivity();
                 activity.runOnUiThread(new Runnable() {
                     @Override
@@ -94,21 +90,23 @@ public class HomeFragment extends android.support.v4.app.Fragment {
                         comList.clear();
                         comList.addAll(tmpList);
                         adapter.notifyDataSetChanged();
-                        swipeRefreshLayout.setRefreshing(false);
+                        if(!isFirst){
+                            swipeRefreshLayout.setRefreshing(false);
+                        }
                     }
                 });
             }
         }).start();
     }
 
-    private void getItem() throws IOException {
+    private void getItem(){
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try{
                     OkHttpClient client = new OkHttpClient();
                     Request request = new Request.Builder()
-                            .url("http://123.207.161.20/suntong/mainPage.php?pages=4")
+                            .url("http://123.207.161.20/suntong/mainPage.php?pages=30")
                             .build();
                     Response response = null;
                     response = client.newCall(request).execute();

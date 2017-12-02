@@ -4,7 +4,7 @@ package com.erhuo.util;
  * Created by Gary on 2017/11/25.
  */
 
-enum TAG{food, book, toiletry, drink, digital, clothes, cosmetic, bag, shoes, sports, stationery};
+enum TAG{food, book, toiletry, drink, digital, clothes, cosmetic, bag, shoes, sports, stationery, groceries};
 
 public class CommodityHome {
     private String userName;       //用户登录名

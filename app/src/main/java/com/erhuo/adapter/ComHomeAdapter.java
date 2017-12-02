@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.erhuo.erhuo3.R;
 import com.erhuo.util.CommodityHome;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -64,7 +65,8 @@ public class ComHomeAdapter extends RecyclerView.Adapter<ComHomeAdapter.ViewHold
         CommodityHome commodityHome = mCommodityHome.get(position);
         holder.com_name.setText(commodityHome.getCommodityName());
         holder.com_des.setText(commodityHome.getDescription());
-        String temp = "￥" + commodityHome.getPrice();
+        DecimalFormat df = new DecimalFormat("#####0.00");
+        String temp = "￥" + df.format(commodityHome.getPrice());
         holder.com_price.setText(temp);
         temp = "#" + commodityHome.getTag();
         holder.com_tag.setText(temp);

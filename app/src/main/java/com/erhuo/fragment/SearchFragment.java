@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -50,6 +51,7 @@ public class SearchFragment extends Fragment {
     private View view;
     private ImageView imageview;
     private TextView textview;
+    private RelativeLayout layout;
 
     private String key;
     private List<CommodityHome> tmpList = new ArrayList<>();
@@ -57,6 +59,7 @@ public class SearchFragment extends Fragment {
     private static final String[] name={"出售商品","求购商品","用户"};
     private Spinner spinner;
     private ArrayAdapter<CharSequence> spinnerAdapter;
+    private int itemSelectedNo = 0;
 
     @Nullable
     @Override
@@ -65,7 +68,8 @@ public class SearchFragment extends Fragment {
         imageview = (ImageView) view.findViewById(R.id.search);
         textview = (TextView) view.findViewById(R.id.search_text);
         imageview.setImageResource(R.drawable.ic_search);
-        imageview.setOnClickListener(new View.OnClickListener() {
+        layout = (RelativeLayout) view.findViewById(R.id.search_all);
+        layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MainActivity activity =(MainActivity)getActivity();
@@ -73,16 +77,6 @@ public class SearchFragment extends Fragment {
                 startActivityForResult(intent, 1);
             }
         });
-        textview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainActivity activity =(MainActivity)getActivity();
-                Intent intent = new Intent(activity, SearchActivity.class);
-                startActivityForResult(intent, 1);
-
-            }
-        });
-
         MainActivity activity2 = (MainActivity) getActivity();
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.search_rev);
         recyclerView.setLayoutManager(new LinearLayoutManager(activity2));
@@ -107,11 +101,29 @@ public class SearchFragment extends Fragment {
 
     //使用数组形式操作
     class SpinnerSelectedListener implements AdapterView.OnItemSelectedListener {
-        public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
-            Log.d("Search", name[arg2]);
+        public void onItemSelected(AdapterView<?> array, View view, int itemNo, long ret) {
+            itemSelectedNo = itemNo;
+            switch (itemSelectedNo){
+                case 0:
+                    if(key != null && !key.equals("")){
+                        getSearchResult(itemSelectedNo);
+                    }
+                    break;
+                case 1:
+                    if(key != null && !key.equals("")){
+                        getSearchResult(itemSelectedNo);
+                    }
+                    break;
+                case 2:
+                    if(key != null && !key.equals("")){
+                        getSearchResult(itemSelectedNo);
+                    }
+                    break;
+                default:break;
+            }
         }
-
         public void onNothingSelected(AdapterView<?> arg0) {
+
         }
     }
 
@@ -129,24 +141,40 @@ public class SearchFragment extends Fragment {
             default:
                 break;
         }
-        if(key != null && key != ""){
-            getSearchResult();
+        if(key != null && !key.equals("")){
+            getSearchResult(itemSelectedNo);
         }
     }
 
-    private void getSearchResult(){
+    private void getSearchResult(final int no){
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
+                    Request request = null;
                     OkHttpClient client = new OkHttpClient();
-                    Request request = new Request.Builder()
-                            .url("http://123.207.161.20/suntong/searchCom.php?search=" + key)
-                            .build();
+                    switch (no){
+                        case 0:
+                            request = new Request.Builder()
+                                    .url("http://123.207.161.20/suntong/searchCom.php?search=" + key)
+                                    .build();
+                            break;
+                        case 1:
+                            request = new Request.Builder()
+                                    .url("http://123.207.161.20/suntong/searchReq.php?search=" + key)
+                                    .build();
+                            break;
+                        case 2:
+                            request = new Request.Builder()
+                                    .url("http://123.207.161.20/suntong/searchUser.php?search=" + key)
+                                    .build();
+                            break;
+                        default:break;
+                    }
                     Response response = null;
                     response = client.newCall(request).execute();
                     String responseData = response.body().string();
-                    parseJSONWithJSONObject(responseData);
+                    parseJSONWithJSONObject(responseData, no);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -154,16 +182,25 @@ public class SearchFragment extends Fragment {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        comList.clear();
-                        comList.addAll(tmpList);
-                        adapter.notifyDataSetChanged();
+                        switch (no){
+                            case 0:
+                            case 1:
+                                comList.clear();
+                                comList.addAll(tmpList);
+                                adapter.notifyDataSetChanged();
+                                break;
+                            case 2:
+                                break;
+                            default:break;
+                        }
+
                     }
                 });
             }
         }).start();
     }
 
-    private void parseJSONWithJSONObject(String jsonData){
+    private void parseJSONWithJSONObject(String jsonData, int no){
         try{
             tmpList.clear();
             JSONArray jsonArray = new JSONArray(jsonData);
