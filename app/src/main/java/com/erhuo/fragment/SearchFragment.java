@@ -10,7 +10,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.erhuo.adapter.ComHomeAdapter;
@@ -51,6 +54,10 @@ public class SearchFragment extends Fragment {
     private String key;
     private List<CommodityHome> tmpList = new ArrayList<>();
 
+    private static final String[] name={"出售商品","求购商品","用户"};
+    private Spinner spinner;
+    private ArrayAdapter<CharSequence> spinnerAdapter;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -81,7 +88,31 @@ public class SearchFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(activity2));
         adapter = new ComHomeAdapter(comList);
         recyclerView.setAdapter(adapter);
+
+
+        MainActivity activity3 = (MainActivity) getActivity();
+        spinner = (Spinner) view.findViewById(R.id.search_spinner);
+        //将可选内容与ArrayAdapter连接起来，simple_spinner_item是android系统自带样式
+        spinnerAdapter = ArrayAdapter.createFromResource(activity3, R.array.searchType, android.R.layout.simple_spinner_item);
+        //设置下拉列表的风格,simple_spinner_dropdown_item是android系统自带的样式，等会自定义修改
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        //将adapter 添加到spinner中
+        spinner.setAdapter(spinnerAdapter);
+        //添加事件Spinner事件监听
+        spinner.setOnItemSelectedListener(new SpinnerSelectedListener());
+
         return view;
+    }
+
+    //使用数组形式操作
+    class SpinnerSelectedListener implements AdapterView.OnItemSelectedListener {
+        public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
+            Log.d("Search", name[arg2]);
+        }
+
+        public void onNothingSelected(AdapterView<?> arg0) {
+        }
     }
 
     @Override

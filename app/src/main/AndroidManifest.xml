@@ -20,6 +20,7 @@
         </activity>
         <activity android:name="com.erhuo.erhuo3.SearchActivity"></activity>
         <activity android:name="com.erhuo.erhuo3.MySellingCommodity"></activity>
+        <activity android:name="com.erhuo.erhuo3.SellCommodityEdit"></activity>
     </application>
 
 </manifest>

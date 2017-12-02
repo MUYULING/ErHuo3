@@ -19,13 +19,17 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             app:layout_scrollFlags="scroll|enterAlways">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="2dp"
-                android:background="@color/searchmenu">
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@color/colorBackground2">
 
 
                 <ImageView
@@ -40,6 +44,7 @@
                     android:id="@+id/search_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@color/colorBackground2"
                     android:layout_centerVertical="true"
                     android:layout_margin="10dp"
                     android:layout_toRightOf="@id/search"
@@ -49,7 +54,15 @@
 
         </RelativeLayout>
 
+        <Spinner
+            android:id="@+id/search_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="8dp"
+            />
+
     </android.support.design.widget.AppBarLayout>
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/search_rev"

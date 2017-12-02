@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="searchType">
+        <item>出售商品</item>
+        <item>求购商品</item>
+        <item>用户</item>
+    </string-array>
+</resources>
