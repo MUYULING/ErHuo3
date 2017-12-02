@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,9 +13,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.erhuo.adapter.ComHomeAdapter;
 import com.erhuo.erhuo3.MainActivity;
 import com.erhuo.erhuo3.R;
 import com.erhuo.erhuo3.SearchActivity;
+import com.erhuo.util.CommodityHome;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -23,6 +30,11 @@ import static android.app.Activity.RESULT_OK;
  */
 
 public class SearchFragment extends Fragment {
+
+    private CommodityHome[] coms = {new CommodityHome("apple", R.drawable.ida), new CommodityHome("banana", R.drawable.ida)};
+    private List<CommodityHome> comList = new ArrayList<>();
+    private ComHomeAdapter adapter;
+
 
     private View view;
     private ImageView imageview;
@@ -44,6 +56,15 @@ public class SearchFragment extends Fragment {
             }
         });
 
+        for(int i = 0; i < coms.length; i++){
+            comList.add(coms[i]);
+        }
+        MainActivity activity2 = (MainActivity) getActivity();
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.search_rev);
+        recyclerView.setLayoutManager(new LinearLayoutManager(activity2));
+        adapter = new ComHomeAdapter(comList);
+        recyclerView.setAdapter(adapter);
+
         return view;
     }
 
@@ -59,4 +80,5 @@ public class SearchFragment extends Fragment {
                 break;
             default:
         } }
+
 }

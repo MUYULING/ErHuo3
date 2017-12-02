@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.erhuo.erhuo3.SearchActivity"></activity>
+        <activity android:name="com.erhuo.erhuo3.MySellingCommodity"></activity>
     </application>
 
 </manifest>

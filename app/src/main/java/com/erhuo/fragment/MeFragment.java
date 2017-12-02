@@ -1,5 +1,6 @@
 package com.erhuo.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.erhuo.erhuo3.MainActivity;
+import com.erhuo.erhuo3.MySellingCommodity;
 import com.erhuo.erhuo3.R;
 
 /**
@@ -32,7 +35,7 @@ public class MeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_me, container, false);
-       /* xiugaiziliaoGO = (ImageView) view.findViewById(R.id.my_xiugaiziliaoGO);
+        xiugaiziliaoGO = (ImageView) view.findViewById(R.id.my_xiugaiziliaoGO);
         tongzhiGO = (ImageView) view.findViewById(R.id.my_tongzhiGO);
         jiaoyijiluGO = (ImageView) view.findViewById(R.id.my_jiaoyijiluGO);
         sellCommodityGO = (ImageView) view.findViewById(R.id.my_sellCommodityGO);
@@ -40,14 +43,15 @@ public class MeFragment extends Fragment {
         favoriteGO = (ImageView) view.findViewById(R.id.my_favoriteGO);
         logoutGO = (ImageView) view.findViewById(R.id.my_LogOutGO);
 
-        xiugaiziliaoGO.setOnClickListener(new View.OnClickListener() {
+        sellCommodityGO.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MainActivity activity =(MainActivity)getActivity();
-                Intent intent = new Intent(activity, SearchActivity.class);
+                Intent intent = new Intent(activity, MySellingCommodity.class);
                 startActivityForResult(intent, 1);
             }
-        }); */
+        });
+
 
         return view;
     }
