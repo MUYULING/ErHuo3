@@ -25,6 +25,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import okhttp3.OkHttpClient;
@@ -37,12 +38,13 @@ import okhttp3.Response;
 
 public class HomeFragment extends android.support.v4.app.Fragment {
 
-    private CommodityHome[] coms = {new CommodityHome("apple", R.drawable.ida), new CommodityHome("banana", R.drawable.ida)};
     private List<CommodityHome> comList = new ArrayList<>();
     private ComHomeAdapter adapter;
 
     private SwipeRefreshLayout swipeRefreshLayout;
     private View view;
+
+    private List<CommodityHome> tmpList = new ArrayList<>();
 
     @SuppressLint("ResourceAsColor")
     @Nullable
@@ -51,8 +53,8 @@ public class HomeFragment extends android.support.v4.app.Fragment {
         view = inflater.inflate(R.layout.fragment_home, container, false);
         FloatingActionButton button = (FloatingActionButton) view.findViewById(R.id.home_add);
         MainActivity activity = (MainActivity) getActivity();
-        for(int i = 0; i < coms.length; i++){
-            comList.add(coms[i]);
+        if(comList.size() == 0){
+            refreshItem();
         }
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.home_rev);
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
@@ -70,25 +72,7 @@ public class HomeFragment extends android.support.v4.app.Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                MainActivity activity = (MainActivity) getActivity();
-                Toast.makeText(activity, "hahha", Toast.LENGTH_SHORT).show();
-                //refreshItem();
-                for(int i = coms.length - 1; i >= 0; i--){
-                    comList.add(coms[i]);
-                }
-                adapter.notifyDataSetChanged();
-                swipeRefreshLayout.setRefreshing(false);
-            }
-        });
-        Button button1 = (Button) view.findViewById(R.id.refresh);
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    getItem();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                refreshItem();
             }
         });
         return view;
@@ -98,47 +82,79 @@ public class HomeFragment extends android.support.v4.app.Fragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                try{
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
+                try {
+                    getItem();
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
                 MainActivity activity = (MainActivity) getActivity();
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        for(int i = coms.length - 1; i >= 0; i--){
-                            comList.add(coms[i]);
-                        }
+                        comList.clear();
+                        comList.addAll(tmpList);
                         adapter.notifyDataSetChanged();
                         swipeRefreshLayout.setRefreshing(false);
                     }
                 });
             }
-        });
+        }).start();
     }
 
     private void getItem() throws IOException {
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder()
-                .url("http://123.207.161.20/suntong/mainPage.php?pages=1")
-                .build();
-        Response response = client.newCall(request).execute();
-        String responseData = response.body().string();
-        parseJSONWithJSONObject(responseData);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    OkHttpClient client = new OkHttpClient();
+                    Request request = new Request.Builder()
+                            .url("http://123.207.161.20/suntong/mainPage.php?pages=4")
+                            .build();
+                    Response response = null;
+                    response = client.newCall(request).execute();
+                    String responseData = response.body().string();
+                    parseJSONWithJSONObject(responseData);
+                } catch (IOException e) {
+                    MainActivity activity = (MainActivity) getActivity();
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            MainActivity activity = (MainActivity) getActivity();
+                            Toast.makeText(activity, "无网络连接", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
     private void parseJSONWithJSONObject(String jsonData){
         try{
+            tmpList.clear();
             JSONArray jsonArray = new JSONArray(jsonData);
             for(int i = 0; i < jsonArray.length(); i++){
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 String name = jsonObject.getString("name");
                 String user_name = jsonObject.getString("user_name");
+                int comId = jsonObject.getInt("com_id");
                 String type = jsonObject.getString("type");
+                String images = jsonObject.getString("images");
+                double price = jsonObject.getDouble("price");
+                String upTime = jsonObject.getString("up_time");
+                String downTime = jsonObject.getString("down_time");
+                String description = jsonObject.getString("description");
+                CommodityHome msg = new CommodityHome(user_name, name, comId, price, type, description, images, upTime, downTime);
+                tmpList.add(msg);
                 Log.d("WebWebWeb", "name: " + name);
                 Log.d("WebWebWeb", "user_name: " + user_name);
                 Log.d("WebWebWeb", "type: " + type);
+                Log.d("WebWebWeb", "com_id：" + comId);
+                Log.d("WebWebWeb", "price: " + price);
+                Log.d("WebWebWeb", "up_time: " + upTime);
+                Log.d("WebWebWeb", "down_time: " + downTime);
+                Log.d("WebWebWeb", "description: " + description);
+                Log.d("WebWebWeb", "image: " + images);
             }
         } catch (JSONException e) {
             e.printStackTrace();

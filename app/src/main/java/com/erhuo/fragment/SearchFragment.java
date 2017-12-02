@@ -19,8 +19,17 @@ import com.erhuo.erhuo3.R;
 import com.erhuo.erhuo3.SearchActivity;
 import com.erhuo.util.CommodityHome;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -31,7 +40,6 @@ import static android.app.Activity.RESULT_OK;
 
 public class SearchFragment extends Fragment {
 
-    private CommodityHome[] coms = {new CommodityHome("apple", R.drawable.ida), new CommodityHome("banana", R.drawable.ida)};
     private List<CommodityHome> comList = new ArrayList<>();
     private ComHomeAdapter adapter;
 
@@ -39,6 +47,9 @@ public class SearchFragment extends Fragment {
     private View view;
     private ImageView imageview;
     private TextView textview;
+
+    private String key;
+    private List<CommodityHome> tmpList = new ArrayList<>();
 
     @Nullable
     @Override
@@ -55,9 +66,16 @@ public class SearchFragment extends Fragment {
                 startActivityForResult(intent, 1);
             }
         });
-
-        for(int i = 0; i < coms.length; i++){
-            comList.add(coms[i]);
+        textview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity activity =(MainActivity)getActivity();
+                Intent intent = new Intent(activity, SearchActivity.class);
+                startActivityForResult(intent, 1);
+            }
+        });
+        if(key != null){
+            getSearchResult();
         }
         MainActivity activity2 = (MainActivity) getActivity();
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.search_rev);
@@ -75,10 +93,74 @@ public class SearchFragment extends Fragment {
                 if (resultCode == RESULT_OK) {
                     String returnedData = data.getStringExtra("data_return");
                     textview.setText(returnedData);
-                    Log.d("MainActivity", returnedData);
+                    Log.d("Search", returnedData);
+                    key = returnedData;
                 }
                 break;
             default:
-        } }
+                break;
+        }
+    }
+
+    private void getSearchResult(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    OkHttpClient client = new OkHttpClient();
+                    Request request = new Request.Builder()
+                            .url("http://123.207.161.20/suntong/mainPage.php?pages=4")
+                            .build();
+                    Response response = null;
+                    response = client.newCall(request).execute();
+                    String responseData = response.body().string();
+                    parseJSONWithJSONObject(responseData);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                MainActivity activity = (MainActivity) getActivity();
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        comList.clear();
+                        comList.addAll(tmpList);
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+            }
+        }).start();
+    }
+
+    private void parseJSONWithJSONObject(String jsonData){
+        try{
+            tmpList.clear();
+            JSONArray jsonArray = new JSONArray(jsonData);
+            for(int i = 0; i < jsonArray.length(); i++){
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                String name = jsonObject.getString("name");
+                String user_name = jsonObject.getString("user_name");
+                int comId = jsonObject.getInt("com_id");
+                String type = jsonObject.getString("type");
+                String images = jsonObject.getString("images");
+                double price = jsonObject.getDouble("price");
+                String upTime = jsonObject.getString("up_time");
+                String downTime = jsonObject.getString("down_time");
+                String description = jsonObject.getString("description");
+                CommodityHome msg = new CommodityHome(user_name, name, comId, price, type, description, images, upTime, downTime);
+                tmpList.add(msg);
+                Log.d("WebWebWeb", "name: " + name);
+                Log.d("WebWebWeb", "user_name: " + user_name);
+                Log.d("WebWebWeb", "type: " + type);
+                Log.d("WebWebWeb", "com_id：" + comId);
+                Log.d("WebWebWeb", "price: " + price);
+                Log.d("WebWebWeb", "up_time: " + upTime);
+                Log.d("WebWebWeb", "down_time: " + downTime);
+                Log.d("WebWebWeb", "description: " + description);
+                Log.d("WebWebWeb", "image: " + images);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

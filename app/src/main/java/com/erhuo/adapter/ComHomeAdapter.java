@@ -27,12 +27,22 @@ public class ComHomeAdapter extends RecyclerView.Adapter<ComHomeAdapter.ViewHold
         CardView cardView;
         ImageView com_image;
         TextView com_name;
+        TextView com_des;
+        TextView com_price;
+        TextView com_tag;
+        TextView com_upTime;
+        TextView com_downTime;
 
         public ViewHolder(View itemView) {
             super(itemView);
             cardView = (CardView) itemView;
             com_image = (ImageView) itemView.findViewById(R.id.com_home_itemcard);
             com_name = (TextView) itemView.findViewById(R.id.com_home_itemcard_name);
+            com_des = (TextView) itemView.findViewById(R.id.com_home_itemcard_des);
+            com_price = (TextView) itemView.findViewById(R.id.com_home_itemcard_price);
+            com_tag = (TextView) itemView.findViewById(R.id.com_home_itemcard_tag);
+            com_upTime = (TextView) itemView.findViewById(R.id.com_home_itemcard_up_time);
+            com_downTime = (TextView) itemView.findViewById(R.id.com_home_itemcard_down_time);
         }
     }
 
@@ -52,8 +62,18 @@ public class ComHomeAdapter extends RecyclerView.Adapter<ComHomeAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         CommodityHome commodityHome = mCommodityHome.get(position);
-        holder.com_name.setText(commodityHome.getCommodity_name());
-        Glide.with(mContext).load(commodityHome.getImageID()).into(holder.com_image);
+        holder.com_name.setText(commodityHome.getCommodityName());
+        holder.com_des.setText(commodityHome.getDescription());
+        String temp = "￥" + commodityHome.getPrice();
+        holder.com_price.setText(temp);
+        temp = "#" + commodityHome.getTag();
+        holder.com_tag.setText(temp);
+        temp = "上架" + commodityHome.getUpTime().substring(0, 10);
+        holder.com_upTime.setText(temp);
+        temp = "下架" + commodityHome.getDownTime().substring(0, 10);
+        holder.com_downTime.setText(temp);
+        temp = "http://123.207.161.20" + commodityHome.getImageID();
+        Glide.with(mContext).load(temp).into(holder.com_image);
     }
 
     @Override

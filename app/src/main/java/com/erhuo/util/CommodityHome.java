@@ -4,42 +4,57 @@ package com.erhuo.util;
  * Created by Gary on 2017/11/25.
  */
 
-enum TAG{food, book, toiletry, drink, digital, clothes, cosmetic, bag, shoes};
+enum TAG{food, book, toiletry, drink, digital, clothes, cosmetic, bag, shoes, sports, stationery};
 
 public class CommodityHome {
-    private String user_name;       //用户登录名
-    private String commodity_name;  //商品名称
-    private int commodity_id;       //商品id
+    private String userName;       //用户登录名
+    private String commodityName;  //商品名称
+    private int commodityId;       //商品id
     private double price;           //商品价格
     private TAG tag;                //商品标签
     private String description;     //商品描述
-    private int imageID;            //图片ID
+    private String imageID;            //图片ID
+    private String upTime;           //上架时间
+    private String downTime;         //下架时间
 
-    public CommodityHome(String commodity_name, int imageID) {
-        this.commodity_name = commodity_name;
-        this.imageID = imageID;
+    public String getUpTime() {
+        return upTime;
     }
 
-    public CommodityHome(String user_name, String commodity_name, int commodity_id, double price, TAG tag, String description, int imageID) {
-        this.user_name = user_name;
-        this.commodity_name = commodity_name;
-        this.commodity_id = commodity_id;
+    public void setUpTime(String upTime) {
+        this.upTime = upTime;
+    }
+
+    public String getDownTime() {
+        return downTime;
+    }
+
+    public void setDownTime(String downTime) {
+        this.downTime = downTime;
+    }
+
+    public CommodityHome(String userName, String commodityName, int commodityId, double price, String tag, String description, String imageID, String upTime, String downTime) {
+        this.userName = userName;
+        this.commodityName = commodityName;
+        this.commodityId = commodityId;
         this.price = price;
-        this.tag = tag;
+        this.tag = TAG.valueOf(tag);
         this.description = description;
         this.imageID = imageID;
+        this.upTime = upTime;
+        this.downTime = downTime;
     }
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public void setCommodity_name(String commodity_name) {
-        this.commodity_name = commodity_name;
+    public void setCommodityName(String commodityName) {
+        this.commodityName = commodityName;
     }
 
-    public void setCommodity_id(int commodity_id) {
-        this.commodity_id = commodity_id;
+    public void setCommodityId(int commodityId) {
+        this.commodityId = commodityId;
     }
 
     public void setPrice(double price) {
@@ -54,20 +69,20 @@ public class CommodityHome {
         this.description = description;
     }
 
-    public void setImageID(int imageID) {
+    public void setImageID(String imageID) {
         this.imageID = imageID;
     }
 
-    public String getUser_name() {
-        return user_name;
+    public String getUserName() {
+        return userName;
     }
 
-    public String getCommodity_name() {
-        return commodity_name;
+    public String getCommodityName() {
+        return commodityName;
     }
 
-    public int getCommodity_id() {
-        return commodity_id;
+    public int getCommodityId() {
+        return commodityId;
     }
 
     public double getPrice() {
@@ -82,7 +97,7 @@ public class CommodityHome {
         return description;
     }
 
-    public int getImageID() {
+    public String getImageID() {
         return imageID;
     }
 }
