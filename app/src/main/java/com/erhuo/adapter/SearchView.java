@@ -223,7 +223,7 @@ public class SearchView extends LinearLayout {
                 if (!(mCallBack == null)){
                     mCallBack.SearchAciton(et_search.getText().toString());
                 }
-                Toast.makeText(context, "需要搜索的是" + mCallBack, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "需要搜索的是" + mCallBack, Toast.LENGTH_SHORT).show();
             }
         });
 

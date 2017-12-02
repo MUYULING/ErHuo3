@@ -72,17 +72,15 @@ public class SearchFragment extends Fragment {
                 MainActivity activity =(MainActivity)getActivity();
                 Intent intent = new Intent(activity, SearchActivity.class);
                 startActivityForResult(intent, 1);
+
             }
         });
-        if(key != null){
-            getSearchResult();
-        }
+
         MainActivity activity2 = (MainActivity) getActivity();
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.search_rev);
         recyclerView.setLayoutManager(new LinearLayoutManager(activity2));
         adapter = new ComHomeAdapter(comList);
         recyclerView.setAdapter(adapter);
-
         return view;
     }
 
@@ -100,6 +98,9 @@ public class SearchFragment extends Fragment {
             default:
                 break;
         }
+        if(key != null && key != ""){
+            getSearchResult();
+        }
     }
 
     private void getSearchResult(){
@@ -109,7 +110,7 @@ public class SearchFragment extends Fragment {
                 try {
                     OkHttpClient client = new OkHttpClient();
                     Request request = new Request.Builder()
-                            .url("http://123.207.161.20/suntong/mainPage.php?pages=4")
+                            .url("http://123.207.161.20/suntong/searchCom.php?search=" + key)
                             .build();
                     Response response = null;
                     response = client.newCall(request).execute();
