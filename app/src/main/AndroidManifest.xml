@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.erhuo.erhuo3">
+    package="com.erhuo.activitiy_erhuo">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
@@ -11,16 +11,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.erhuo.erhuo3.MainActivity" android:label="贰货">
+        <activity android:name="com.erhuo.activitiy_erhuo.MainActivity" android:label="贰货">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.erhuo.erhuo3.SearchActivity"></activity>
-        <activity android:name="com.erhuo.erhuo3.MySellingCommodity"></activity>
-        <activity android:name="com.erhuo.erhuo3.SellCommodityEdit"></activity>
+        <activity android:name="com.erhuo.activitiy_erhuo.SearchActivity"></activity>
+        <activity android:name="com.erhuo.activitiy_erhuo.MySellingCommodity"></activity>
+        <activity android:name="com.erhuo.activitiy_erhuo.SellCommodityEdit"></activity>
+        <activity android:name="com.erhuo.activitiy_erhuo.SellingDetail"></activity>
     </application>
 
 </manifest>

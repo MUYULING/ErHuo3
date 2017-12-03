@@ -14,4 +14,7 @@
     <string name="hour">时</string>
     <string name="minute">分</string>
     <string name="user_image">USER_IMAGE</string>
+    <string name="buy_now">立即购买</string>
+    <string name="sellers">查看卖家</string>
+    <string name="fav">收藏</string>
 </resources>

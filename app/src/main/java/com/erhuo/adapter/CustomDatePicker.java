@@ -16,7 +16,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.erhuo.UIView.DatePickerView;
-import com.erhuo.erhuo3.R;
+import com.erhuo.activitiy_erhuo.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

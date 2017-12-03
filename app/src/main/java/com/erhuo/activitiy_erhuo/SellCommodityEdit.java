@@ -1,4 +1,4 @@
-package com.erhuo.erhuo3;
+package com.erhuo.activitiy_erhuo;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;

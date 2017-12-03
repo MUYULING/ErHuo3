@@ -1,4 +1,4 @@
-package com.erhuo.erhuo3;
+package com.erhuo.activitiy_erhuo;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

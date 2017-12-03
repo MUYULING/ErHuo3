@@ -6,7 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
-import com.erhuo.erhuo3.R;
+import com.erhuo.activitiy_erhuo.R;
 
 /**
  * Created by Carson_Ho on 17/8/10.

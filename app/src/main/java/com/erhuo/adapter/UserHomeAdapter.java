@@ -1,7 +1,6 @@
 package com.erhuo.adapter;
 
 import android.content.Context;
-import android.media.Image;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,10 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.erhuo.erhuo3.R;
+import com.erhuo.activitiy_erhuo.R;
 import com.erhuo.util.UserHome;
-
-import org.w3c.dom.Text;
 
 import java.text.DecimalFormat;
 import java.util.List;

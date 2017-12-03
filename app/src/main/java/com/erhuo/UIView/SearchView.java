@@ -23,9 +23,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.erhuo.erhuo3.R;
+import com.erhuo.activitiy_erhuo.R;
 import com.erhuo.interfaces.ICallBack;
 import com.erhuo.interfaces.bCallBack;
 import com.erhuo.SQLiteHelper.SearchRecordSQLiteHelper;

@@ -19,9 +19,9 @@ import android.widget.TextView;
 
 import com.erhuo.adapter.ComHomeAdapter;
 import com.erhuo.adapter.UserHomeAdapter;
-import com.erhuo.erhuo3.MainActivity;
-import com.erhuo.erhuo3.R;
-import com.erhuo.erhuo3.SearchActivity;
+import com.erhuo.activitiy_erhuo.MainActivity;
+import com.erhuo.activitiy_erhuo.R;
+import com.erhuo.activitiy_erhuo.SearchActivity;
 import com.erhuo.util.CommodityHome;
 import com.erhuo.util.UserHome;
 
@@ -88,8 +88,11 @@ public class SearchFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(activity2));
         switch (itemSelectedNo){
             case 0:
+                adapter = new ComHomeAdapter(comList, activity2, 0);
+                recyclerView.setAdapter(adapter);
+                break;
             case 1:
-                adapter = new ComHomeAdapter(comList);
+                adapter = new ComHomeAdapter(comList, activity2, 1);
                 recyclerView.setAdapter(adapter);
                 break;
             case 2:
@@ -117,16 +120,17 @@ public class SearchFragment extends Fragment {
     class SpinnerSelectedListener implements AdapterView.OnItemSelectedListener {
         public void onItemSelected(AdapterView<?> array, View view, int itemNo, long ret) {
             itemSelectedNo = itemNo;
+            MainActivity activity = (MainActivity) getActivity();
             switch (itemSelectedNo){
                 case 0:
-                    adapter = new ComHomeAdapter(comList);
+                    adapter = new ComHomeAdapter(comList, activity, 0);
                     recyclerView.setAdapter(adapter);
                     if(key != null && !key.equals("")){
                         getSearchResult(itemSelectedNo);
                     }
                     break;
                 case 1:
-                    adapter = new ComHomeAdapter(comList);
+                    adapter = new ComHomeAdapter(comList, activity, 0);
                     recyclerView.setAdapter(adapter);
                     if(key != null && !key.equals("")){
                         getSearchResult(itemSelectedNo);
@@ -204,6 +208,10 @@ public class SearchFragment extends Fragment {
                     public void run() {
                         switch (no){
                             case 0:
+                                comList.clear();
+                                comList.addAll(tmpList);
+                                adapter.notifyDataSetChanged();
+                                break;
                             case 1:
                                 comList.clear();
                                 comList.addAll(tmpList);

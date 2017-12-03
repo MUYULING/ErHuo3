@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.erhuo.erhuo3.R;
+import com.erhuo.activitiy_erhuo.R;
 
 /**
  * Created by bruce on 2016/11/1.

@@ -1,6 +1,7 @@
 package com.erhuo.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,8 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.erhuo.erhuo3.MainActivity;
-import com.erhuo.erhuo3.R;
+import com.erhuo.activitiy_erhuo.MainActivity;
+import com.erhuo.activitiy_erhuo.R;
+import com.erhuo.activitiy_erhuo.SellingDetail;
 import com.erhuo.util.CommodityHome;
 
 import java.text.DecimalFormat;
@@ -28,6 +30,9 @@ public class ComHomeAdapter extends RecyclerView.Adapter<ComHomeAdapter.ViewHold
 
     private Context mContext;
     private List<CommodityHome> mCommodityHome;
+    private MainActivity activity;
+    private int code;
+
     static class ViewHolder extends RecyclerView.ViewHolder{
         CardView cardView;
         ImageView com_image;
@@ -38,6 +43,7 @@ public class ComHomeAdapter extends RecyclerView.Adapter<ComHomeAdapter.ViewHold
         TextView com_upTime;
         TextView com_downTime;
         Button button;
+        MainActivity activity;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -53,8 +59,10 @@ public class ComHomeAdapter extends RecyclerView.Adapter<ComHomeAdapter.ViewHold
         }
     }
 
-    public ComHomeAdapter(List<CommodityHome> mCommodityHome) {
+    public ComHomeAdapter(List<CommodityHome> mCommodityHome, MainActivity activity, int code) {
         this.mCommodityHome = mCommodityHome;
+        this.activity = activity;
+        this.code = code;
     }
 
     @Override
@@ -87,6 +95,11 @@ public class ComHomeAdapter extends RecyclerView.Adapter<ComHomeAdapter.ViewHold
             public void onClick(View v) {
                 Log.d("RORORO", commodityHome.getCommodityName());
                 Toast.makeText(v.getContext(), "hahaha from: " + commodityHome.getCommodityName(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(activity, SellingDetail.class);
+                intent.putExtra("com_id", commodityHome.getCommodityId());
+                intent.putExtra("user_name", commodityHome.getUserName());
+                intent.putExtra("code", code);
+                activity.startActivity(intent);
             }
         });
     }

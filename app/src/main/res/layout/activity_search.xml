@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
 
     android:background="@color/colorBackground"
-    tools:context="com.erhuo.erhuo3.MainActivity">
+    tools:context="com.erhuo.activitiy_erhuo.MainActivity">
 
     <com.erhuo.UIView.SearchView
         android:id="@+id/search_view"

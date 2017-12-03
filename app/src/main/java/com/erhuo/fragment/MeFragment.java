@@ -9,9 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.erhuo.erhuo3.MainActivity;
-import com.erhuo.erhuo3.MySellingCommodity;
-import com.erhuo.erhuo3.R;
+import com.erhuo.activitiy_erhuo.MainActivity;
+import com.erhuo.activitiy_erhuo.MySellingCommodity;
+import com.erhuo.activitiy_erhuo.R;
 
 /**
  * Created by bruce on 2016/11/1.

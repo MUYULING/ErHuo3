@@ -17,7 +17,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.erhuo.erhuo3.R;
+import com.erhuo.activitiy_erhuo.R;
 
 import java.util.ArrayList;
 import java.util.List;
