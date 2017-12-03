@@ -9,5 +9,10 @@
     <color name="tab_checked">#3F51B5</color>
     <color name="tab_unchecked">#757575</color>
     <color name="searchmenu">#757575</color>
+    <color name="background">#FFFFFF</color>
     <color name="colorBackground2">#CCCCCC</color>
+    <color name="timeColor">#47eaff</color>
+    <color name="split_line">#11112233</color>
+    <color name="text1">#59B29C</color>
+    <color name="text2">#333333</color>
 </resources>

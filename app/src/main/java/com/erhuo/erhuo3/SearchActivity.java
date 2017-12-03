@@ -11,7 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.erhuo.interfaces.bCallBack;
 import com.erhuo.interfaces.ICallBack;
-import com.erhuo.adapter.SearchView;
+import com.erhuo.UIView.SearchView;
 
 /**
  * Created by Carson_Ho on 17/8/11.

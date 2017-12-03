@@ -1,4 +1,4 @@
-package com.erhuo.adapter;
+package com.erhuo.UIView;
 
 import android.content.Context;
 import android.util.AttributeSet;

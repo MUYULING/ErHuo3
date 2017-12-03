@@ -1,4 +1,4 @@
-package com.erhuo.adapter;
+package com.erhuo.UIView;
 
 /**
  * Created by mac on 2017/11/18.

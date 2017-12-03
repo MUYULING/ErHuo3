@@ -5,4 +5,21 @@
         <item>求购商品</item>
         <item>用户</item>
     </string-array>
+
+    <string-array name="CommodityType">
+        <item>食品</item>
+        <item>饮品</item>
+        <item>书籍</item>
+        <item>文具用品</item>
+        <item>数码产品</item>
+        <item>衣服</item>
+        <item>鞋类</item>
+        <item>箱包</item>
+        <item>化妆用品</item>
+        <item>体育用品</item>
+        <item>洗漱用品</item>
+        <item>杂物</item>
+    </string-array>
 </resources>
+
+

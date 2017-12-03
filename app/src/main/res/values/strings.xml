@@ -5,5 +5,13 @@
     <string name="title_me">我</string>
     <string name="com_image">COM_IMAGE</string>
     <string name="see">查看详情</string>
+    <string name="cancle">取消</string>
+    <string name="title">请选择时间</string>
+    <string name="commit">确定</string>
+    <string name="year">年</string>
+    <string name="month">月</string>
+    <string name="day">日</string>
+    <string name="hour">时</string>
+    <string name="minute">分</string>
     <string name="user_image">USER_IMAGE</string>
 </resources>
