@@ -42,34 +42,42 @@
 
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="50dp"
+                android:gravity="center_vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="商品名称"/>
+                    android:layout_marginStart="15dp"
+                    android:background="@null"
+                    android:text="商品名称"
+                    android:gravity="center"/>
 
                 <EditText
                     android:id="@+id/input_message1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:paddingEnd="15dp"
+                    android:paddingStart="15dp"/>
 
             </LinearLayout>
+
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="50dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="bottom"
-                    android:text="商品种类"/>
+                    android:layout_marginStart="15dp"
+                    android:background="@null"
+                    android:text="商品种类"
+                    android:gravity="center"/>
 
                 <Spinner
                     android:id="@+id/ComType_spinner"
@@ -82,91 +90,112 @@
 
             </LinearLayout>
 
-
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="50dp"
+                android:gravity="center_vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="价格"/>
+                    android:layout_marginStart="15dp"
+                    android:background="@null"
+                    android:text="价         格"
+                    android:gravity="center"/>
 
                 <EditText
                     android:id="@+id/input_message2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/selectDate"
-                android:orientation="horizontal"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="上架时间"/>
-
-                <TextView
-                    android:id="@+id/currentDate"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:textColor="@color/timeColor"
-                    android:textSize="15sp" />
-
+                    android:paddingEnd="15dp"
+                    android:paddingStart="15dp"/>
 
             </LinearLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:id="@+id/selectTime"
-                android:orientation="horizontal"
-                android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="50dp"
+                android:gravity="center_vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="截止时间"/>
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="15dp"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:text="上架时间"
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/currentTime"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:background="@null"
                     android:gravity="center"
+                    android:paddingEnd="15dp"
+                    android:paddingStart="15dp"
                     android:textColor="@color/timeColor"
                     android:textSize="15sp" />
 
+            </RelativeLayout>
 
-            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/selectDate"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="15dp"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:text="截止时间"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/currentDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:paddingEnd="15dp"
+                    android:paddingStart="15dp"
+                    android:textColor="@color/timeColor"
+                    android:textSize="15sp" />
+
+            </RelativeLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="50dp"
+                android:gravity="center_vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="商品描述"/>
+                    android:layout_marginStart="15dp"
+                    android:background="@null"
+                    android:text="商品描述"
+                    android:gravity="center"/>
 
                 <EditText
                     android:id="@+id/input_message3"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:paddingEnd="15dp"
+                    android:paddingStart="15dp"/>
 
             </LinearLayout>
-
 
         </LinearLayout>
 

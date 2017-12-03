@@ -5,7 +5,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.erhuo.adapter.CustomDatePicker;
@@ -20,7 +20,7 @@ import java.util.Locale;
 
 public class SellCommodityEdit extends AppCompatActivity {
 
-    private LinearLayout selectDate, selectTime;
+    private RelativeLayout selectDate, selectTime;
     private TextView currentDate, currentTime;
     private CustomDatePicker customDatePicker1, customDatePicker2;
 
@@ -44,7 +44,7 @@ public class SellCommodityEdit extends AppCompatActivity {
         });
 
 
-        selectTime = (LinearLayout) findViewById(R.id.selectTime);
+        selectTime = (RelativeLayout) findViewById(R.id.selectTime);
         selectTime.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                 switch (v.getId()) {
@@ -52,26 +52,16 @@ public class SellCommodityEdit extends AppCompatActivity {
                         // 日期格式为yyyy-MM-dd
                         customDatePicker1.show(currentDate.getText().toString());
                         break;
-
-                    case R.id.selectTime:
-                        // 日期格式为yyyy-MM-dd HH:mm
-                        customDatePicker2.show(currentTime.getText().toString());
-                        break;
                 }
             }
         });
-        selectDate = (LinearLayout) findViewById(R.id.selectDate);
+        selectDate = (RelativeLayout) findViewById(R.id.selectDate);
         selectDate.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                 switch (v.getId()) {
                     case R.id.selectDate:
                         // 日期格式为yyyy-MM-dd
                         customDatePicker1.show(currentDate.getText().toString());
-                        break;
-
-                    case R.id.selectTime:
-                        // 日期格式为yyyy-MM-dd HH:mm
-                        customDatePicker2.show(currentTime.getText().toString());
                         break;
                 }
             }
@@ -82,7 +72,6 @@ public class SellCommodityEdit extends AppCompatActivity {
         initDatePicker();
 
     }
-
 
     private void initDatePicker() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
@@ -108,6 +97,8 @@ public class SellCommodityEdit extends AppCompatActivity {
         customDatePicker2.showSpecificTime(true); // 显示时和分
         customDatePicker2.setIsLoop(true); // 允许循环滚动
     }
+
+
 
 }
 
