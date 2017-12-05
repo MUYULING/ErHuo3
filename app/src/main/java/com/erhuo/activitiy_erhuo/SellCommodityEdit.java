@@ -11,20 +11,12 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.erhuo.adapter.CustomDatePicker;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-
-import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 
 /**
  * Created by mac on 2017/12/2.
@@ -41,8 +33,11 @@ public class SellCommodityEdit extends AppCompatActivity {
     private String name;
     private String price;
     private String description;
+    private ImageView picture;
     String type;
     String downTime;
+    public static final int TAKE_PHOTO = 1;
+    private Uri imageUri;
 
 
     private static final String[] typename={"食品","饮品","书籍","文具用品","数码产品","衣服","鞋类","箱包","化妆用品","体育用品","洗漱用品","杂物"};
@@ -76,6 +71,32 @@ public class SellCommodityEdit extends AppCompatActivity {
             }
         });
 
+        Button takePhoto = (Button) findViewById(R.id.take_photo);
+        picture = (ImageView) findViewById(R.id.picture);
+        takePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                File outputImage = new File(getExternalCacheDir(),
+                        "output_image.jpg");
+                try {if (outputImage.exists()) { outputImage.delete();
+                }
+                    outputImage.createNewFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                if (Build.VERSION.SDK_INT >= 24) {
+                    imageUri = FileProvider.getUriForFile(SellCommodityEdit.this,"com.erhuo.fileprovider", outputImage);
+                }
+                else {
+                    imageUri = Uri.fromFile(outputImage);
+                }
+                Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+                startActivityForResult(intent, TAKE_PHOTO);
+            }
+        });
+
         spinner = (Spinner) findViewById(R.id.ComType_spinner);
         //将可选内容与ArrayAdapter连接起来，simple_spinner_item是android系统自带样式
         spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.CommodityType, R.layout.type_spiner_text_item);
@@ -103,6 +124,26 @@ public class SellCommodityEdit extends AppCompatActivity {
 
         initDatePicker();
 
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case TAKE_PHOTO:
+                if (resultCode == RESULT_OK) {
+                    try {
+                        // 将拍摄的照片显示出来
+                        Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
+                        picture.setImageBitmap(bitmap);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
+                break;
+            default:
+                break;
+        }
     }
 
     class SpinnerSelectedListener implements AdapterView.OnItemSelectedListener {
@@ -142,20 +183,20 @@ public class SellCommodityEdit extends AppCompatActivity {
         customDatePicker2.setIsLoop(true); // 允许循环滚动
     }
 
-    public void httpPost(View view){
+    /*public void httpPost(View view){
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try{
                     OkHttpClient client = new OkHttpClient();
                     RequestBody requestBody = new FormBody.Builder()
-                            .add("user_name","")
+                            .add("user_name","zhangbo")
                             .add("name",name)
                             .add("type",type)
                             .add("price",price)
                             .add("description",description)
                             .add("images","")
-                            .add("down_time","downTime")
+                            .add("down_time",downTime)
                             .build();
                     Request request = new Request.Builder()
                             .url("http://123.207.161.20/zhangbo/commodity.php/add_tommodity.php")
@@ -177,6 +218,7 @@ public class SellCommodityEdit extends AppCompatActivity {
             }
         }).start();
     }
+    } */
 
 }
 
