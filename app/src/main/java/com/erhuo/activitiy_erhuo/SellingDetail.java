@@ -1,6 +1,7 @@
 package com.erhuo.activitiy_erhuo;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -54,7 +55,7 @@ public class SellingDetail extends AppCompatActivity {
                 .setPointViewVisible(true)
                 .setPageIndicator(new int[]{R.mipmap.index_white,R.mipmap.index_red})
                 .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT)
-                //.startTurning(2000)
+                .startTurning(2000)
                 .setManualPageable(true);
         TextView contact = (TextView) findViewById(R.id.contact);
         TextView buy = (TextView) findViewById(R.id.buy);
@@ -69,6 +70,14 @@ public class SellingDetail extends AppCompatActivity {
                 break;
             default:break;
         }
+        contact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SellingDetail.this, Me.class);
+                intent.putExtra("user_name", getIntent().getStringExtra("user_name"));
+                startActivity(intent);
+            }
+        });
         Toast.makeText(SellingDetail.this, getIntent().getIntExtra("com_id", -1) + getIntent().getStringExtra("user_name"), Toast.LENGTH_SHORT).show();
         getItem(getIntent().getIntExtra("com_id", -1), getIntent().getStringExtra("user_name"), getIntent().getIntExtra("code", 0));
     }
