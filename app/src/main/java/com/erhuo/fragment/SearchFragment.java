@@ -104,9 +104,9 @@ public class SearchFragment extends Fragment {
         MainActivity activity3 = (MainActivity) getActivity();
         spinner = (Spinner) view.findViewById(R.id.search_spinner);
         //将可选内容与ArrayAdapter连接起来，simple_spinner_item是android系统自带样式
-        spinnerAdapter = ArrayAdapter.createFromResource(activity3, R.array.searchType, R.layout.custom_spiner_text_item);
+        spinnerAdapter = ArrayAdapter.createFromResource(activity3, R.array.searchType, R.layout.search_spiner_text_item);
         //设置下拉列表的风格,simple_spinner_dropdown_item是android系统自带的样式，等会自定义修改
-        spinnerAdapter.setDropDownViewResource(R.layout.custom_spinner_dropdown_item);
+        spinnerAdapter.setDropDownViewResource(R.layout.search_spinner_dropdown_item);
 
         //将adapter 添加到spinner中
         spinner.setAdapter(spinnerAdapter);
