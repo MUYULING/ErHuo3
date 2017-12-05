@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.erhuo.activitiy_erhuo.R;
-import com.erhuo.util.UserHome;
+import com.erhuo.entity.UserHome;
 
 import java.text.DecimalFormat;
 import java.util.List;

@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.erhuo.activitiy_erhuo">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -11,17 +11,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.erhuo.activitiy_erhuo.MainActivity" android:label="贰货">
+        <activity
+            android:name=".MainActivity"
+            android:label="贰货">
+        </activity>
+        <activity android:name=".SearchActivity" />
+        <activity android:name=".MySellingCommodity" />
+        <activity android:name=".SellCommodityEdit" />
+        <activity android:name=".SellingDetail" />
+        <activity android:name=".Me" />
+        <activity
+            android:name=".Login"
+            android:label="贰货">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.erhuo.activitiy_erhuo.SearchActivity"></activity>
-        <activity android:name="com.erhuo.activitiy_erhuo.MySellingCommodity"></activity>
-        <activity android:name="com.erhuo.activitiy_erhuo.SellCommodityEdit"></activity>
-        <activity android:name="com.erhuo.activitiy_erhuo.SellingDetail"></activity>
     </application>
 
 </manifest>

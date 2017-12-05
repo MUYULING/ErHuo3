@@ -17,7 +17,7 @@ import com.bumptech.glide.Glide;
 import com.erhuo.activitiy_erhuo.MainActivity;
 import com.erhuo.activitiy_erhuo.R;
 import com.erhuo.activitiy_erhuo.SellingDetail;
-import com.erhuo.util.CommodityHome;
+import com.erhuo.entity.CommodityHome;
 
 import java.text.DecimalFormat;
 import java.util.List;

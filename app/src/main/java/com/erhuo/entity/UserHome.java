@@ -1,4 +1,4 @@
-package com.erhuo.util;
+package com.erhuo.entity;
 
 /**
  * Created by Gary on 2017/12/2.

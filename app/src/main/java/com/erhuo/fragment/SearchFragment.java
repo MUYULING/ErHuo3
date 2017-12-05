@@ -22,8 +22,8 @@ import com.erhuo.adapter.UserHomeAdapter;
 import com.erhuo.activitiy_erhuo.MainActivity;
 import com.erhuo.activitiy_erhuo.R;
 import com.erhuo.activitiy_erhuo.SearchActivity;
-import com.erhuo.util.CommodityHome;
-import com.erhuo.util.UserHome;
+import com.erhuo.entity.CommodityHome;
+import com.erhuo.entity.UserHome;
 
 import org.json.JSONArray;
 import org.json.JSONException;

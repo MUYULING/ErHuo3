@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.erhuo.adapter.ComHomeAdapter;
 import com.erhuo.activitiy_erhuo.MainActivity;
 import com.erhuo.activitiy_erhuo.R;
-import com.erhuo.util.CommodityHome;
+import com.erhuo.entity.CommodityHome;
 
 import org.json.JSONArray;
 import org.json.JSONException;

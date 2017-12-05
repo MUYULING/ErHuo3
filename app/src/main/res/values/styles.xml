@@ -18,4 +18,8 @@
         <item name="android:windowBackground">@color/background</item>
     </style>
 
+    <style name="tablayoutIcon" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+    </style>
+
 </resources>

@@ -1,17 +1,37 @@
 package com.erhuo.fragment;
 
 import android.content.Intent;
+import android.icu.lang.UScript;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.erhuo.activitiy_erhuo.MainActivity;
+import com.erhuo.activitiy_erhuo.Me;
 import com.erhuo.activitiy_erhuo.MySellingCommodity;
 import com.erhuo.activitiy_erhuo.R;
+import com.erhuo.entity.CommodityDetail;
+import com.erhuo.entity.UserMe;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * Created by bruce on 2016/11/1.
@@ -29,6 +49,8 @@ public class MeFragment extends Fragment {
     private ImageView requireCommodityGO;
     private ImageView favoriteGO;
     private ImageView logoutGO;
+    private RelativeLayout layout1;
+    private RelativeLayout layout2;
 
 
     @Nullable
@@ -42,30 +64,84 @@ public class MeFragment extends Fragment {
         requireCommodityGO = (ImageView) view.findViewById(R.id.my_requireCommodityGO);
         favoriteGO = (ImageView) view.findViewById(R.id.my_favoriteGO);
         logoutGO = (ImageView) view.findViewById(R.id.my_LogOutGO);
-
-        sellCommodityGO.setOnClickListener(new View.OnClickListener() {
+        layout1 = (RelativeLayout) view.findViewById(R.id.mine);
+        layout1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity activity = (MainActivity)getActivity();
+                Intent intent = new Intent(view.getContext(), Me.class);
+                intent.putExtra("user_name", activity.getIntent().getStringExtra("user_name"));
+                startActivity(intent);
+            }
+        });
+        layout2 = (RelativeLayout) view.findViewById(R.id.my_sellCommodity);
+        layout2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MainActivity activity =(MainActivity)getActivity();
                 Intent intent = new Intent(activity, MySellingCommodity.class);
+                intent.putExtra("user_name", activity.getIntent().getStringExtra("user_name"));
                 startActivityForResult(intent, 1);
             }
         });
-
-
+        getUser();
         return view;
     }
 
-    /*@Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case 1:
-                if (resultCode == RESULT_OK) {
-                    String returnedData = data.getStringExtra("data_return");
-                    textview.setText(returnedData);
-                    Log.d("MainActivity", returnedData);
+    private void getUser(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                final MainActivity activity = (MainActivity) getActivity();
+                OkHttpClient client = new OkHttpClient();
+                RequestBody body = new FormBody.Builder()
+                        .add("search", activity.getIntent().getStringExtra("user_name"))
+                        .build();
+                Request request = new Request.Builder()
+                        .url("http://123.207.161.20/gaolingzhe/user.php")
+                        .post(body)
+                        .build();
+                try{
+                    Response response = client.newCall(request).execute();
+                    String responseData = response.body().string();
+                    final UserMe userMe = parseJSONWithJSONObject(responseData);
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ImageView avatar = (ImageView) view.findViewById(R.id.my_photo);
+                            Glide.with(getContext()).load("http://123.207.161.20" + userMe.getImageID()).into(avatar);
+                            TextView name = (TextView) view.findViewById(R.id.my_name);
+                            name.setText(userMe.getNickName());
+                            TextView userName = (TextView) view.findViewById(R.id.my_yonghuID);
+                            userName.setText(userMe.getUserName());
+                        }
+                    });
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-                break;
-            default:
-        } } */
+            }
+        }).start();
+    }
+
+    private UserMe parseJSONWithJSONObject(String responseData) {
+        UserMe msg = null;
+        try{
+            JSONArray jsonArray = new JSONArray(responseData);
+            for(int i = 0; i < jsonArray.length(); i++){
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                String userName = jsonObject.getString("user_name");
+                String nickName = jsonObject.getString("nick_name");
+                String imageID = jsonObject.getString("head_image");
+                String gender = jsonObject.getString("sex");
+                msg = new UserMe(userName, nickName, imageID, gender);
+                Log.d("ME", "user_name: " + userName);
+                Log.d("ME", "nick_name: " + nickName);
+                Log.d("ME", "imageID: " + imageID);
+                Log.d("ME", "gender: " + gender);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return msg;
+    }
 }
