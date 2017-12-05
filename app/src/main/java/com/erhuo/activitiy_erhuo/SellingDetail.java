@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.holder.Holder;
+import com.bumptech.glide.Glide;
 import com.erhuo.util.CommodityDetail;
 import com.erhuo.util.CommodityHome;
 
@@ -41,7 +42,7 @@ import okhttp3.Response;
 public class SellingDetail extends AppCompatActivity {
 
     private ConvenientBanner convenientBanner;
-    private List<Integer> images = new ArrayList<>();
+    private List<String> images = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,9 +58,8 @@ public class SellingDetail extends AppCompatActivity {
                 .setPointViewVisible(true)
                 .setPageIndicator(new int[]{R.mipmap.index_white,R.mipmap.index_red})
                 .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT)
+                //.startTurning(2000)
                 .setManualPageable(true);
-        images.add(R.drawable.computer);
-        images.add(R.drawable.computer2);
         TextView contact = (TextView) findViewById(R.id.contact);
         TextView buy = (TextView) findViewById(R.id.buy);
         switch (getIntent().getIntExtra("code", 0)){
@@ -75,10 +75,9 @@ public class SellingDetail extends AppCompatActivity {
         }
         Toast.makeText(SellingDetail.this, getIntent().getIntExtra("com_id", -1) + getIntent().getStringExtra("user_name"), Toast.LENGTH_SHORT).show();
         getItem(getIntent().getIntExtra("com_id", -1), getIntent().getStringExtra("user_name"), getIntent().getIntExtra("code", 0));
-        convenientBanner.notifyDataSetChanged();
     }
 
-    public class LocalImageHolderView implements Holder<Integer> {
+    public class LocalImageHolderView implements Holder<String> {
 
         private ImageView imageView;
         @Override
@@ -86,11 +85,13 @@ public class SellingDetail extends AppCompatActivity {
             imageView = new ImageView(context);
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             return imageView;
+
         }
 
         @Override
-        public void UpdateUI(Context context, int position, Integer data) {
-            imageView.setImageResource(data);
+        public void UpdateUI(Context context, int position, String data) {
+            Glide.with(context).load(data).into(imageView);
+
         }
     }
 
@@ -108,7 +109,7 @@ public class SellingDetail extends AppCompatActivity {
                             .add("user_name", user_name)
                             .add("com_id", String.valueOf(comId))
                             .build();
-                    Log.d("DETAIL", "comid:" + comId + ", username: " + user_name);
+                    Log.d("DETAIL", "comid:" + comId + ", username: " + user_name + ", code: " + code);
                     String url = "";
                     switch (code){
                         case 0:
@@ -116,6 +117,7 @@ public class SellingDetail extends AppCompatActivity {
                             break;
                         case 1:
                             url = "http://123.207.161.20/zhangbo/req_commodity.php/detail.php";
+                            break;
                     }
                     Request request = new Request.Builder()
                             .url(url)
@@ -143,6 +145,14 @@ public class SellingDetail extends AppCompatActivity {
                                 upTimeView.setText("上架 " + msg.getUpTime());
                                 TextView downTimeView = (TextView) findViewById(R.id.tv_goods_down_time);
                                 downTimeView.setText("下架 " + msg.getDownTime());
+                                TextView stateView = (TextView) findViewById(R.id.tv_goods_state);
+                                stateView.setText("状态 " + msg.getState());
+                                images.add("http://123.207.161.20" + msg.getImageID());
+                                Log.d("DETAIL", msg.getImageID());
+                                Log.d("DETAIL", images.get(0));
+                                images.add("http://123.207.161.20" + msg.getImageID());
+                                images.add("http://123.207.161.20" + msg.getImageID());
+                                convenientBanner.notifyDataSetChanged();
                             }
                         });
                     } catch (IOException e) {
@@ -156,6 +166,7 @@ public class SellingDetail extends AppCompatActivity {
     private CommodityDetail parseJSONWithJSONObject(String jsonData){
         CommodityDetail msg = null;
         try{
+            Log.d("DETAIL", jsonData);
             JSONArray jsonArray = new JSONArray(jsonData);
             for(int i = 0; i < jsonArray.length(); i++){
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -167,9 +178,11 @@ public class SellingDetail extends AppCompatActivity {
                 double price = jsonObject.getDouble("price");
                 String upTime = jsonObject.getString("up_time");
                 String downTime = jsonObject.getString("down_time");
+                //String downTime = jsonObject.getString("downtime");
                 String description = jsonObject.getString("description");
+                String state = jsonObject.getString("state");
                 int detailId = jsonObject.getInt("detail_id");
-                msg = new CommodityDetail(user_name, name, comId, price, type, description, images, upTime, downTime, detailId);
+                msg = new CommodityDetail(user_name, name, comId, price, type, description, images, upTime, downTime, detailId, state);
                 Log.d("DETAIL", "name: " + name);
                 Log.d("DETAIL", "user_name: " + user_name);
                 Log.d("DETAIL", "type: " + type);
@@ -180,6 +193,7 @@ public class SellingDetail extends AppCompatActivity {
                 Log.d("DETAIL", "description: " + description);
                 Log.d("DETAIL", "image: " + images);
                 Log.d("DETAIL", "detail_id: " + detailId);
+                Log.d("DETAIL", "state: " + state);
             }
         } catch (JSONException e) {
             e.printStackTrace();

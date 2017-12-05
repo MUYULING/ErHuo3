@@ -11,12 +11,20 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.erhuo.adapter.CustomDatePicker;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * Created by mac on 2017/12/2.
@@ -134,7 +142,7 @@ public class SellCommodityEdit extends AppCompatActivity {
         customDatePicker2.setIsLoop(true); // 允许循环滚动
     }
 
-    /*public void httpPost(View view){
+    public void httpPost(View view){
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -158,17 +166,17 @@ public class SellCommodityEdit extends AppCompatActivity {
 
                 } catch (IOException e) {
 
-                    SellCommodityEdit.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(this, "无网络连接", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                    e.printStackTrace();
+                      runOnUiThread(new Runnable() {
+                          @Override
+                          public void run() {
+                              Toast.makeText(SellCommodityEdit.this, "无网络连接", Toast.LENGTH_SHORT).show();
+                          }
+                      });
+                      e.printStackTrace();
                 }
             }
         }).start();
-    }*/
+    }
 
 }
 

@@ -16,6 +16,16 @@ public class CommodityDetail {
     private String downTime;         //下架时间
     private int detailId;
 
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    private String state;       //商品状态
+
     public int getDetailId() {
         return detailId;
     }
@@ -24,7 +34,7 @@ public class CommodityDetail {
         this.detailId = detailId;
     }
 
-    public CommodityDetail(String userName, String commodityName, int commodityId, double price, String tag, String description, String imageID, String upTime, String downTime, int detailId) {
+    public CommodityDetail(String userName, String commodityName, int commodityId, double price, String tag, String description, String imageID, String upTime, String downTime, int detailId, String state) {
         this.userName = userName;
         this.commodityName = commodityName;
         this.commodityId = commodityId;
@@ -35,6 +45,7 @@ public class CommodityDetail {
         this.upTime = upTime;
         this.downTime = downTime;
         this.detailId = detailId;
+        this.state = state;
     }
 
     public String getUserName() {

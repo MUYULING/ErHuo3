@@ -73,17 +73,24 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tv_goods_up_time"
+                    android:id="@+id/tv_goods_state"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true" />
+                    android:layout_alignParentEnd="true"/>
 
                 <TextView
                     android:id="@+id/tv_goods_down_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_below="@id/tv_goods_up_time" />
+                    android:layout_alignParentBottom="true" />
+
+                <TextView
+                    android:id="@+id/tv_goods_up_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/tv_goods_price"
+                    android:layout_alignParentEnd="true" />
 
                 <LinearLayout
                     android:id="@+id/ll_activity"

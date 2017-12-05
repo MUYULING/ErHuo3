@@ -130,7 +130,7 @@ public class SearchFragment extends Fragment {
                     }
                     break;
                 case 1:
-                    adapter = new ComHomeAdapter(comList, activity, 0);
+                    adapter = new ComHomeAdapter(comList, activity, 1);
                     recyclerView.setAdapter(adapter);
                     if(key != null && !key.equals("")){
                         getSearchResult(itemSelectedNo);
