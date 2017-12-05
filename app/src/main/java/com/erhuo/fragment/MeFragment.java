@@ -1,7 +1,6 @@
 package com.erhuo.fragment;
 
 import android.content.Intent;
-import android.icu.lang.UScript;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,7 +17,6 @@ import com.erhuo.activitiy_erhuo.MainActivity;
 import com.erhuo.activitiy_erhuo.Me;
 import com.erhuo.activitiy_erhuo.MySellingCommodity;
 import com.erhuo.activitiy_erhuo.R;
-import com.erhuo.entity.CommodityDetail;
 import com.erhuo.entity.UserMe;
 
 import org.json.JSONArray;
