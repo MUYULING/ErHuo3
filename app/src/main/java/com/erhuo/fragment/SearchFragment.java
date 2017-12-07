@@ -96,7 +96,7 @@ public class SearchFragment extends Fragment {
                 recyclerView.setAdapter(adapter);
                 break;
             case 2:
-                adapter2 = new UserHomeAdapter(userList);
+                adapter2 = new UserHomeAdapter(userList, (MainActivity) getActivity());
                 recyclerView.setAdapter(adapter2);
                 break;
             default:break;
@@ -137,7 +137,7 @@ public class SearchFragment extends Fragment {
                     }
                     break;
                 case 2:
-                    adapter2 = new UserHomeAdapter(userList);
+                    adapter2 = new UserHomeAdapter(userList, (MainActivity) getActivity());
                     recyclerView.setAdapter(adapter2);
                     if(key != null && !key.equals("")){
                         getSearchResult(itemSelectedNo);

@@ -30,11 +30,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.erhuo.activitiy_erhuo.SearchActivity"></activity>
-        <activity android:name="com.erhuo.activitiy_erhuo.MySellingCommodity"></activity>
-        <activity android:name="com.erhuo.activitiy_erhuo.SellCommodityEdit"></activity>
-        <activity android:name="com.erhuo.activitiy_erhuo.SellingDetail"></activity>
-
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.example.cameraalbumtest.fileprovider"

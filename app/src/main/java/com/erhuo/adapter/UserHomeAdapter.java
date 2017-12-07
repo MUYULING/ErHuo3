@@ -1,6 +1,7 @@
 package com.erhuo.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,6 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.erhuo.activitiy_erhuo.MainActivity;
+import com.erhuo.activitiy_erhuo.Me;
+import com.erhuo.activitiy_erhuo.MySellingCommodity;
 import com.erhuo.activitiy_erhuo.R;
 import com.erhuo.entity.UserHome;
 
@@ -27,9 +31,11 @@ public class UserHomeAdapter extends RecyclerView.Adapter<UserHomeAdapter.ViewHo
 
     private Context mcontext;
     private List<UserHome> mUserHome;
+    private MainActivity activity;
 
-    public UserHomeAdapter(List<UserHome> mUserHome) {
+    public UserHomeAdapter(List<UserHome> mUserHome, MainActivity activity) {
         this.mUserHome = mUserHome;
+        this.activity = activity;
     }
 
     @Override
@@ -55,7 +61,10 @@ public class UserHomeAdapter extends RecyclerView.Adapter<UserHomeAdapter.ViewHo
             @Override
             public void onClick(View v) {
                 Log.d("RORORO", userHome.getUserName());
-                Toast.makeText(v.getContext(), "hahaha from: " + userHome.getUserName(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(v.getContext(), "hahaha from: " + userHome.getUserName(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(activity, Me.class);
+                intent.putExtra("user_name", activity.getIntent().getStringExtra("user_name"));
+                activity.startActivity(intent);
             }
         });
     }

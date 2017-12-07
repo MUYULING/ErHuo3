@@ -94,7 +94,7 @@ public class ComHomeAdapter extends RecyclerView.Adapter<ComHomeAdapter.ViewHold
             @Override
             public void onClick(View v) {
                 Log.d("RORORO", commodityHome.getCommodityName() + ", " + code);
-                Toast.makeText(v.getContext(), "hahaha from: " + commodityHome.getCommodityName(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(v.getContext(), "hahaha from: " + commodityHome.getCommodityName(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(activity, SellingDetail.class);
                 intent.putExtra("com_id", commodityHome.getCommodityId());
                 intent.putExtra("user_name", commodityHome.getUserName());
