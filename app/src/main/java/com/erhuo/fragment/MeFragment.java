@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.erhuo.activitiy_erhuo.Login;
 import com.erhuo.activitiy_erhuo.MainActivity;
 import com.erhuo.activitiy_erhuo.Me;
 import com.erhuo.activitiy_erhuo.MySellingCommodity;
@@ -44,6 +45,7 @@ public class MeFragment extends Fragment {
     private RelativeLayout meLayout;
     private RelativeLayout sellingLayout;
     private RelativeLayout noticLayout;
+    private RelativeLayout logoutLayout;
 
 
 
@@ -51,13 +53,6 @@ public class MeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_me, container, false);
-        ImageView xiugaiziliaoGO = (ImageView) view.findViewById(R.id.my_xiugaiziliaoGO);
-        ImageView tongzhiGO = (ImageView) view.findViewById(R.id.my_tongzhiGO);
-        ImageView jiaoyijiluGO = (ImageView) view.findViewById(R.id.my_jiaoyijiluGO);
-        ImageView sellCommodityGO = (ImageView) view.findViewById(R.id.my_sellCommodityGO);
-        ImageView requireCommodityGO = (ImageView) view.findViewById(R.id.my_requireCommodityGO);
-        ImageView favoriteGO = (ImageView) view.findViewById(R.id.my_favoriteGO);
-        ImageView logoutGO = (ImageView) view.findViewById(R.id.my_LogOutGO);
         meLayout = (RelativeLayout) view.findViewById(R.id.mine);
         meLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,6 +83,18 @@ public class MeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        logoutLayout = (RelativeLayout) view.findViewById(R.id.LogOut);
+        logoutLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity activity = (MainActivity)getActivity();
+                Intent intent = new Intent(view.getContext(), Login.class);
+                startActivity(intent);
+                activity.finish();
+            }
+        });
+
+
         getUser();
         return view;
     }

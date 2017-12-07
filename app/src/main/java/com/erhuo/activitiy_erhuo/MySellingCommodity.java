@@ -18,7 +18,7 @@ public class MySellingCommodity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_sellingcom);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_myCommodity);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_sellCommodity);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -36,15 +36,16 @@ public class MySellingCommodity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_mycommodity, menu);
+        getMenuInflater().inflate(R.menu.toolbar_my_sellcommodity, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.add_commodity:
+            case R.id.add_sell_commodity:
                 Intent intent = new Intent(this, SellCommodityEdit.class);
+                intent.putExtra("user_name", this.getIntent().getStringExtra("user_name"));
                 startActivityForResult(intent, 1);
                 break;
             default:

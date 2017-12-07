@@ -5,7 +5,7 @@
 
     <android.support.v7.widget.Toolbar
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/toolbar_sellCommodity"
+        android:id="@+id/toolbar_requireCommodity"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="我的出售商品"
+            android:text="我的求购商品"
             android:textSize="20sp"
             android:textColor="@color/colorDefault"
             />
