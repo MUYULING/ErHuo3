@@ -29,7 +29,9 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:textSize="24sp"
-                android:textColor="#222222"/>
+                android:textColor="#222222"
+                android:maxEms="7"
+                android:singleLine="true"/>
 
             <TextView
                 android:id="@+id/com_home_itemcard_des"

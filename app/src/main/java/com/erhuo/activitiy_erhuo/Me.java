@@ -13,8 +13,15 @@ import com.erhuo.fragment.BuyingFragment;
 import com.erhuo.fragment.CommentFragment;
 import com.erhuo.fragment.SellingFragment;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class Me extends AppCompatActivity {
 
@@ -33,6 +40,7 @@ public class Me extends AppCompatActivity {
         setContentView(R.layout.activity_me);
         initControls();
         fragmentChange();
+        getUser();
     }
 
     /**
@@ -71,5 +79,26 @@ public class Me extends AppCompatActivity {
 
         //将tabLayout与viewpager连起来
         tab_title.setupWithViewPager(vp_pager);
+    }
+
+    private void getUser(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    OkHttpClient client = new OkHttpClient();
+                    RequestBody requestBody = new FormBody.Builder()
+                            .add("search", getIntent().getStringExtra("user_name"))
+                            .build();
+                    Request request = new Request.Builder()
+                            .url("http://123.207.161.20/gaolingzhe/userdetail.php")
+                            .post(requestBody)
+                            .build();
+                    Response response = client.newCall(request).execute();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        })
     }
 }
