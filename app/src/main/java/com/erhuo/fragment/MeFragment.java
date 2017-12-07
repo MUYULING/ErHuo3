@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.erhuo.activitiy_erhuo.MainActivity;
 import com.erhuo.activitiy_erhuo.Me;
 import com.erhuo.activitiy_erhuo.MySellingCommodity;
+import com.erhuo.activitiy_erhuo.NoticeAvtivity;
 import com.erhuo.activitiy_erhuo.R;
 import com.erhuo.entity.UserMe;
 
@@ -40,30 +41,25 @@ public class MeFragment extends Fragment {
 
 
     private View view;
-    private ImageView xiugaiziliaoGO;
-    private ImageView tongzhiGO;
-    private ImageView jiaoyijiluGO;
-    private ImageView sellCommodityGO;
-    private ImageView requireCommodityGO;
-    private ImageView favoriteGO;
-    private ImageView logoutGO;
-    private RelativeLayout layout1;
-    private RelativeLayout layout2;
+    private RelativeLayout meLayout;
+    private RelativeLayout sellingLayout;
+    private RelativeLayout noticLayout;
+
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_me, container, false);
-        xiugaiziliaoGO = (ImageView) view.findViewById(R.id.my_xiugaiziliaoGO);
-        tongzhiGO = (ImageView) view.findViewById(R.id.my_tongzhiGO);
-        jiaoyijiluGO = (ImageView) view.findViewById(R.id.my_jiaoyijiluGO);
-        sellCommodityGO = (ImageView) view.findViewById(R.id.my_sellCommodityGO);
-        requireCommodityGO = (ImageView) view.findViewById(R.id.my_requireCommodityGO);
-        favoriteGO = (ImageView) view.findViewById(R.id.my_favoriteGO);
-        logoutGO = (ImageView) view.findViewById(R.id.my_LogOutGO);
-        layout1 = (RelativeLayout) view.findViewById(R.id.mine);
-        layout1.setOnClickListener(new View.OnClickListener() {
+        ImageView xiugaiziliaoGO = (ImageView) view.findViewById(R.id.my_xiugaiziliaoGO);
+        ImageView tongzhiGO = (ImageView) view.findViewById(R.id.my_tongzhiGO);
+        ImageView jiaoyijiluGO = (ImageView) view.findViewById(R.id.my_jiaoyijiluGO);
+        ImageView sellCommodityGO = (ImageView) view.findViewById(R.id.my_sellCommodityGO);
+        ImageView requireCommodityGO = (ImageView) view.findViewById(R.id.my_requireCommodityGO);
+        ImageView favoriteGO = (ImageView) view.findViewById(R.id.my_favoriteGO);
+        ImageView logoutGO = (ImageView) view.findViewById(R.id.my_LogOutGO);
+        meLayout = (RelativeLayout) view.findViewById(R.id.mine);
+        meLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MainActivity activity = (MainActivity)getActivity();
@@ -72,14 +68,24 @@ public class MeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        layout2 = (RelativeLayout) view.findViewById(R.id.my_sellCommodity);
-        layout2.setOnClickListener(new View.OnClickListener() {
+        sellingLayout = (RelativeLayout) view.findViewById(R.id.my_sellCommodity);
+        sellingLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MainActivity activity =(MainActivity)getActivity();
                 Intent intent = new Intent(activity, MySellingCommodity.class);
                 intent.putExtra("user_name", activity.getIntent().getStringExtra("user_name"));
                 startActivityForResult(intent, 1);
+            }
+        });
+        noticLayout = (RelativeLayout) view.findViewById(R.id.my_tongzhi);
+        noticLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity activity = (MainActivity)getActivity();
+                Intent intent = new Intent(view.getContext(), NoticeAvtivity.class);
+                intent.putExtra("user_name", activity.getIntent().getStringExtra("user_name"));
+                startActivity(intent);
             }
         });
         getUser();

@@ -3,7 +3,7 @@
     package="com.erhuo.activitiy_erhuo">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -14,8 +14,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="贰货">
-        </activity>
+            android:label="贰货"></activity>
         <activity android:name=".SearchActivity" />
         <activity android:name=".MySellingCommodity" />
         <activity android:name=".SellCommodityEdit" />
@@ -30,6 +29,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.example.cameraalbumtest.fileprovider"
@@ -40,6 +40,7 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
+        <activity android:name=".NoticeAvtivity"></activity>
     </application>
 
 </manifest>

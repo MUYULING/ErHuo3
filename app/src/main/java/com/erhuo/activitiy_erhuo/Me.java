@@ -99,6 +99,6 @@ public class Me extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-        })
+        }).start();
     }
 }
