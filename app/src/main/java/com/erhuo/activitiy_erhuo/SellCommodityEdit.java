@@ -227,6 +227,7 @@ public class SellCommodityEdit extends AppCompatActivity {
                             @Override
                             public void run() {
                                 Toast.makeText(SellCommodityEdit.this, "添加失败，请重试", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SellCommodityEdit.this, "添加失败，请重试", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
