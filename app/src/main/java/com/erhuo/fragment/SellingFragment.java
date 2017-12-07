@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import com.erhuo.activitiy_erhuo.Me;
 import com.erhuo.activitiy_erhuo.R;
 import com.erhuo.adapter.ComHomeAdapter;
+import com.erhuo.adapter.SellingRecycleAdapter;
 import com.erhuo.entity.CommodityHome;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ import java.util.List;
 public class SellingFragment extends Fragment {
 
     private List<CommodityHome> commodityHomeList = new ArrayList<>();
-    private ComHomeAdapter adapter;
+    private SellingRecycleAdapter adapter;
     private View view;
     private List<CommodityHome> tmpList = new ArrayList<>();
 
@@ -32,7 +33,7 @@ public class SellingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_selling, container, false);
         Me activity = (Me) getActivity();
-        adapter = new ComHomeAdapter(commodityHomeList, activity, 0);
+        adapter = new SellingRecycleAdapter(commodityHomeList, activity, 0);
 
         return view;
     }
