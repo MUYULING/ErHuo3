@@ -32,7 +32,6 @@ import android.widget.Toast;
 
 import com.erhuo.adapter.CustomDatePicker;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -197,83 +196,10 @@ public class SellCommodityEdit extends AppCompatActivity {
 
                 addItem();
 
-                //file = new File(picPath);
-                //uploadFile(file);
             }
         });
 
     }
-
-  /* public static void uploadFile(final File file) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                String CHARSET = "utf-8"; // 设置编码
-                String SUCCESS = "1";
-                String FAILURE = "0";
-
-                String BOUNDARY = UUID.randomUUID().toString(); // 边界标识 随机生成
-                String PREFIX = "--", LINE_END = "\r\n";
-                String CONTENT_TYPE = "multipart/form-data"; // 内容类型
-                String RequestURL = "http://123.207.161.20/zhangbo/commodity.php/add_tommodity.php";
-                try {
-                    URL url = new URL(RequestURL);
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    //conn.setReadTimeout(TIME_OUT);
-                    //conn.setConnectTimeout(TIME_OUT);
-                    conn.setDoInput(true); // 允许输入流
-                    conn.setDoOutput(true); // 允许输出流
-                    conn.setUseCaches(false); // 不允许使用缓存
-                    conn.setRequestMethod("POST"); // 请求方式
-                    conn.setRequestProperty("Charset", CHARSET); // 设置编码
-                    conn.setRequestProperty("connection", "keep-alive");
-                    conn.setRequestProperty("Content-Type", CONTENT_TYPE + ";boundary="
-                            + BOUNDARY);
-                    if (file != null) {
-
-                        OutputStream outputSteam = conn.getOutputStream();
-
-                        DataOutputStream dos = new DataOutputStream(outputSteam);
-                        StringBuffer sb = new StringBuffer();
-                        sb.append(PREFIX);
-                        sb.append(BOUNDARY);
-                        sb.append(LINE_END);
-
-
-
-                        sb.append("Content-Disposition: form-data; name=\"images\"; filename=\""
-                                + file.getName() + "\"" + LINE_END);
-                        sb.append("Content-Type: application/octet-stream; charset="
-                                + CHARSET + LINE_END);
-                        sb.append(LINE_END);
-                        dos.write(sb.toString().getBytes());
-                        InputStream is = new FileInputStream(file);
-                        byte[] bytes = new byte[1024];
-                        int len = 0;
-                        while ((len = is.read(bytes)) != -1) {
-                            dos.write(bytes, 0, len);
-                        }
-                        is.close();
-                        dos.write(LINE_END.getBytes());
-                        byte[] end_data = (PREFIX + BOUNDARY + PREFIX + LINE_END)
-                                .getBytes();
-                        dos.write(end_data);
-                        dos.flush();
-
-                        int res = conn.getResponseCode();
-                        if (res == 200) {
-                            //return SUCCESS;
-                        }
-                    }
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                //return FAILURE;
-            }
-        }).start();
-    } */
 
 
     private void openAlbum() {

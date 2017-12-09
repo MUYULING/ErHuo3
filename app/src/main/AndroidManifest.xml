@@ -18,6 +18,7 @@
         <activity android:name=".SearchActivity" />
         <activity android:name=".MySellingCommodity" />
         <activity android:name=".SellCommodityEdit" />
+        <activity android:name=".SellCommodityReEdit" />
         <activity android:name=".MyRequiringCommodity" />
         <activity android:name=".RequireCommodityEdit" />
         <activity android:name=".SellingDetail" />

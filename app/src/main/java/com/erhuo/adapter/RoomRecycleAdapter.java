@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.erhuo.activitiy_erhuo.MySellingCommodity;
 import com.erhuo.activitiy_erhuo.R;
+import com.erhuo.activitiy_erhuo.SellCommodityReEdit;
 import com.erhuo.activitiy_erhuo.SellingDetail;
 import com.erhuo.entity.CommodityHome;
 
@@ -176,6 +177,12 @@ public class RoomRecycleAdapter extends RecyclerView.Adapter<RoomRecycleAdapter.
         holder.button_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Intent intent = new Intent(activity, SellCommodityReEdit.class);
+                intent.putExtra("user_name", activity.getIntent().getStringExtra("user_name"));
+                intent.putExtra("com_id", commodityHome.getCommodityId());
+                activity.startActivity(intent);
+
 
             }
         });
