@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.erhuo.activitiy_erhuo.Login;
 import com.erhuo.activitiy_erhuo.MainActivity;
 import com.erhuo.activitiy_erhuo.Me;
+import com.erhuo.activitiy_erhuo.MyRequiringCommodity;
 import com.erhuo.activitiy_erhuo.MySellingCommodity;
 import com.erhuo.activitiy_erhuo.NoticeAvtivity;
 import com.erhuo.activitiy_erhuo.R;
@@ -46,7 +47,7 @@ public class MeFragment extends Fragment {
     private RelativeLayout sellingLayout;
     private RelativeLayout noticLayout;
     private RelativeLayout logoutLayout;
-
+    private RelativeLayout buyingLayout;
 
 
     @Nullable
@@ -93,7 +94,17 @@ public class MeFragment extends Fragment {
                 activity.finish();
             }
         });
-
+        buyingLayout = (RelativeLayout) view.findViewById(R.id.my_requireCommodity);
+        buyingLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity activity = (MainActivity)getActivity();
+                Intent intent = new Intent(view.getContext(), MyRequiringCommodity.class);
+                intent.putExtra("user_name", activity.getIntent().getStringExtra("user_name"));
+                startActivity(intent);
+                activity.finish();
+            }
+        });
 
         getUser();
         return view;

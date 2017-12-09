@@ -23,8 +23,8 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
 
         public ViewHolder(View view){
             super(view);
-            firstname = (TextView)view.findViewById(R.id.firstname);
-            secondname = (TextView)view.findViewById(R.id.secondname);
+            firstname = (TextView)view.findViewById(R.id.buyername);
+            secondname = (TextView)view.findViewById(R.id.comname);
             date = (TextView)view.findViewById(R.id.notice_date);
         }
     }

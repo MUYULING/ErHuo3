@@ -91,7 +91,7 @@ public class SellingFragment extends Fragment {
                     activity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            MainActivity activity = (MainActivity) getActivity();
+                            Me activity = (Me) getActivity();
                             Toast.makeText(activity, "无网络连接", Toast.LENGTH_SHORT).show();
                         }
                     });

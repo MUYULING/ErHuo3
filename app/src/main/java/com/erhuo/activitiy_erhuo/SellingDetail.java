@@ -131,6 +131,7 @@ public class SellingDetail extends AppCompatActivity {
                     try {
                         Response response = client.newCall(request).execute();
                         String responseData = response.body().string();
+                        Log.d("DETAIL", responseData);
                         final CommodityDetail msg = parseJSONWithJSONObject(responseData);
                         Log.d("DETAIL", msg.getCommodityName());
                         runOnUiThread(new Runnable() {
@@ -183,7 +184,6 @@ public class SellingDetail extends AppCompatActivity {
                 double price = jsonObject.getDouble("price");
                 String upTime = jsonObject.getString("up_time");
                 String downTime = jsonObject.getString("down_time");
-                //String downTime = jsonObject.getString("downtime");
                 String description = jsonObject.getString("description");
                 String state = jsonObject.getString("state");
                 int detailId = jsonObject.getInt("detail_id");

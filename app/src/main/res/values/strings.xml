@@ -18,4 +18,9 @@
     <string name="sellers">查看卖家</string>
     <string name="fav">收藏</string>
     <string name="login">Login</string>
+    <string name="username">用户名</string>
+    <string name="passwd">密码</string>
+    <string name="denglu">登录</string>
+    <string name="register">注册</string>
+    <string name="notice">通知管理</string>
 </resources>
