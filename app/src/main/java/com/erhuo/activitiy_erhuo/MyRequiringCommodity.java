@@ -14,9 +14,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.erhuo.adapter.Room2RecycleAdapter;
-import com.erhuo.adapter.RoomRecycleAdapter;
 import com.erhuo.entity.CommodityDetail;
-import com.erhuo.entity.CommodityHome;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -80,7 +78,7 @@ public class MyRequiringCommodity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.add_require_commodity:
-                Intent intent = new Intent(this, SellCommodityEdit.class);
+                Intent intent = new Intent(this, RequireCommodityEdit.class);
                 intent.putExtra("user_name", this.getIntent().getStringExtra("user_name"));
                 startActivityForResult(intent, 1);
                 break;

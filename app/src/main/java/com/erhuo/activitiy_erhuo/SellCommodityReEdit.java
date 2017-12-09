@@ -305,6 +305,7 @@ public class SellCommodityReEdit extends AppCompatActivity {
                 }
                 addItem();
 
+                finish();
             }
         });
 

@@ -196,6 +196,7 @@ public class RequireCommodityEdit extends AppCompatActivity {
 
                 addItem();
 
+                finish();
             }
         });
 
@@ -388,7 +389,7 @@ public class RequireCommodityEdit extends AppCompatActivity {
                             .addFormDataPart("down_time", downTime)
                             .build();
                     Request request1 = new Request.Builder()
-                            .url("http://123.207.161.20/zhangbo/commodity.php/add_tommodity.php")
+                            .url("http://123.207.161.20/zhangbo/req_commodity.php/add_tommodity.php")
                             .post(requestBody1)
                             .build();
                     Response response1 = client1.newCall(request1).execute();

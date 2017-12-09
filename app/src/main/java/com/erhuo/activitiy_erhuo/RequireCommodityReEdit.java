@@ -27,11 +27,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.erhuo.adapter.CustomDatePicker;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -42,6 +45,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
@@ -53,7 +57,7 @@ import okhttp3.Response;
  * Created by mac on 2017/12/2.
  */
 
-public class SellCommodityEdit extends AppCompatActivity {
+public class RequireCommodityReEdit extends AppCompatActivity {
 
     private RelativeLayout selectDate, selectTime;
     private TextView currentDate, currentTime;
@@ -67,8 +71,20 @@ public class SellCommodityEdit extends AppCompatActivity {
     private String type;
     private String downTime;
     private String userName;
+    private int detail_id;
+    private int com_id;
     private ImageView picture;
     private Bitmap bitmap;
+
+    String B_name;
+    String B_type;
+    String B_typehanzi;
+    String B_images;
+    String b_images;
+    String B_price;
+    String B_upTime;
+    String B_downTime;
+    String B_description;
 
     public static final int TAKE_PHOTO = 1;
     public static final int CHOOSE_PHOTO = 2;
@@ -87,10 +103,12 @@ public class SellCommodityEdit extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.editsellcom);
+        setContentView(R.layout.editrequirecom);
 
         userName = getIntent().getStringExtra("user_name");
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_edit_sell);
+        com_id = getIntent().getIntExtra("com_id", 0);
+        detail_id = getIntent().getIntExtra("detail_id", 0);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_edit_require);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -104,6 +122,95 @@ public class SellCommodityEdit extends AppCompatActivity {
                 finish();
             }
         });
+
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    OkHttpClient client = new OkHttpClient();
+                    RequestBody requestBody = new FormBody.Builder()
+                            .add("user_name", userName)
+                            .add("com_id", Integer.toString(com_id))
+                            .build();
+                    Log.d("user_name", userName);
+                    Log.d("com_id","" + com_id);
+                    Request request = new Request.Builder()
+                            .url("http://123.207.161.20/zhangbo/req_commodity.php/detail.php")
+                            .post(requestBody)
+                            .build();
+
+                    Response response = client.newCall(request).execute();
+                    String responseData = response.body().string();
+                    JSONArray jsonArray = new JSONArray(responseData);
+                    JSONObject jsonObject = jsonArray.getJSONObject(0);
+                    B_name = jsonObject.getString("name");
+                    B_type = jsonObject.getString("type");
+                    B_images =jsonObject.getString("images");
+                    B_price = jsonObject.getString("price");
+                    B_upTime = jsonObject.getString("up_time");
+                    B_downTime = jsonObject.getString("down_time");
+                    B_description = jsonObject.getString("description");
+                    Log.d("B_name",B_name);
+                    Log.d("B_type",B_type);
+                    Log.d("B_price",B_price);
+                    Log.d("B_upTime",B_upTime);
+                    Log.d("B_images",B_images);
+                    Log.d("B_downTime",B_downTime);
+                    Log.d("B_description", B_description);
+                    Log.d("username",userName);
+                    Log.d("detail_id",Integer.toString(detail_id));
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            tv1.setText(B_name);
+                            tv2.setText(B_price);
+                            tv3.setText(B_description);
+
+                            switch(B_type)
+                            {
+                                case"food":B_typehanzi = "食品";break;
+                                case"drink":B_typehanzi = "饮品";break;
+                                case"book":B_typehanzi = "书籍";break;
+                                case"stationery":B_typehanzi = "文具用品";break;
+                                case"digital":B_typehanzi = "数码产品";break;
+                                case"clothes":B_typehanzi = "衣服";break;
+                                case"shoes":B_typehanzi = "鞋类";break;
+                                case"bag":B_typehanzi = "箱包";break;
+                                case"cosmetic":B_typehanzi = "化妆用品";break;
+                                case"sports":B_typehanzi = "体育用品";break;
+                                case"toiletry":B_typehanzi = "洗漱用品";break;
+                                case"groceries":B_typehanzi = "杂物";break;
+                            }
+                            SpinnerAdapter apsAdapter= spinner.getAdapter(); //得到SpinnerAdapter对象
+                            int k= apsAdapter.getCount();
+                            for(int i=0;i<k;i++){
+                                if(B_typehanzi.equals(apsAdapter.getItem(i).toString())){
+                                    spinner.setSelection(i,true);// 默认选中项
+                                    break;
+                                }
+                            }
+
+                            initDatePicker(B_downTime, B_upTime);
+                            Glide.with(RequireCommodityReEdit.this).load("http://123.207.161.20" +B_images).into(picture);
+                        }
+                    });
+
+                } catch (IOException e) {
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(RequireCommodityReEdit.this,  "无网络连接", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
 
 
         //Button takePhoto = (Button) findViewById(R.id.take_photo);
@@ -137,10 +244,10 @@ public class SellCommodityEdit extends AppCompatActivity {
         chooseFromAlbum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ContextCompat.checkSelfPermission(SellCommodityEdit.this,
+                if (ContextCompat.checkSelfPermission(RequireCommodityReEdit.this,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.
                         PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(SellCommodityEdit.this, new
+                    ActivityCompat.requestPermissions(RequireCommodityReEdit.this, new
                             String[]{ Manifest.permission. WRITE_EXTERNAL_STORAGE }, 1); }
                 else {
                     openAlbum();
@@ -171,17 +278,16 @@ public class SellCommodityEdit extends AppCompatActivity {
 
         selectTime = (RelativeLayout) findViewById(R.id.selectTime);
         selectDate = (RelativeLayout) findViewById(R.id.selectDate);
-        selectDate.setOnClickListener(new View.OnClickListener(){
+        selectDate.setOnClickListener( new View.OnClickListener(){
             public void onClick(View v) {
                 // 日期格式为yyyy-MM-dd
                 downTime = currentDate.getText().toString();
-                customDatePicker1.show(currentDate.getText().toString());
+                customDatePicker1.show(B_downTime.split(" ")[0]);
             }
         });
 
         currentDate = (TextView) findViewById(R.id.currentDate);
         currentTime = (TextView) findViewById(R.id.currentTime);
-        initDatePicker();
 
         Button submit = (Button) findViewById(R.id.submit);
         submit.setOnClickListener(new View.OnClickListener() {
@@ -193,7 +299,10 @@ public class SellCommodityEdit extends AppCompatActivity {
                 name = tv1.getText().toString();
                 price = tv2.getText().toString();
                 description = tv3.getText().toString();
-
+                if(picPath!=null)
+                {
+                    file = new File(picPath);
+                }
                 addItem();
 
                 finish();
@@ -242,7 +351,7 @@ public class SellCommodityEdit extends AppCompatActivity {
                 break;
             case CHOOSE_PHOTO:
                 if (resultCode == RESULT_OK) {
-                        // 判断手机系统版本号
+                    // 判断手机系统版本号
                     if (Build.VERSION.SDK_INT >= 19) {
                         // 4.4 及以上系统使用这个方法处理图片
                         handleImageOnKitKat(data);
@@ -271,7 +380,7 @@ public class SellCommodityEdit extends AppCompatActivity {
             } else if ("com.android.providers.downloads.documents".equals(uri.
                     getAuthority())) {
                 Uri contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), Long.valueOf(docId));
-                        imagePath = getImagePath(contentUri, null);
+                imagePath = getImagePath(contentUri, null);
             }
         } else if ("content".equalsIgnoreCase(uri.getScheme())) {
             // 如果是 content 类型的 Uri，则使用普通方式处理
@@ -304,7 +413,14 @@ public class SellCommodityEdit extends AppCompatActivity {
 
     private void displayImage(String imagePath) {
         if (imagePath != null) {
-            Log.d("imagePath",imagePath);
+            Log.d("!!!!!!!!!!!!!imagePath",imagePath);
+            Log.d("!!!!!!!!!!!!!imagePath",imagePath);
+            Log.d("!!!!!!!!!!!!!imagePath",imagePath);
+            Log.d("!!!!!!!!!!!!!imagePath",imagePath);
+            Log.d("!!!!!!!!!!!!!imagePath",imagePath);
+            Log.d("!!!!!!!!!!!!!imagePath",imagePath);
+            Log.d("!!!!!!!!!!!!!imagePath",imagePath);
+            Log.d("!!!!!!!!!!!!!imagePath",imagePath);
             picPath = imagePath;
             bitmap = BitmapFactory.decodeFile(imagePath);
             picture.setImageBitmap(bitmap);
@@ -340,12 +456,21 @@ public class SellCommodityEdit extends AppCompatActivity {
         }
     }
 
-    private void initDatePicker() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
+    private void initDatePicker(String b_downTime, String b_upTime) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
         String now = sdf.format(new Date());
         downTime = now.split(" ")[0];
-        currentDate.setText(now.split(" ")[0]);
-        currentTime.setText(now);
+        //Log.d("!!!!!!!!!!!!now",now);
+        //Log.d("!!!!!!!!!!!!now",now);
+        //Log.d("!!!!!!!!!!!!B_downtime",b_downTime);
+        //Log.d("!!!!!!!!!!!!B_uptime",b_upTime);
+        //Log.d("!!!!!!!!!!!!now",now);
+        //Log.d("!!!!!!!!!!!!now",now);
+        //Log.d("!!!!!!!!!!!!now",now);
+        //Log.d("!!!!!!!!!!!!now",now);
+
+        currentDate.setText(b_downTime.split(" ")[0]);
+        currentTime.setText(b_upTime);
 
         customDatePicker1 = new CustomDatePicker(this, new CustomDatePicker.ResultHandler() {
             @Override
@@ -372,37 +497,64 @@ public class SellCommodityEdit extends AppCompatActivity {
             @Override
             public void run() {
                 try{
-                    file = new File(picPath);
                     MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("image/jpeg; charset=utf-8");
                     //RequestBody fileBody = RequestBody.create(MediaType.parse("image/png"), file);
                     OkHttpClient client1 = new OkHttpClient();
 
-                    RequestBody requestBody1 = new MultipartBody.Builder()
-                            .setType(MultipartBody.FORM)
-                            .addFormDataPart("pic", file.getName(), RequestBody.create(MEDIA_TYPE_MARKDOWN, file))
-                            .addFormDataPart("user_name", userName)
-                            .addFormDataPart("name", name)
-                            .addFormDataPart("type", type)
-                            .addFormDataPart("price", price)
-                            .addFormDataPart("description", description)
-                            .addFormDataPart("down_time", downTime)
-                            .build();
+                    b_images = B_images;
+                    RequestBody requestBody1;
+                    if(file!=null){
+                        requestBody1 = new MultipartBody.Builder()
+                                .setType(MultipartBody.FORM)
+                                .addFormDataPart("pic", file.getName(), RequestBody.create(MEDIA_TYPE_MARKDOWN, file))
+                                .addFormDataPart("oldimages", b_images)
+                                .addFormDataPart("name", name)
+                                .addFormDataPart("detail_id", Integer.toString(detail_id))
+                                .addFormDataPart("type", type)
+                                .addFormDataPart("price", price)
+                                .addFormDataPart("description", description)
+                                .addFormDataPart("down_time", downTime)
+                                .build();
+                    }
+                    else{
+                        requestBody1 = new MultipartBody.Builder()
+                                .setType(MultipartBody.FORM)
+                                .addFormDataPart("oldimages", b_images)
+                                .addFormDataPart("name", name)
+                                .addFormDataPart("detail_id", Integer.toString(detail_id))
+                                .addFormDataPart("type", type)
+                                .addFormDataPart("price", price)
+                                .addFormDataPart("description", description)
+                                .addFormDataPart("down_time", downTime)
+                                .build();
+                    }
+
+                    Log.d("oldimages", b_images);
+                    Log.d("oldimages", b_images);
+                    Log.d("oldimages", b_images);
+                    Log.d("oldimages", b_images);
+                    Log.d("oldimages", b_images);
+                    Log.d("oldimages", b_images);
+                    Log.d("oldimages", b_images);
+                    Log.d("oldimages", b_images);
+
                     Request request1 = new Request.Builder()
-                            .url("http://123.207.161.20/zhangbo/commodity.php/add_tommodity.php")
+                            .url("http://123.207.161.20/zhangbo/req_commodity.php/alter.php")
                             .post(requestBody1)
                             .build();
 
 
                     Response response1 = client1.newCall(request1).execute();
                     String responseData1 = response1.body().string();
-                    JSONObject jsonObject = new JSONObject(responseData1);
-                    int success = jsonObject.getInt("success");
+                    Log.d("responseData1",responseData1);
+                    JSONObject jsonObject1 = new JSONObject(responseData1);
+                    int success = jsonObject1.getInt("success");
                     Log.d("ADD", Integer.toString(success));
                     if(success == 1){
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(SellCommodityEdit.this, "添加成功", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RequireCommodityReEdit.this, "修改成功", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -410,19 +562,19 @@ public class SellCommodityEdit extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(SellCommodityEdit.this, "添加失败，请重试", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RequireCommodityReEdit.this, "修改失败，请重试", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
                 } catch (IOException e) {
 
-                      runOnUiThread(new Runnable() {
-                          @Override
-                          public void run() {
-                              Toast.makeText(SellCommodityEdit.this, "无网络连接", Toast.LENGTH_SHORT).show();
-                          }
-                      });
-                      e.printStackTrace();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(RequireCommodityReEdit.this, "无网络连接", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    e.printStackTrace();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
