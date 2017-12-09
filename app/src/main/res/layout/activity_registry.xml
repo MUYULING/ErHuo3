@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/toolbar_Notice"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="注册"
+            android:textSize="20sp"
+            android:textColor="@color/colorDefault"
+            />
+
+    </android.support.v7.widget.Toolbar>
+
+    <!--昵称-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/txusername"
+            android:textSize="18sp" />
+        <EditText
+            android:id="@+id/edit_username"
+            android:layout_width="180dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="22dp"
+            android:inputType="text"
+            android:textSize="18sp"
+            android:background="@drawable/ed_bg"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/txnickname"
+            android:textSize="18sp" />
+        <EditText
+            android:id="@+id/edit_nickname"
+            android:layout_width="180dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="22dp"
+            android:inputType="text"
+            android:textSize="18sp"
+            android:background="@drawable/ed_bg"/>
+
+    </LinearLayout>
+
+    <!--密码-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/password1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/txpassword1"
+            android:textSize="18sp" />
+        <EditText
+            android:id="@+id/edit_password1"
+            android:layout_width="180dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="22dp"
+            android:inputType="textPassword"
+            android:textSize="18sp"
+            android:background="@drawable/ed_bg"/>
+
+    </LinearLayout>
+
+    <!--确认密码-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/password2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/txpassword2"
+            android:textSize="18sp" />
+        <EditText
+            android:id="@+id/edit_password2"
+            android:layout_width="180dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="22dp"
+            android:inputType="textPassword"
+            android:textSize="18sp"
+            android:background="@drawable/ed_bg"/>
+
+    </LinearLayout>
+
+    <!--性别-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/sex"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/txsex"
+            android:textSize="18sp" />
+
+        <RadioGroup
+            android:id="@+id/radioGroupID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/maleGroupID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="45dp"
+                android:text="@string/txsex1" />
+
+            <RadioButton
+                android:id="@+id/femaleGroupID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="40dp"
+                android:text="@string/txsex2" />
+
+        </RadioGroup>
+    </LinearLayout>
+
+    <!--学校-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/school"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/txschool"
+            android:textSize="18sp" />
+        <EditText
+            android:id="@+id/edit_school"
+            android:layout_width="180dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="22dp"
+            android:inputType="text"
+            android:textSize="18sp"
+            android:background="@drawable/ed_bg"/>
+
+    </LinearLayout>
+
+    <!--学号-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/studentid"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/txstudentid"
+            android:textSize="18sp" />
+        <EditText
+            android:id="@+id/edit_studentid"
+            android:layout_width="180dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="22dp"
+            android:inputType="text"
+            android:textSize="18sp"
+            android:background="@drawable/ed_bg"/>
+
+    </LinearLayout>
+
+    <!--手机号-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/phone"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/txphone"
+            android:textSize="18sp" />
+        <EditText
+            android:id="@+id/edit_phone"
+            android:layout_width="180dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="22dp"
+            android:inputType="text"
+            android:textSize="18sp"
+            android:background="@drawable/ed_bg"/>
+
+    </LinearLayout>
+
+    <!--提交/取消-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/txsubmit" />
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="30dp"
+            android:text="@string/txcancel" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

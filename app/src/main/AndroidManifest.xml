@@ -42,8 +42,10 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".NoticeAvtivity" />
-        <activity android:name=".MyRecordActivity"></activity>
+        <activity android:name=".NoticeActivity" />
+        <activity android:name=".MyRecordActivity" />
+        <activity android:name=".CollectionActivity" />
+        <activity android:name=".Registry"></activity>
     </application>
 
 </manifest>

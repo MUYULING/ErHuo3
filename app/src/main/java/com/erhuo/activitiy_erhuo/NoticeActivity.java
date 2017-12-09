@@ -16,7 +16,7 @@ import com.erhuo.fragment.RequiringNoticeFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NoticeAvtivity extends AppCompatActivity {
+public class NoticeActivity extends AppCompatActivity {
 
     private TabLayout tab_title;
     private ViewPager vp_pager;

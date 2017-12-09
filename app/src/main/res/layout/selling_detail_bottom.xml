@@ -16,7 +16,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:id="@+id/good_collection_llyt"
+            android:id="@+id/good_collection"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -40,6 +40,7 @@
             android:background="#e0e0e0"></TextView>
 
         <LinearLayout
+            android:id="@+id/good_contact"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1">
@@ -56,6 +57,7 @@
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/good_buy"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_weight="2">

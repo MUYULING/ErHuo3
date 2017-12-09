@@ -13,7 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.erhuo.activitiy_erhuo.MyRequiringCommodity;
+import com.erhuo.activitiy_erhuo.CollectionActivity;
+import com.erhuo.activitiy_erhuo.Me;
 import com.erhuo.activitiy_erhuo.R;
 import com.erhuo.activitiy_erhuo.SellingDetail;
 import com.erhuo.entity.CommodityHome;
@@ -22,14 +23,14 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 /**
- * Created by Gary on 2017/12/7.
+ * Created by Gary on 2017/12/9.
  */
 
-public class Room2RecycleAdapter extends RecyclerView.Adapter<Room2RecycleAdapter.ViewHolder> {
+public class SellingCollAdapter extends RecyclerView.Adapter<SellingCollAdapter.ViewHolder> {
 
     private Context mContext;
     private List<CommodityHome> mCommodityHome;
-    private MyRequiringCommodity activity;
+    private CollectionActivity activity;
     private int code;
 
     static class ViewHolder extends RecyclerView.ViewHolder{
@@ -41,43 +42,39 @@ public class Room2RecycleAdapter extends RecyclerView.Adapter<Room2RecycleAdapte
         TextView com_tag;
         TextView com_upTime;
         TextView com_downTime;
-        Button button_click;
-        Button button_delete;
-        Button button_update;
+        Button button;
 
         public ViewHolder(View itemView) {
             super(itemView);
             cardView = (CardView) itemView;
-            com_image = (ImageView) itemView.findViewById(R.id.com_room_itemcard);
-            com_name = (TextView) itemView.findViewById(R.id.com_room_itemcard_name);
-            com_des = (TextView) itemView.findViewById(R.id.com_room_itemcard_des);
-            com_price = (TextView) itemView.findViewById(R.id.com_room_itemcard_price);
-            com_tag = (TextView) itemView.findViewById(R.id.com_room_itemcard_tag);
-            com_upTime = (TextView) itemView.findViewById(R.id.com_room_itemcard_up_time);
-            com_downTime = (TextView) itemView.findViewById(R.id.com_room_itemcard_down_time);
-            button_click = (Button) itemView.findViewById(R.id.room_click);
-            button_delete = (Button) itemView.findViewById(R.id.room_delete);
-            button_update = (Button) itemView.findViewById(R.id.room_update);
+            com_image = (ImageView) itemView.findViewById(R.id.com_home_itemcard);
+            com_name = (TextView) itemView.findViewById(R.id.com_home_itemcard_name);
+            com_des = (TextView) itemView.findViewById(R.id.com_home_itemcard_des);
+            com_price = (TextView) itemView.findViewById(R.id.com_home_itemcard_price);
+            com_tag = (TextView) itemView.findViewById(R.id.com_home_itemcard_tag);
+            com_upTime = (TextView) itemView.findViewById(R.id.com_home_itemcard_up_time);
+            com_downTime = (TextView) itemView.findViewById(R.id.com_home_itemcard_down_time);
+            button = (Button) itemView.findViewById(R.id.click);
         }
     }
 
-    public Room2RecycleAdapter(List<CommodityHome> mCommodityHome, MyRequiringCommodity activity, int code) {
+    public SellingCollAdapter(List<CommodityHome> mCommodityHome, CollectionActivity activity, int code) {
         this.mCommodityHome = mCommodityHome;
         this.activity = activity;
         this.code = code;
     }
 
     @Override
-    public Room2RecycleAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public SellingCollAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if(mContext == null){
             mContext = parent.getContext();
         }
-        View view = LayoutInflater.from(mContext).inflate(R.layout.room_commodity_itemcard, parent, false);
-        return new Room2RecycleAdapter.ViewHolder(view);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.home_commodity_itemcard, parent, false);
+        return new SellingCollAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(Room2RecycleAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(SellingCollAdapter.ViewHolder holder, int position) {
         final CommodityHome commodityHome = mCommodityHome.get(position);
         holder.com_name.setText(commodityHome.getCommodityName());
         holder.com_des.setText(commodityHome.getDescription());
@@ -92,7 +89,7 @@ public class Room2RecycleAdapter extends RecyclerView.Adapter<Room2RecycleAdapte
         holder.com_downTime.setText(temp);
         temp = "http://123.207.161.20" + commodityHome.getImageID();
         Glide.with(mContext).load(temp).into(holder.com_image);
-        holder.button_click.setOnClickListener(new View.OnClickListener() {
+        holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("RORORO", commodityHome.getCommodityName() + ", " + code);
@@ -103,18 +100,6 @@ public class Room2RecycleAdapter extends RecyclerView.Adapter<Room2RecycleAdapte
                 intent.putExtra("wawawa", activity.getIntent().getStringExtra("user_name"));
                 intent.putExtra("code", code);
                 activity.startActivity(intent);
-            }
-        });
-        holder.button_delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        holder.button_update.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
             }
         });
     }

@@ -11,12 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.erhuo.activitiy_erhuo.CollectionActivity;
 import com.erhuo.activitiy_erhuo.Me;
-import com.erhuo.activitiy_erhuo.NoticeActivity;
 import com.erhuo.activitiy_erhuo.R;
-import com.erhuo.adapter.NoticeAdapter;
+import com.erhuo.adapter.SellingCollAdapter;
+import com.erhuo.adapter.SellingRecycleAdapter;
 import com.erhuo.entity.CommodityHome;
-import com.erhuo.entity.Notice;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,23 +36,23 @@ import okhttp3.Response;
  * Created by Gary on 2017/12/9.
  */
 
-public class SellingNoticeFragment extends Fragment {
+public class SellingCollFragment extends Fragment {
 
-    private List<Notice> noticeList = new ArrayList<>();
-    private NoticeAdapter adapter;
+    private List<CommodityHome> commodityHomeList = new ArrayList<>();
+    private SellingCollAdapter adapter;
     private View view;
-    private List<Notice> tmpList = new ArrayList<>();
+    private List<CommodityHome> tmpList = new ArrayList<>();
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_notice, container, false);
-        NoticeActivity activity = (NoticeActivity) getActivity();
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.notice_rev);
+        view = inflater.inflate(R.layout.fragment_selling, container, false);
+        CollectionActivity activity = (CollectionActivity) getActivity();
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.home_rev);
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
-        adapter = new NoticeAdapter(noticeList, (NoticeActivity)getActivity(), 0);
+        adapter = new SellingCollAdapter(commodityHomeList, activity, 0);
         recyclerView.setAdapter(adapter);
-        if(noticeList.size() == 0){
+        if(commodityHomeList.size() == 0){
             getItem();
         }
         return view;
@@ -64,33 +64,33 @@ public class SellingNoticeFragment extends Fragment {
             public void run() {
                 try{
                     OkHttpClient client = new OkHttpClient();
-                    NoticeActivity activity = (NoticeActivity) getActivity();
+                    CollectionActivity activity = (CollectionActivity)getActivity();
                     RequestBody requestBody = new FormBody.Builder()
-                            .add("to_user", activity.getIntent().getStringExtra("user_name"))
-                            .add("req", "0")
+                            .add("user_name", activity.getIntent().getStringExtra("user_name"))
+                            .add("req", Integer.toString(0))
                             .build();
                     Request request = new Request.Builder()
-                            .url("http://123.207.161.20/sl/qa_msg.php")
+                            .url("http://123.207.161.20/sl/qa_coll.php")
                             .post(requestBody)
                             .build();
-                    Response response = null;
-                    response = client.newCall(request).execute();
+                    Response response = client.newCall(request).execute();
                     String responseData = response.body().string();
                     parseJSONWithJSONObject(responseData);
                     activity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            noticeList.clear();
-                            noticeList.addAll(tmpList);
+                            commodityHomeList.clear();
+                            commodityHomeList.addAll(tmpList);
                             adapter.notifyDataSetChanged();
 
                         }
                     });
                 } catch (IOException e) {
-                    final NoticeActivity activity = (NoticeActivity) getActivity();
+                    Me activity = (Me) getActivity();
                     activity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            Me activity = (Me) getActivity();
                             Toast.makeText(activity, "无网络连接", Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -106,15 +106,26 @@ public class SellingNoticeFragment extends Fragment {
             JSONArray jsonArray = new JSONArray(jsonData);
             for(int i = 0; i < jsonArray.length(); i++){
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                String ownerID = jsonObject.getString("to_user");
-                String owner = jsonObject.getString("to_nick");
-                String applierID = jsonObject.getString("from_user");
-                String applier = jsonObject.getString("from_nick");
+                String name = jsonObject.getString("name");
+                String user_name = jsonObject.getString("owner_name");
                 int comId = jsonObject.getInt("com_id");
-                String com = jsonObject.getString("name");
-                String date = jsonObject.getString("send_time");
-                Notice notice = new Notice(owner, ownerID, applier, applierID, com, comId, date);
-                tmpList.add(notice);
+                String type = jsonObject.getString("type");
+                String images = jsonObject.getString("images");
+                double price = jsonObject.getDouble("price");
+                String upTime = jsonObject.getString("up_time");
+                String downTime = jsonObject.getString("down_time");
+                String description = jsonObject.getString("description");
+                CommodityHome msg = new CommodityHome(user_name, name, comId, price, type, description, images, upTime, downTime);
+                tmpList.add(msg);
+                Log.d("WebWebWeb", "name: " + name);
+                Log.d("WebWebWeb", "user_name: " + user_name);
+                Log.d("WebWebWeb", "type: " + type);
+                Log.d("WebWebWeb", "com_id：" + comId);
+                Log.d("WebWebWeb", "price: " + price);
+                Log.d("WebWebWeb", "up_time: " + upTime);
+                Log.d("WebWebWeb", "down_time: " + downTime);
+                Log.d("WebWebWeb", "description: " + description);
+                Log.d("WebWebWeb", "image: " + images);
             }
         } catch (JSONException e) {
             e.printStackTrace();

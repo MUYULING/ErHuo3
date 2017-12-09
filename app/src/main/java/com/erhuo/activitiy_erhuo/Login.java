@@ -33,8 +33,18 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 username = ed_id.getText().toString();
-                password=ed_pwd.getText().toString();
+                password = ed_pwd.getText().toString();
+                Log.d("LOGIN", username);
+                Log.d("LOGIN", password);
                 login();
+            }
+        });
+        Button register = (Button) findViewById(R.id.btnreg);
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Login.this, Registry.class);
+                startActivity(intent);
             }
         });
         ed_id = (EditText) findViewById(R.id.ed_user);

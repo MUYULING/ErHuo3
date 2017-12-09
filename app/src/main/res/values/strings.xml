@@ -18,12 +18,27 @@
     <string name="sellers">查看卖家</string>
     <string name="fav">收藏</string>
     <string name="login">Login</string>
-    <string name="username">用户名</string>
-    <string name="passwd">密码</string>
+    <string name="username">用\u0020\u0020户\u0020\u0020名</string>
+    <string name="passwd">密\u3000\u3000码</string>
     <string name="denglu">登录</string>
     <string name="register">注册</string>
     <string name="notice">通知管理</string>
     <string name="delete">删除</string>
     <string name="update">修改</string>
     <string name="record">交易记录管理</string>
+    <string name="favor">收藏夹</string>
+    <string name="edimg">编辑头像</string>
+    <string name="txnickname">昵\u3000\u3000称</string>
+    <string name="txusername">用\u0020\u0020户\u0020\u0020名</string>
+    <string name="txphone">手\u0020\u0020机\u0020\u0020号</string>
+    <string name="txpassword1">密\u3000\u3000码</string>
+    <string name="txpassword2">确认密码</string>
+    <string name="txsex">性\u3000\u3000别</string>sex
+    <string name="txsex1">男</string>
+    <string name="txsex2">女</string>
+    <string name="txschool">学\u3000\u3000校</string>
+    <string name="txstudentid">学\u3000\u3000号</string>
+    <string name="txsubmit">提交</string>
+    <string name="txcancel">取消</string>
+
 </resources>

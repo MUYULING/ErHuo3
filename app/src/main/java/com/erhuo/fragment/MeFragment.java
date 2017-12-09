@@ -13,13 +13,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.erhuo.activitiy_erhuo.CollectionActivity;
 import com.erhuo.activitiy_erhuo.Login;
 import com.erhuo.activitiy_erhuo.MainActivity;
 import com.erhuo.activitiy_erhuo.Me;
 import com.erhuo.activitiy_erhuo.MyRecordActivity;
 import com.erhuo.activitiy_erhuo.MyRequiringCommodity;
 import com.erhuo.activitiy_erhuo.MySellingCommodity;
-import com.erhuo.activitiy_erhuo.NoticeAvtivity;
+import com.erhuo.activitiy_erhuo.NoticeActivity;
 import com.erhuo.activitiy_erhuo.R;
 import com.erhuo.entity.UserMe;
 
@@ -85,7 +86,7 @@ public class MeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 MainActivity activity = (MainActivity)getActivity();
-                Intent intent = new Intent(view.getContext(), NoticeAvtivity.class);
+                Intent intent = new Intent(view.getContext(), NoticeActivity.class);
                 intent.putExtra("user_name", activity.getIntent().getStringExtra("user_name"));
                 startActivity(intent);
             }
@@ -116,6 +117,16 @@ public class MeFragment extends Fragment {
             public void onClick(View v) {
                 MainActivity activity = (MainActivity)getActivity();
                 Intent intent = new Intent(view.getContext(), MyRecordActivity.class);
+                intent.putExtra("user_name", activity.getIntent().getStringExtra("user_name"));
+                startActivity(intent);
+            }
+        });
+        RelativeLayout favLayout = (RelativeLayout) view.findViewById(R.id.my_favorite);
+        favLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity activity = (MainActivity)getActivity();
+                Intent intent = new Intent(view.getContext(), CollectionActivity.class);
                 intent.putExtra("user_name", activity.getIntent().getStringExtra("user_name"));
                 startActivity(intent);
             }

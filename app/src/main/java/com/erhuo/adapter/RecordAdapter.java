@@ -48,9 +48,9 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
     @Override
     public void onBindViewHolder(RecordAdapter.ViewHolder holder, int position){
         Notice notice = mNoticeList.get(position);
-        holder.firstname.setText(notice.getFirstname());
-        holder.secondname.setText(notice.getSecondname());
-        holder.date.setText(notice.getDate());
+//        holder.firstname.setText(notice.getFirstname());
+//        holder.secondname.setText(notice.getSecondname());
+//        holder.date.setText(notice.getDate());
     }
 
     @Override

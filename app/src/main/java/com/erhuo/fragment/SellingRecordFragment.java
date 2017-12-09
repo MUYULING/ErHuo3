@@ -10,9 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.erhuo.activitiy_erhuo.MyRecordActivity;
-import com.erhuo.activitiy_erhuo.NoticeAvtivity;
 import com.erhuo.activitiy_erhuo.R;
-import com.erhuo.adapter.NoticeAdapter;
 import com.erhuo.adapter.RecordAdapter;
 import com.erhuo.entity.Notice;
 
@@ -46,8 +44,8 @@ public class SellingRecordFragment extends Fragment {
     }
 
     private void getItem() {
-        Notice notice = new Notice("asd", "asd", "2017.12.7");
-        noticeList.add(notice);
+        //Notice notice = new Notice("asd", "asd", "2017.12.7");
+       // noticeList.add(notice);
         adapter.notifyDataSetChanged();
     }
 }

@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,6 +58,9 @@ public class SellingDetail extends AppCompatActivity {
                 .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT)
                 .startTurning(2000)
                 .setManualPageable(true);
+        LinearLayout fav = (LinearLayout) findViewById(R.id.good_collection);
+        LinearLayout cont = (LinearLayout) findViewById(R.id.good_contact);
+        LinearLayout buyl = (LinearLayout) findViewById(R.id.good_buy);
         TextView contact = (TextView) findViewById(R.id.contact);
         TextView buy = (TextView) findViewById(R.id.buy);
         switch (getIntent().getIntExtra("code", 0)){
@@ -70,12 +74,24 @@ public class SellingDetail extends AppCompatActivity {
                 break;
             default:break;
         }
-        contact.setOnClickListener(new View.OnClickListener() {
+        cont.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SellingDetail.this, Me.class);
                 intent.putExtra("user_name", getIntent().getStringExtra("user_name"));
                 startActivity(intent);
+            }
+        });
+        fav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                insertCollection();
+            }
+        });
+        buyl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //insertRecord();
             }
         });
         Toast.makeText(SellingDetail.this, getIntent().getIntExtra("com_id", -1) + getIntent().getStringExtra("user_name"), Toast.LENGTH_SHORT).show();
@@ -205,4 +221,52 @@ public class SellingDetail extends AppCompatActivity {
         }
         return msg;
     }
+
+    private void insertCollection(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                OkHttpClient client = new OkHttpClient();
+                Log.d("FAAV", getIntent().getStringExtra("wawawa"));
+                Log.d("FAAV", Integer.toString(getIntent().getIntExtra("code", 0)));
+                Log.d("FAAV", Integer.toString(getIntent().getIntExtra("com_id", -1)));
+                Log.d("FAAV", getIntent().getStringExtra("user_name"));
+
+                RequestBody requestBody = new FormBody.Builder()
+                        .add("user_name", getIntent().getStringExtra("wawawa"))
+                        .add("owner_name", getIntent().getStringExtra("user_name"))
+                        .add("req", Integer.toString(getIntent().getIntExtra("code", 0)))
+                        .add("com_id", Integer.toString(getIntent().getIntExtra("com_id", -1)))
+                        .build();
+                Request request = new Request.Builder()
+                        .url("http://123.207.161.20/sl/ins_coll.php")
+                        .post(requestBody)
+                        .build();
+                try {
+                    Response response = client.newCall(request).execute();
+                    String responseData = response.body().string();
+                    Log.d("FAAV", responseData);
+                    if(responseData.equals("true")){
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(SellingDetail.this, "收藏添加成功", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                    else{
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(SellingDetail.this, "收藏添加失败", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
 }
