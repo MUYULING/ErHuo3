@@ -56,7 +56,7 @@ public class Registry extends AppCompatActivity {
             if(checkedId == radioButton1.getId()){
                 gender = "male";
             }
-            else{
+            if(checkedId == radioButton2.getId()){
                 gender = "female";
             }
         }

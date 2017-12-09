@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.erhuo.activitiy_erhuo.MyRequiringCommodity;
 import com.erhuo.activitiy_erhuo.R;
 import com.erhuo.activitiy_erhuo.SellingDetail;
+import com.erhuo.entity.CommodityDetail;
 import com.erhuo.entity.CommodityHome;
 
 import java.text.DecimalFormat;
@@ -28,7 +29,7 @@ import java.util.List;
 public class Room2RecycleAdapter extends RecyclerView.Adapter<Room2RecycleAdapter.ViewHolder> {
 
     private Context mContext;
-    private List<CommodityHome> mCommodityHome;
+    private List<CommodityDetail> mCommodityDetail;
     private MyRequiringCommodity activity;
     private int code;
 
@@ -61,8 +62,8 @@ public class Room2RecycleAdapter extends RecyclerView.Adapter<Room2RecycleAdapte
         }
     }
 
-    public Room2RecycleAdapter(List<CommodityHome> mCommodityHome, MyRequiringCommodity activity, int code) {
-        this.mCommodityHome = mCommodityHome;
+    public Room2RecycleAdapter(List<CommodityDetail> mCommodityDetail, MyRequiringCommodity activity, int code) {
+        this.mCommodityDetail = mCommodityDetail;
         this.activity = activity;
         this.code = code;
     }
@@ -78,28 +79,28 @@ public class Room2RecycleAdapter extends RecyclerView.Adapter<Room2RecycleAdapte
 
     @Override
     public void onBindViewHolder(Room2RecycleAdapter.ViewHolder holder, int position) {
-        final CommodityHome commodityHome = mCommodityHome.get(position);
-        holder.com_name.setText(commodityHome.getCommodityName());
-        holder.com_des.setText(commodityHome.getDescription());
+        final CommodityDetail commodityDetail = mCommodityDetail.get(position);
+        holder.com_name.setText(commodityDetail.getCommodityName());
+        holder.com_des.setText(commodityDetail.getDescription());
         DecimalFormat df = new DecimalFormat("#####0.00");
-        String temp = "￥" + df.format(commodityHome.getPrice());
+        String temp = "￥" + df.format(commodityDetail.getPrice());
         holder.com_price.setText(temp);
-        temp = "#" + commodityHome.getTag();
+        temp = "#" + commodityDetail.getTag();
         holder.com_tag.setText(temp);
-        temp = "上架" + commodityHome.getUpTime().substring(0, 10);
+        temp = "上架" + commodityDetail.getUpTime().substring(0, 10);
         holder.com_upTime.setText(temp);
-        temp = "下架" + commodityHome.getDownTime().substring(0, 10);
+        temp = "下架" + commodityDetail.getDownTime().substring(0, 10);
         holder.com_downTime.setText(temp);
-        temp = "http://123.207.161.20" + commodityHome.getImageID();
+        temp = "http://123.207.161.20" + commodityDetail.getImageID();
         Glide.with(mContext).load(temp).into(holder.com_image);
         holder.button_click.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("RORORO", commodityHome.getCommodityName() + ", " + code);
+                Log.d("RORORO", commodityDetail.getCommodityName() + ", " + code);
                 //Toast.makeText(v.getContext(), "hahaha from: " + commodityHome.getCommodityName(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(activity, SellingDetail.class);
-                intent.putExtra("com_id", commodityHome.getCommodityId());
-                intent.putExtra("user_name", commodityHome.getUserName());
+                intent.putExtra("com_id", commodityDetail.getCommodityId());
+                intent.putExtra("user_name", commodityDetail.getUserName());
                 intent.putExtra("wawawa", activity.getIntent().getStringExtra("user_name"));
                 intent.putExtra("code", code);
                 activity.startActivity(intent);
@@ -121,6 +122,6 @@ public class Room2RecycleAdapter extends RecyclerView.Adapter<Room2RecycleAdapte
 
     @Override
     public int getItemCount() {
-        return mCommodityHome.size();
+        return mCommodityDetail.size();
     }
 }
