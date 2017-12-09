@@ -19,6 +19,7 @@
         <activity android:name=".MySellingCommodity" />
         <activity android:name=".SellCommodityEdit" />
         <activity android:name=".MyRequiringCommodity" />
+        <activity android:name=".RequireCommodityEdit" />
         <activity android:name=".SellingDetail" />
         <activity android:name=".Me" />
         <activity

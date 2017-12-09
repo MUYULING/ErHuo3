@@ -45,10 +45,10 @@ public class MeFragment extends Fragment {
     private View view;
     private RelativeLayout meLayout;
     private RelativeLayout sellingLayout;
+    private RelativeLayout requiringLayout;
     private RelativeLayout noticLayout;
     private RelativeLayout logoutLayout;
     private RelativeLayout buyingLayout;
-
 
     @Nullable
     @Override
@@ -70,6 +70,17 @@ public class MeFragment extends Fragment {
             public void onClick(View v) {
                 MainActivity activity =(MainActivity)getActivity();
                 Intent intent = new Intent(activity, MySellingCommodity.class);
+                intent.putExtra("user_name", activity.getIntent().getStringExtra("user_name"));
+                startActivityForResult(intent, 1);
+            }
+        });
+
+        requiringLayout = (RelativeLayout) view.findViewById(R.id.my_requireCommodity);
+        requiringLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity activity =(MainActivity)getActivity();
+                Intent intent = new Intent(activity,MyRequiringCommodity.class);
                 intent.putExtra("user_name", activity.getIntent().getStringExtra("user_name"));
                 startActivityForResult(intent, 1);
             }

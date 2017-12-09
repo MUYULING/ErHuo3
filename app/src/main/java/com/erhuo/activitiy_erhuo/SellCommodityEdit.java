@@ -15,11 +15,10 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.FileProvider;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -33,7 +32,6 @@ import android.widget.Toast;
 
 import com.erhuo.adapter.CustomDatePicker;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -41,7 +39,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import okhttp3.FormBody;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -72,6 +71,12 @@ public class SellCommodityEdit extends AppCompatActivity {
     public static final int CHOOSE_PHOTO = 2;
     private Uri imageUri;
 
+    private String picPath = null;
+    private String imagePath = null;
+
+    private File file;
+
+
 
     private static final String[] typename={"食品","饮品","书籍","文具用品","数码产品","衣服","鞋类","箱包","化妆用品","体育用品","洗漱用品","杂物"};
     private Spinner spinner;
@@ -82,7 +87,7 @@ public class SellCommodityEdit extends AppCompatActivity {
         setContentView(R.layout.editsellcom);
 
         userName = getIntent().getStringExtra("user_name");
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_edit);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_edit_sell);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -98,10 +103,11 @@ public class SellCommodityEdit extends AppCompatActivity {
         });
 
 
-        Button takePhoto = (Button) findViewById(R.id.take_photo);
+        //Button takePhoto = (Button) findViewById(R.id.take_photo);
         Button chooseFromAlbum = (Button) findViewById(R.id.choose_from_album);
         picture = (ImageView) findViewById(R.id.picture);
-        takePhoto.setOnClickListener(new View.OnClickListener() {
+
+        /*takePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
@@ -123,7 +129,7 @@ public class SellCommodityEdit extends AppCompatActivity {
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
                 startActivityForResult(intent, TAKE_PHOTO);
             }
-        });
+        });  */
 
         chooseFromAlbum.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -186,10 +192,85 @@ public class SellCommodityEdit extends AppCompatActivity {
                 description = tv3.getText().toString();
 
                 addItem();
+
+                //file = new File(picPath);
+                //uploadFile(file);
             }
         });
 
     }
+
+  /* public static void uploadFile(final File file) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String CHARSET = "utf-8"; // 设置编码
+                String SUCCESS = "1";
+                String FAILURE = "0";
+
+                String BOUNDARY = UUID.randomUUID().toString(); // 边界标识 随机生成
+                String PREFIX = "--", LINE_END = "\r\n";
+                String CONTENT_TYPE = "multipart/form-data"; // 内容类型
+                String RequestURL = "http://123.207.161.20/zhangbo/commodity.php/add_tommodity.php";
+                try {
+                    URL url = new URL(RequestURL);
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    //conn.setReadTimeout(TIME_OUT);
+                    //conn.setConnectTimeout(TIME_OUT);
+                    conn.setDoInput(true); // 允许输入流
+                    conn.setDoOutput(true); // 允许输出流
+                    conn.setUseCaches(false); // 不允许使用缓存
+                    conn.setRequestMethod("POST"); // 请求方式
+                    conn.setRequestProperty("Charset", CHARSET); // 设置编码
+                    conn.setRequestProperty("connection", "keep-alive");
+                    conn.setRequestProperty("Content-Type", CONTENT_TYPE + ";boundary="
+                            + BOUNDARY);
+                    if (file != null) {
+
+                        OutputStream outputSteam = conn.getOutputStream();
+
+                        DataOutputStream dos = new DataOutputStream(outputSteam);
+                        StringBuffer sb = new StringBuffer();
+                        sb.append(PREFIX);
+                        sb.append(BOUNDARY);
+                        sb.append(LINE_END);
+
+
+
+                        sb.append("Content-Disposition: form-data; name=\"images\"; filename=\""
+                                + file.getName() + "\"" + LINE_END);
+                        sb.append("Content-Type: application/octet-stream; charset="
+                                + CHARSET + LINE_END);
+                        sb.append(LINE_END);
+                        dos.write(sb.toString().getBytes());
+                        InputStream is = new FileInputStream(file);
+                        byte[] bytes = new byte[1024];
+                        int len = 0;
+                        while ((len = is.read(bytes)) != -1) {
+                            dos.write(bytes, 0, len);
+                        }
+                        is.close();
+                        dos.write(LINE_END.getBytes());
+                        byte[] end_data = (PREFIX + BOUNDARY + PREFIX + LINE_END)
+                                .getBytes();
+                        dos.write(end_data);
+                        dos.flush();
+
+                        int res = conn.getResponseCode();
+                        if (res == 200) {
+                            //return SUCCESS;
+                        }
+                    }
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                //return FAILURE;
+            }
+        }).start();
+    } */
+
 
     private void openAlbum() {
         Intent intent = new Intent("android.intent.action.GET_CONTENT");
@@ -273,7 +354,7 @@ public class SellCommodityEdit extends AppCompatActivity {
 
     private void handleImageBeforeKitKat(Intent data) {
         Uri uri = data.getData();
-        String imagePath = getImagePath(uri, null);
+        imagePath = getImagePath(uri, null);
         displayImage(imagePath);
     }
 
@@ -292,20 +373,15 @@ public class SellCommodityEdit extends AppCompatActivity {
 
     private void displayImage(String imagePath) {
         if (imagePath != null) {
-        bitmap = BitmapFactory.decodeFile(imagePath);
-        picture.setImageBitmap(bitmap);
+            Log.d("imagePath",imagePath);
+            picPath = imagePath;
+            bitmap = BitmapFactory.decodeFile(imagePath);
+            picture.setImageBitmap(bitmap);
         } else {
-        Toast.makeText(this, "failed to get image", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "failed to get image", Toast.LENGTH_SHORT).show();
         }
     }
 
-    // 图片转成string
-    public static String convertIconToString(Bitmap bitmap) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();// outputstream
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-        byte[] appicon = baos.toByteArray();// 转为byte数组
-        return Base64.encodeToString(appicon, Base64.DEFAULT);
-    }
 
 
     class SpinnerSelectedListener implements AdapterView.OnItemSelectedListener {
@@ -346,7 +422,7 @@ public class SellCommodityEdit extends AppCompatActivity {
                 downTime = time.split(" ")[0];
                 currentDate.setText(time.split(" ")[0]);
             }
-        }, "2010-01-01 00:00", now); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
+        }, now , "2050-12-31 00:00"); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
         customDatePicker1.showSpecificTime(false); // 不显示时和分
         customDatePicker1.setIsLoop(false); // 不允许循环滚动
 
@@ -355,7 +431,7 @@ public class SellCommodityEdit extends AppCompatActivity {
             public void handle(String time) { // 回调接口，获得选中的时间
                 currentTime.setText(time);
             }
-        }, "2010-01-01 00:00", now); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
+        }, now , "2050-12-31 00:00"); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
         customDatePicker2.showSpecificTime(true); // 显示时和分
         customDatePicker2.setIsLoop(true); // 允许循环滚动
     }
@@ -365,23 +441,31 @@ public class SellCommodityEdit extends AppCompatActivity {
             @Override
             public void run() {
                 try{
-                    OkHttpClient client = new OkHttpClient();
-                    RequestBody requestBody = new FormBody.Builder()
-                            .add("user_name", userName)
-                            .add("name", name)
-                            .add("type", type)
-                            .add("price", price)
-                            .add("description", description)
-                            .add("down_time", downTime)
-                            .add("images",convertIconToString(bitmap))
+                    file = new File(picPath);
+                    MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("image/jpeg; charset=utf-8");
+                    //RequestBody fileBody = RequestBody.create(MediaType.parse("image/png"), file);
+                    OkHttpClient client1 = new OkHttpClient();
+
+                    RequestBody requestBody1 = new MultipartBody.Builder()
+                            .setType(MultipartBody.FORM)
+                            .addFormDataPart("images", file.getName(), RequestBody.create(MEDIA_TYPE_MARKDOWN, file))
+                            .addFormDataPart("user_name", userName)
+                            .addFormDataPart("name", name)
+                            .addFormDataPart("type", type)
+                            .addFormDataPart("price", price)
+                            .addFormDataPart("description", description)
+                            .addFormDataPart("down_time", downTime)
                             .build();
-                    Request request = new Request.Builder()
+                    Request request1 = new Request.Builder()
                             .url("http://123.207.161.20/zhangbo/commodity.php/add_tommodity.php")
-                            .post(requestBody)
+                            .post(requestBody1)
                             .build();
-                    Response response = client.newCall(request).execute();
-                    String responseData = response.body().string();
-                    if(responseData.equals("true")){
+
+
+                    Response response1 = client1.newCall(request1).execute();
+                    String responseData1 = response1.body().string();
+
+                    if(responseData1.equals("true")){
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -393,7 +477,6 @@ public class SellCommodityEdit extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(SellCommodityEdit.this, "添加失败，请重试", Toast.LENGTH_SHORT).show();
                                 Toast.makeText(SellCommodityEdit.this, "添加失败，请重试", Toast.LENGTH_SHORT).show();
                             }
                         });
