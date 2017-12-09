@@ -88,7 +88,7 @@ public class MyRequiringCommodity extends AppCompatActivity {
         return true;
     }
 
-    private void getItem(){
+    public void getItem(){
         new Thread(new Runnable() {
             @Override
             public void run() {

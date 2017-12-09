@@ -1,22 +1,24 @@
 package com.erhuo.activitiy_erhuo;
 
-import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.erhuo.adapter.FragmentAdapter;
+import com.erhuo.fragment.RequiringRecordFragment;
 import com.erhuo.fragment.SellingNoticeFragment;
 import com.erhuo.fragment.RequiringNoticeFragment;
+import com.erhuo.fragment.SellingRecordFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class NoticeAvtivity extends AppCompatActivity {
+public class MyRecordActivity extends AppCompatActivity {
 
     private TabLayout tab_title;
     private ViewPager vp_pager;
@@ -24,7 +26,7 @@ public class NoticeAvtivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.manage_notice);
+        setContentView(R.layout.activity_my_record);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_Notice);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -52,10 +54,10 @@ public class NoticeAvtivity extends AppCompatActivity {
     private void fragmentChange()
     {
         List<Fragment> list_fragment = new ArrayList<>();
-        SellingNoticeFragment sellingNoticeFragment = new SellingNoticeFragment();
-        RequiringNoticeFragment requiringNoticeFragment = new RequiringNoticeFragment();
-        list_fragment.add(sellingNoticeFragment);
-        list_fragment.add(requiringNoticeFragment);
+        SellingRecordFragment sellingRecordFragment = new SellingRecordFragment();
+        RequiringRecordFragment requiringRecordFragment = new RequiringRecordFragment();
+        list_fragment.add(sellingRecordFragment);
+        list_fragment.add(requiringRecordFragment);
 
         List<String> list_title = new ArrayList<>();
         list_title.add("出售商品");

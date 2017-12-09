@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.erhuo.activitiy_erhuo.Login;
 import com.erhuo.activitiy_erhuo.MainActivity;
 import com.erhuo.activitiy_erhuo.Me;
+import com.erhuo.activitiy_erhuo.MyRecordActivity;
 import com.erhuo.activitiy_erhuo.MyRequiringCommodity;
 import com.erhuo.activitiy_erhuo.MySellingCommodity;
 import com.erhuo.activitiy_erhuo.NoticeAvtivity;
@@ -43,18 +44,12 @@ public class MeFragment extends Fragment {
 
 
     private View view;
-    private RelativeLayout meLayout;
-    private RelativeLayout sellingLayout;
-    private RelativeLayout requiringLayout;
-    private RelativeLayout noticLayout;
-    private RelativeLayout logoutLayout;
-    private RelativeLayout buyingLayout;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_me, container, false);
-        meLayout = (RelativeLayout) view.findViewById(R.id.mine);
+        RelativeLayout meLayout = (RelativeLayout) view.findViewById(R.id.mine);
         meLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,7 +59,7 @@ public class MeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        sellingLayout = (RelativeLayout) view.findViewById(R.id.my_sellCommodity);
+        RelativeLayout sellingLayout = (RelativeLayout) view.findViewById(R.id.my_sellCommodity);
         sellingLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,7 +70,7 @@ public class MeFragment extends Fragment {
             }
         });
 
-        requiringLayout = (RelativeLayout) view.findViewById(R.id.my_requireCommodity);
+        RelativeLayout requiringLayout = (RelativeLayout) view.findViewById(R.id.my_requireCommodity);
         requiringLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,7 +80,7 @@ public class MeFragment extends Fragment {
                 startActivityForResult(intent, 1);
             }
         });
-        noticLayout = (RelativeLayout) view.findViewById(R.id.my_tongzhi);
+        RelativeLayout noticLayout = (RelativeLayout) view.findViewById(R.id.my_tongzhi);
         noticLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,7 +90,7 @@ public class MeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        logoutLayout = (RelativeLayout) view.findViewById(R.id.LogOut);
+        RelativeLayout logoutLayout = (RelativeLayout) view.findViewById(R.id.LogOut);
         logoutLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,7 +100,7 @@ public class MeFragment extends Fragment {
                 activity.finish();
             }
         });
-        buyingLayout = (RelativeLayout) view.findViewById(R.id.my_requireCommodity);
+        RelativeLayout buyingLayout = (RelativeLayout) view.findViewById(R.id.my_requireCommodity);
         buyingLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,7 +110,16 @@ public class MeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
+        RelativeLayout recordLayout = (RelativeLayout) view.findViewById(R.id.my_jiaoyijilu);
+        recordLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity activity = (MainActivity)getActivity();
+                Intent intent = new Intent(view.getContext(), MyRecordActivity.class);
+                intent.putExtra("user_name", activity.getIntent().getStringExtra("user_name"));
+                startActivity(intent);
+            }
+        });
         getUser();
         return view;
     }

@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="贰货"></activity>
+            android:label="贰货" />
         <activity android:name=".SearchActivity" />
         <activity android:name=".MySellingCommodity" />
         <activity android:name=".SellCommodityEdit" />
@@ -42,7 +42,8 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".NoticeAvtivity"></activity>
+        <activity android:name=".NoticeAvtivity" />
+        <activity android:name=".MyRecordActivity"></activity>
     </application>
 
 </manifest>

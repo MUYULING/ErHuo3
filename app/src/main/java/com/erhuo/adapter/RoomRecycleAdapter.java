@@ -126,7 +126,7 @@ public class RoomRecycleAdapter extends RecyclerView.Adapter<RoomRecycleAdapter.
                             OkHttpClient client = new OkHttpClient();
                             RequestBody requestBody = new FormBody.Builder()
                                     .add("user_name", commodityHome.getUserName())
-                                    .add("com_id", commodityHome.getUserName())
+                                    .add("com_id", Integer.toString(commodityHome.getCommodityId()))
                                     .build();
                             Request request = new Request.Builder()
                                     .url("http://123.207.161.20/zhangbo/commodity.php/delete.php")
@@ -143,6 +143,7 @@ public class RoomRecycleAdapter extends RecyclerView.Adapter<RoomRecycleAdapter.
                                     @Override
                                     public void run() {
                                         Toast.makeText(activity, "删除成功", Toast.LENGTH_SHORT).show();
+                                        activity.getItem();
                                     }
                                 });
                             }
