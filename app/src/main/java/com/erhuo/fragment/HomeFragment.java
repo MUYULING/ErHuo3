@@ -1,6 +1,7 @@
 package com.erhuo.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -13,9 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.erhuo.adapter.ComHomeAdapter;
 import com.erhuo.activitiy_erhuo.MainActivity;
+import com.erhuo.activitiy_erhuo.Me;
 import com.erhuo.activitiy_erhuo.R;
+import com.erhuo.activitiy_erhuo.SellCommodityEdit;
+import com.erhuo.adapter.ComHomeAdapter;
 import com.erhuo.entity.CommodityHome;
 
 import org.json.JSONArray;
@@ -62,8 +65,11 @@ public class HomeFragment extends android.support.v4.app.Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity activity = (MainActivity) getActivity();
-                Toast.makeText(activity, "hahha", Toast.LENGTH_SHORT).show();
+                MainActivity activity = (MainActivity)getActivity();
+                Intent intent = new Intent(view.getContext(), SellCommodityEdit.class);
+                intent.putExtra("user_name", activity.getIntent().getStringExtra("user_name"));
+                startActivity(intent);
+
             }
         });
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_home);
