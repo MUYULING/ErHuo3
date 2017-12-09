@@ -42,19 +42,23 @@ public class RoomRecycleAdapter extends RecyclerView.Adapter<RoomRecycleAdapter.
         TextView com_tag;
         TextView com_upTime;
         TextView com_downTime;
-        Button button;
+        Button button_click;
+        Button button_delete;
+        Button button_update;
 
         public ViewHolder(View itemView) {
             super(itemView);
             cardView = (CardView) itemView;
-            com_image = (ImageView) itemView.findViewById(R.id.com_home_itemcard);
-            com_name = (TextView) itemView.findViewById(R.id.com_home_itemcard_name);
-            com_des = (TextView) itemView.findViewById(R.id.com_home_itemcard_des);
-            com_price = (TextView) itemView.findViewById(R.id.com_home_itemcard_price);
-            com_tag = (TextView) itemView.findViewById(R.id.com_home_itemcard_tag);
-            com_upTime = (TextView) itemView.findViewById(R.id.com_home_itemcard_up_time);
-            com_downTime = (TextView) itemView.findViewById(R.id.com_home_itemcard_down_time);
-            button = (Button) itemView.findViewById(R.id.click);
+            com_image = (ImageView) itemView.findViewById(R.id.com_room_itemcard);
+            com_name = (TextView) itemView.findViewById(R.id.com_room_itemcard_name);
+            com_des = (TextView) itemView.findViewById(R.id.com_room_itemcard_des);
+            com_price = (TextView) itemView.findViewById(R.id.com_room_itemcard_price);
+            com_tag = (TextView) itemView.findViewById(R.id.com_room_itemcard_tag);
+            com_upTime = (TextView) itemView.findViewById(R.id.com_room_itemcard_up_time);
+            com_downTime = (TextView) itemView.findViewById(R.id.com_room_itemcard_down_time);
+            button_click = (Button) itemView.findViewById(R.id.room_click);
+            button_delete = (Button) itemView.findViewById(R.id.room_delete);
+            button_update = (Button) itemView.findViewById(R.id.room_update);
         }
     }
 
@@ -69,7 +73,7 @@ public class RoomRecycleAdapter extends RecyclerView.Adapter<RoomRecycleAdapter.
         if(mContext == null){
             mContext = parent.getContext();
         }
-        View view = LayoutInflater.from(mContext).inflate(R.layout.home_commodity_itemcard, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.room_commodity_itemcard, parent, false);
         return new RoomRecycleAdapter.ViewHolder(view);
     }
 
@@ -89,7 +93,7 @@ public class RoomRecycleAdapter extends RecyclerView.Adapter<RoomRecycleAdapter.
         holder.com_downTime.setText(temp);
         temp = "http://123.207.161.20" + commodityHome.getImageID();
         Glide.with(mContext).load(temp).into(holder.com_image);
-        holder.button.setOnClickListener(new View.OnClickListener() {
+        holder.button_click.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("RORORO", commodityHome.getCommodityName() + ", " + code);
@@ -99,6 +103,18 @@ public class RoomRecycleAdapter extends RecyclerView.Adapter<RoomRecycleAdapter.
                 intent.putExtra("user_name", commodityHome.getUserName());
                 intent.putExtra("code", code);
                 activity.startActivity(intent);
+            }
+        });
+        holder.button_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        holder.button_update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
     }
