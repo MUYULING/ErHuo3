@@ -403,6 +403,7 @@ public class SellCommodityEdit extends AppCompatActivity {
                             @Override
                             public void run() {
                                 Toast.makeText(SellCommodityEdit.this, "添加成功", Toast.LENGTH_SHORT).show();
+                                finish();
                             }
                         });
                     }

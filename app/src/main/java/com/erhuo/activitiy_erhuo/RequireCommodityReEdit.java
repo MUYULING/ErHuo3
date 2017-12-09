@@ -555,6 +555,7 @@ public class RequireCommodityReEdit extends AppCompatActivity {
                             @Override
                             public void run() {
                                 Toast.makeText(RequireCommodityReEdit.this, "修改成功", Toast.LENGTH_SHORT).show();
+                                finish();
                             }
                         });
                     }

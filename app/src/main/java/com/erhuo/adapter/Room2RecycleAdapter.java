@@ -181,16 +181,17 @@ public class Room2RecycleAdapter extends RecyclerView.Adapter<Room2RecycleAdapte
                 intent.putExtra("user_name", activity.getIntent().getStringExtra("user_name"));
                 intent.putExtra("com_id", commodityDetail.getCommodityId());
                 intent.putExtra("detail_id", commodityDetail.getDetailId());
-                activity.startActivity(intent);
+                activity.startActivityForResult(intent, 1);
 
 
             }
         });
 
     }
-        @Override
-        public int getItemCount () {
+    @Override
+    public int getItemCount () {
             return mCommodityDetail.size();
         }
+
 
 }

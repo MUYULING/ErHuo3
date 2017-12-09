@@ -183,7 +183,7 @@ public class RoomRecycleAdapter extends RecyclerView.Adapter<RoomRecycleAdapter.
                 intent.putExtra("user_name", activity.getIntent().getStringExtra("user_name"));
                 intent.putExtra("com_id", commodityDetail.getCommodityId());
                 intent.putExtra("detail_id", commodityDetail.getDetailId());
-                activity.startActivity(intent);
+                activity.startActivityForResult(intent, 2);
 
 
             }

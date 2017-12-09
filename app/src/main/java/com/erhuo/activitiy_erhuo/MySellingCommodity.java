@@ -83,7 +83,7 @@ public class MySellingCommodity extends AppCompatActivity {
             case R.id.add_sell_commodity:
                 Intent intent = new Intent(this, SellCommodityEdit.class);
                 intent.putExtra("user_name", this.getIntent().getStringExtra("user_name"));
-                startActivityForResult(intent, 1);
+                startActivityForResult(intent, 2);
                 break;
             default:
         }
@@ -161,5 +161,11 @@ public class MySellingCommodity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d("FRESH", "fresh");
+        getItem();
     }
 }

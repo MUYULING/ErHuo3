@@ -6,9 +6,14 @@
         <item>用户</item>
     </string-array>
 
-    <string-array name="TradeRecord">
-        <item>买入</item>
+    <string-array name="SellRecord">
         <item>售出</item>
+        <item>买入</item>
+    </string-array>
+
+    <string-array name="Requirerecord">
+        <item>申求</item>
+        <item>应求</item>
     </string-array>
 
     <string-array name="CommodityType">

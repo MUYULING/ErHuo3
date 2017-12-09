@@ -17,39 +17,31 @@
         android:paddingRight="8dp">
 
         <TextView
-            android:id="@+id/buyername"
+            android:id="@+id/record_buyername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#797979"
-            android:textSize="24sp" />
-
-        <TextView
-            android:id="@+id/xiangmai"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/buyername"
             android:textColor="#222222"
             android:textSize="18sp" />
 
+
         <TextView
-            android:id="@+id/ownername"
+            android:id="@+id/record_ownername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/xiangmai"
+            android:layout_below="@id/record_buyername"
             android:textColor="#222222"
             android:textSize="18sp"/>
 
         <TextView
-            android:id="@+id/comname"
+            android:id="@+id/record_comname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/ownername"
-            android:textColor="#797979"
+            android:layout_below="@id/record_ownername"
+            android:textColor="#222222"
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/notice_date"
+            android:id="@+id/record_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -61,11 +53,11 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/notice_state"
+            android:id="@+id/record_state"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_below="@id/notice_date"
+            android:layout_below="@id/record_date"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
@@ -73,22 +65,23 @@
             android:textSize="16sp" />
 
         <Button
-            android:id="@+id/com_home_notice_accept"
+            android:id="@+id/com_home_record_accept"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/com_home_notice_decline"
-            android:layout_toStartOf="@+id/com_home_notice_decline"
+            android:layout_alignBaseline="@+id/com_home_record_decline"
+            android:layout_alignBottom="@+id/com_home_record_decline"
+            android:layout_toStartOf="@+id/com_home_record_decline"
             android:clickable="true"
             android:text="已完成"
             android:textColor="#59B29C"
             android:textSize="16sp" />
 
         <Button
-            android:id="@+id/com_home_notice_decline"
+            android:id="@+id/com_home_record_decline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_below="@+id/comname"
+            android:layout_below="@+id/record_comname"
             android:clickable="true"
             android:text="已取消"
             android:textColor="#59B29C"
