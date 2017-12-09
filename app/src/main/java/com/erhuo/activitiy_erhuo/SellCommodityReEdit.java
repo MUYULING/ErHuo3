@@ -146,7 +146,7 @@ public class SellCommodityReEdit extends AppCompatActivity {
                     JSONObject jsonObject = jsonArray.getJSONObject(0);
                     B_name = jsonObject.getString("name");
                     B_type = jsonObject.getString("type");
-                    B_images ="http://123.207.161.20" + jsonObject.getString("images");
+                    B_images =jsonObject.getString("images");
                     B_price = jsonObject.getString("price");
                     B_upTime = jsonObject.getString("up_time");
                     B_downTime = jsonObject.getString("down_time");
@@ -155,6 +155,7 @@ public class SellCommodityReEdit extends AppCompatActivity {
                     Log.d("B_type",B_type);
                     Log.d("B_price",B_price);
                     Log.d("B_upTime",B_upTime);
+                    Log.d("B_images",B_images);
                     Log.d("B_downTime",B_downTime);
                     Log.d("B_description", B_description);
                     Log.d("username",userName);
@@ -192,8 +193,7 @@ public class SellCommodityReEdit extends AppCompatActivity {
                             }
 
                             initDatePicker(B_downTime, B_upTime);
-                            Glide.with(SellCommodityReEdit.this).load(B_images).into(picture);
-                            file = new File(B_images);
+                            Glide.with(SellCommodityReEdit.this).load("http://123.207.161.20" +B_images).into(picture);
                         }
                     });
 
@@ -501,17 +501,42 @@ public class SellCommodityReEdit extends AppCompatActivity {
                     OkHttpClient client1 = new OkHttpClient();
 
                     b_images = B_images;
-                    RequestBody requestBody1 = new MultipartBody.Builder()
-                            .setType(MultipartBody.FORM)
-                            .addFormDataPart("pic", file.getName(), RequestBody.create(MEDIA_TYPE_MARKDOWN, file))
-                            .addFormDataPart("oldimages", b_images)
-                            .addFormDataPart("name", name)
-                            .addFormDataPart("detail_id", Integer.toString(detail_id))
-                            .addFormDataPart("type", type)
-                            .addFormDataPart("price", price)
-                            .addFormDataPart("description", description)
-                            .addFormDataPart("down_time", downTime)
-                            .build();
+                    RequestBody requestBody1;
+                    if(file!=null){
+                        requestBody1 = new MultipartBody.Builder()
+                                .setType(MultipartBody.FORM)
+                                .addFormDataPart("pic", file.getName(), RequestBody.create(MEDIA_TYPE_MARKDOWN, file))
+                                .addFormDataPart("oldimages", b_images)
+                                .addFormDataPart("name", name)
+                                .addFormDataPart("detail_id", Integer.toString(detail_id))
+                                .addFormDataPart("type", type)
+                                .addFormDataPart("price", price)
+                                .addFormDataPart("description", description)
+                                .addFormDataPart("down_time", downTime)
+                                .build();
+                    }
+                    else{
+                        requestBody1 = new MultipartBody.Builder()
+                                .setType(MultipartBody.FORM)
+                                .addFormDataPart("oldimages", b_images)
+                                .addFormDataPart("name", name)
+                                .addFormDataPart("detail_id", Integer.toString(detail_id))
+                                .addFormDataPart("type", type)
+                                .addFormDataPart("price", price)
+                                .addFormDataPart("description", description)
+                                .addFormDataPart("down_time", downTime)
+                                .build();
+                    }
+
+                    Log.d("oldimages", b_images);
+                    Log.d("oldimages", b_images);
+                    Log.d("oldimages", b_images);
+                    Log.d("oldimages", b_images);
+                    Log.d("oldimages", b_images);
+                    Log.d("oldimages", b_images);
+                    Log.d("oldimages", b_images);
+                    Log.d("oldimages", b_images);
+
                     Request request1 = new Request.Builder()
                             .url("http://123.207.161.20/zhangbo/req_commodity.php/alter.php")
                             .post(requestBody1)
