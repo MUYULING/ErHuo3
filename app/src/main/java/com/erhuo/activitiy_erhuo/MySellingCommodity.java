@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.erhuo.adapter.RoomRecycleAdapter;
 import com.erhuo.adapter.SellingRecycleAdapter;
+import com.erhuo.entity.CommodityDetail;
 import com.erhuo.entity.CommodityHome;
 
 import org.json.JSONArray;
@@ -37,10 +38,10 @@ import okhttp3.Response;
 
 public class MySellingCommodity extends AppCompatActivity {
 
-    private List<CommodityHome> commodityHomeList = new ArrayList<>();
+    private List<CommodityDetail> commodityDetailList = new ArrayList<>();
     private RoomRecycleAdapter adapter;
     private View view;
-    private List<CommodityHome> tmpList = new ArrayList<>();
+    private List<CommodityDetail> tmpList = new ArrayList<>();
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,9 +64,9 @@ public class MySellingCommodity extends AppCompatActivity {
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.room_rev);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new RoomRecycleAdapter(commodityHomeList, this, 0);
+        adapter = new RoomRecycleAdapter(commodityDetailList, this, 0);
         recyclerView.setAdapter(adapter);
-        if(commodityHomeList.size() == 0){
+        if(commodityDetailList.size() == 0){
             getItem();
         }
     }
@@ -109,8 +110,8 @@ public class MySellingCommodity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            commodityHomeList.clear();
-                            commodityHomeList.addAll(tmpList);
+                            commodityDetailList.clear();
+                            commodityDetailList.addAll(tmpList);
                             adapter.notifyDataSetChanged();
 
                         }
@@ -143,7 +144,9 @@ public class MySellingCommodity extends AppCompatActivity {
                 String upTime = jsonObject.getString("up_time");
                 String downTime = jsonObject.getString("down_time");
                 String description = jsonObject.getString("description");
-                CommodityHome msg = new CommodityHome(user_name, name, comId, price, type, description, images, upTime, downTime);
+                int detailID = jsonObject.getInt("detail_id");
+                String state = jsonObject.getString("state");
+                CommodityDetail msg = new CommodityDetail(user_name, name, comId, price, type, description, images, upTime, downTime, detailID, state);
                 tmpList.add(msg);
                 Log.d("WebWebWeb", "name: " + name);
                 Log.d("WebWebWeb", "user_name: " + user_name);

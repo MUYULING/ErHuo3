@@ -18,6 +18,7 @@ import com.erhuo.activitiy_erhuo.MySellingCommodity;
 import com.erhuo.activitiy_erhuo.R;
 import com.erhuo.activitiy_erhuo.SellCommodityReEdit;
 import com.erhuo.activitiy_erhuo.SellingDetail;
+import com.erhuo.entity.CommodityDetail;
 import com.erhuo.entity.CommodityHome;
 
 import org.json.JSONException;
@@ -40,7 +41,7 @@ import okhttp3.Response;
 public class RoomRecycleAdapter extends RecyclerView.Adapter<RoomRecycleAdapter.ViewHolder> {
 
     private Context mContext;
-    private List<CommodityHome> mCommodityHome;
+    private List<CommodityDetail> mCommodityDetail;
     private MySellingCommodity activity;
     private int code;
 
@@ -73,8 +74,8 @@ public class RoomRecycleAdapter extends RecyclerView.Adapter<RoomRecycleAdapter.
         }
     }
 
-    public RoomRecycleAdapter(List<CommodityHome> mCommodityHome, MySellingCommodity activity, int code) {
-        this.mCommodityHome = mCommodityHome;
+    public RoomRecycleAdapter(List<CommodityDetail> mCommodityDetail, MySellingCommodity activity, int code) {
+        this.mCommodityDetail = mCommodityDetail;
         this.activity = activity;
         this.code = code;
     }
@@ -90,28 +91,28 @@ public class RoomRecycleAdapter extends RecyclerView.Adapter<RoomRecycleAdapter.
 
     @Override
     public void onBindViewHolder(RoomRecycleAdapter.ViewHolder holder, int position) {
-        final CommodityHome commodityHome = mCommodityHome.get(position);
-        holder.com_name.setText(commodityHome.getCommodityName());
-        holder.com_des.setText(commodityHome.getDescription());
+        final CommodityDetail commodityDetail = mCommodityDetail.get(position);
+        holder.com_name.setText(commodityDetail.getCommodityName());
+        holder.com_des.setText(commodityDetail.getDescription());
         DecimalFormat df = new DecimalFormat("#####0.00");
-        String temp = "￥" + df.format(commodityHome.getPrice());
+        String temp = "￥" + df.format(commodityDetail.getPrice());
         holder.com_price.setText(temp);
-        temp = "#" + commodityHome.getTag();
+        temp = "#" + commodityDetail.getTag();
         holder.com_tag.setText(temp);
-        temp = "上架" + commodityHome.getUpTime().substring(0, 10);
+        temp = "上架" + commodityDetail.getUpTime().substring(0, 10);
         holder.com_upTime.setText(temp);
-        temp = "下架" + commodityHome.getDownTime().substring(0, 10);
+        temp = "下架" + commodityDetail.getDownTime().substring(0, 10);
         holder.com_downTime.setText(temp);
-        temp = "http://123.207.161.20" + commodityHome.getImageID();
+        temp = "http://123.207.161.20" + commodityDetail.getImageID();
         Glide.with(mContext).load(temp).into(holder.com_image);
         holder.button_click.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("RORORO", commodityHome.getCommodityName() + ", " + code);
+                Log.d("RORORO", commodityDetail.getCommodityName() + ", " + code);
                 //Toast.makeText(v.getContext(), "hahaha from: " + commodityHome.getCommodityName(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(activity, SellingDetail.class);
-                intent.putExtra("com_id", commodityHome.getCommodityId());
-                intent.putExtra("user_name", commodityHome.getUserName());
+                intent.putExtra("com_id", commodityDetail.getCommodityId());
+                intent.putExtra("user_name", commodityDetail.getUserName());
                 intent.putExtra("wawawa", activity.getIntent().getStringExtra("user_name"));
                 intent.putExtra("code", code);
                 activity.startActivity(intent);
@@ -127,8 +128,8 @@ public class RoomRecycleAdapter extends RecyclerView.Adapter<RoomRecycleAdapter.
                         try{
                             OkHttpClient client = new OkHttpClient();
                             RequestBody requestBody = new FormBody.Builder()
-                                    .add("user_name", commodityHome.getUserName())
-                                    .add("com_id", Integer.toString(commodityHome.getCommodityId()))
+                                    .add("user_name", commodityDetail.getUserName())
+                                    .add("com_id", Integer.toString(commodityDetail.getCommodityId()))
                                     .build();
                             Request request = new Request.Builder()
                                     .url("http://123.207.161.20/zhangbo/commodity.php/delete.php")
@@ -180,7 +181,8 @@ public class RoomRecycleAdapter extends RecyclerView.Adapter<RoomRecycleAdapter.
 
                 Intent intent = new Intent(activity, SellCommodityReEdit.class);
                 intent.putExtra("user_name", activity.getIntent().getStringExtra("user_name"));
-                intent.putExtra("com_id", commodityHome.getCommodityId());
+                intent.putExtra("com_id", commodityDetail.getCommodityId());
+                intent.putExtra("detail_id", commodityDetail.getDetailId());
                 activity.startActivity(intent);
 
 
@@ -190,6 +192,6 @@ public class RoomRecycleAdapter extends RecyclerView.Adapter<RoomRecycleAdapter.
 
     @Override
     public int getItemCount() {
-        return mCommodityHome.size();
+        return mCommodityDetail.size();
     }
 }

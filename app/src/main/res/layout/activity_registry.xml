@@ -47,7 +47,7 @@
             android:layout_marginLeft="22dp"
             android:inputType="text"
             android:textSize="18sp"
-            android:background="@drawable/ed_bg"/>
+            />
 
     </LinearLayout>
 
@@ -72,7 +72,7 @@
             android:layout_marginLeft="22dp"
             android:inputType="text"
             android:textSize="18sp"
-            android:background="@drawable/ed_bg"/>
+            />
 
     </LinearLayout>
 
@@ -98,7 +98,7 @@
             android:layout_marginLeft="22dp"
             android:inputType="textPassword"
             android:textSize="18sp"
-            android:background="@drawable/ed_bg"/>
+            />
 
     </LinearLayout>
 
@@ -124,7 +124,7 @@
             android:layout_marginLeft="22dp"
             android:inputType="textPassword"
             android:textSize="18sp"
-            android:background="@drawable/ed_bg"/>
+            />
 
     </LinearLayout>
 
@@ -192,7 +192,7 @@
             android:layout_marginLeft="22dp"
             android:inputType="text"
             android:textSize="18sp"
-            android:background="@drawable/ed_bg"/>
+            />
 
     </LinearLayout>
 
@@ -218,7 +218,7 @@
             android:layout_marginLeft="22dp"
             android:inputType="text"
             android:textSize="18sp"
-            android:background="@drawable/ed_bg"/>
+            />
 
     </LinearLayout>
 
@@ -244,7 +244,7 @@
             android:layout_marginLeft="22dp"
             android:inputType="text"
             android:textSize="18sp"
-            android:background="@drawable/ed_bg"/>
+            />
 
     </LinearLayout>
 

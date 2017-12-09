@@ -29,6 +29,8 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Button login = (Button) findViewById(R.id.btnlogin);
+        ed_id = (EditText) findViewById(R.id.ed_user);
+        ed_pwd = (EditText) findViewById(R.id.ed_pwd);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -36,7 +38,12 @@ public class Login extends AppCompatActivity {
                 password = ed_pwd.getText().toString();
                 Log.d("LOGIN", username);
                 Log.d("LOGIN", password);
-                login();
+                if(username.equals("") || password.equals("")){
+                    Toast.makeText(Login.this, "用户名或密码不可为空", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    login();
+                }
             }
         });
         Button register = (Button) findViewById(R.id.btnreg);
@@ -47,8 +54,7 @@ public class Login extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        ed_id = (EditText) findViewById(R.id.ed_user);
-        ed_pwd = (EditText) findViewById(R.id.ed_pwd);
+
     }
 
     public void login() {

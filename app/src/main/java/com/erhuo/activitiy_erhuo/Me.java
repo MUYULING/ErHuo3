@@ -62,21 +62,17 @@ public class Me extends AppCompatActivity {
         List<Fragment> list_fragment = new ArrayList<>();
         SellingFragment sellingFragment = new SellingFragment();
         BuyingFragment buyingFragment = new BuyingFragment();
-        CommentFragment commentFragment = new CommentFragment();
         list_fragment.add(sellingFragment);
         list_fragment.add(buyingFragment);
-        list_fragment.add(commentFragment);
 
         List<String> list_title = new ArrayList<>();
         list_title.add("正在出售");
         list_title.add("正在求购");
-        list_title.add("评价");
 
         tab_title.setTabMode(TabLayout.MODE_FIXED);
 
         tab_title.addTab(tab_title.newTab().setText(list_title.get(0)));
         tab_title.addTab(tab_title.newTab().setText(list_title.get(1)));
-        tab_title.addTab(tab_title.newTab().setText(list_title.get(2)));
 
         FragmentAdapter fAdapter = new FragmentAdapter(getSupportFragmentManager(), list_fragment, list_title);
         vp_pager.setAdapter(fAdapter);

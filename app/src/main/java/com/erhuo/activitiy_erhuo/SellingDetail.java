@@ -91,7 +91,7 @@ public class SellingDetail extends AppCompatActivity {
         buyl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //insertRecord();
+                insertRecord();
             }
         });
         Toast.makeText(SellingDetail.this, getIntent().getIntExtra("com_id", -1) + getIntent().getStringExtra("user_name"), Toast.LENGTH_SHORT).show();
@@ -269,4 +269,45 @@ public class SellingDetail extends AppCompatActivity {
         }).start();
     }
 
+    private void insertRecord(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                OkHttpClient client = new OkHttpClient();
+                RequestBody requestBody = new FormBody.Builder()
+                        .add("from_user", getIntent().getStringExtra("wawawa"))
+                        .add("to_user", getIntent().getStringExtra("user_name"))
+                        .add("com_id", Integer.toString(getIntent().getIntExtra("com_id", -1)))
+                        .add("req", Integer.toString(getIntent().getIntExtra("code", 0)))
+                        .add("content", "hahahhaha")
+                        .build();
+                Request request = new Request.Builder()
+                        .url("http://123.207.161.20/sl/ins_msg.php")
+                        .post(requestBody)
+                        .build();
+                try{
+                    Response response = client.newCall(request).execute();
+                    String responseData = response.body().string();
+                    if(responseData.equals("true")){
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(SellingDetail.this, "通知已发出，请等待对方确认", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                    else{
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(SellingDetail.this, "消息发送失败，请重试", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
 }
