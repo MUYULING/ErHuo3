@@ -58,13 +58,48 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/my_tongzhi"
+        android:id="@+id/my_EditMyInformation"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:background="#ffffff"
         android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:paddingBottom="12dp"
+        android:paddingStart="5dp"
+        android:paddingTop="12dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="修改个人资料"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/my_EditMyInformationGO"
+            android:layout_width="15dp"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/right_arrow"
+
+            />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/bottom_shadow" />
+
+    <RelativeLayout
+        android:id="@+id/my_tongzhi"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="#ffffff"
         android:paddingBottom="12dp"
         android:paddingStart="5dp"
         android:paddingTop="12dp">

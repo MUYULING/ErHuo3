@@ -6,6 +6,11 @@
         <item>用户</item>
     </string-array>
 
+    <string-array name="noticeType">
+        <item>购买消息</item>
+        <item>应求消息</item>
+    </string-array>
+
     <string-array name="CommodityType">
         <item>食品</item>
         <item>饮品</item>

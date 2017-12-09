@@ -24,8 +24,10 @@
 
     </android.support.v7.widget.Toolbar>
 
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/notice_list"
+        android:layout_above="@id/toolbar_Notice"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar_Notice" />
