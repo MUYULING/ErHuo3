@@ -113,7 +113,6 @@ public class MeFragment extends Fragment {
                 Intent intent = new Intent(view.getContext(), MyRequiringCommodity.class);
                 intent.putExtra("user_name", activity.getIntent().getStringExtra("user_name"));
                 startActivity(intent);
-                activity.finish();
             }
         });
 

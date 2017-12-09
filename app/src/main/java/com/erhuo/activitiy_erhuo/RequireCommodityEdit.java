@@ -32,6 +32,9 @@ import android.widget.Toast;
 
 import com.erhuo.adapter.CustomDatePicker;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -448,7 +451,7 @@ public class RequireCommodityEdit extends AppCompatActivity {
 
                     RequestBody requestBody1 = new MultipartBody.Builder()
                             .setType(MultipartBody.FORM)
-                            .addFormDataPart("images", file.getName(), RequestBody.create(MEDIA_TYPE_MARKDOWN, file))
+                            .addFormDataPart("pic", file.getName(), RequestBody.create(MEDIA_TYPE_MARKDOWN, file))
                             .addFormDataPart("user_name", userName)
                             .addFormDataPart("name", name)
                             .addFormDataPart("type", type)
@@ -460,12 +463,12 @@ public class RequireCommodityEdit extends AppCompatActivity {
                             .url("http://123.207.161.20/zhangbo/commodity.php/add_tommodity.php")
                             .post(requestBody1)
                             .build();
-
-
                     Response response1 = client1.newCall(request1).execute();
                     String responseData1 = response1.body().string();
-
-                    if(responseData1.equals("true")){
+                    JSONObject jsonObject = new JSONObject(responseData1);
+                    int success = jsonObject.getInt("success");
+                    Log.d("ADD", Integer.toString(success));
+                    if(success == 1){
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -481,7 +484,6 @@ public class RequireCommodityEdit extends AppCompatActivity {
                             }
                         });
                     }
-
                 } catch (IOException e) {
 
                     runOnUiThread(new Runnable() {
@@ -490,6 +492,8 @@ public class RequireCommodityEdit extends AppCompatActivity {
                             Toast.makeText(RequireCommodityEdit.this, "无网络连接", Toast.LENGTH_SHORT).show();
                         }
                     });
+                    e.printStackTrace();
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
