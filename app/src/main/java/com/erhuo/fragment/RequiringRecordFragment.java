@@ -48,13 +48,12 @@ public class RequiringRecordFragment extends Fragment {
         adapter = new RecordAdapter(noticeList);
         recyclerView.setAdapter(adapter);
         if(noticeList.size() == 0){
-            getItem();
+            getItem("sell", 1);
         }
-        return view;
 
         spinner = (Spinner) view.findViewById(R.id.TradeRecord_spinner);
         //将可选内容与ArrayAdapter连接起来，simple_spinner_item是android系统自带样式
-        spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.CommodityType, R.layout.type_spiner_text_item);
+        spinnerAdapter = ArrayAdapter.createFromResource(activity, R.array.CommodityType, R.layout.type_spiner_text_item);
         //设置下拉列表的风格,simple_spinner_dropdown_item是android系统自带的样式，等会自定义修改
         spinnerAdapter.setDropDownViewResource(R.layout.type_spinner_dropdown_item);
         //将adapter 添加到spinner中
@@ -62,7 +61,7 @@ public class RequiringRecordFragment extends Fragment {
         //添加事件Spinner事件监听
         spinner.setOnItemSelectedListener(new SpinnerSelectedListener());
 
-
+        return view;
     }
 
 
@@ -71,7 +70,7 @@ public class RequiringRecordFragment extends Fragment {
         public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
                                    long arg3) {
 
-            Toast.makeText(activity.this, (typename[arg2]), Toast.LENGTH_SHORT).show();
+
 
         }
 
@@ -80,7 +79,7 @@ public class RequiringRecordFragment extends Fragment {
     }
 
 
-    private void getItem() {
+    private void getItem(String state, int code) {
         //Notice notice = new Notice("asd", "asd", "2017.12.7");
        // noticeList.add(notice);
         adapter.notifyDataSetChanged();
