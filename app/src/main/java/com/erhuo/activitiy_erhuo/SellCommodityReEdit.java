@@ -71,6 +71,7 @@ public class SellCommodityReEdit extends AppCompatActivity {
     private String type;
     private String downTime;
     private String userName;
+    private int detail_id;
     private int com_id;
     private ImageView picture;
     private Bitmap bitmap;
@@ -84,8 +85,6 @@ public class SellCommodityReEdit extends AppCompatActivity {
     String B_upTime;
     String B_downTime;
     String B_description;
-
-
 
     public static final int TAKE_PHOTO = 1;
     public static final int CHOOSE_PHOTO = 2;
@@ -108,6 +107,7 @@ public class SellCommodityReEdit extends AppCompatActivity {
 
         userName = getIntent().getStringExtra("user_name");
         com_id = getIntent().getIntExtra("com_id", 0);
+        detail_id = getIntent().getIntExtra("detail_id", 0);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_edit_sell);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -157,6 +157,8 @@ public class SellCommodityReEdit extends AppCompatActivity {
                     Log.d("B_upTime",B_upTime);
                     Log.d("B_downTime",B_downTime);
                     Log.d("B_description", B_description);
+                    Log.d("username",userName);
+                    Log.d("detail_id",Integer.toString(detail_id));
 
                     runOnUiThread(new Runnable() {
                         @Override
@@ -191,6 +193,7 @@ public class SellCommodityReEdit extends AppCompatActivity {
 
                             initDatePicker(B_downTime, B_upTime);
                             Glide.with(SellCommodityReEdit.this).load(B_images).into(picture);
+                            file = new File(B_images);
                         }
                     });
 
@@ -296,6 +299,10 @@ public class SellCommodityReEdit extends AppCompatActivity {
                 name = tv1.getText().toString();
                 price = tv2.getText().toString();
                 description = tv3.getText().toString();
+                if(picPath!=null)
+                {
+                    file = new File(picPath);
+                }
                 addItem();
 
             }
@@ -489,18 +496,17 @@ public class SellCommodityReEdit extends AppCompatActivity {
             @Override
             public void run() {
                 try{
-                    file = new File(picPath);
                     MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("image/jpeg; charset=utf-8");
                     //RequestBody fileBody = RequestBody.create(MediaType.parse("image/png"), file);
                     OkHttpClient client1 = new OkHttpClient();
-                    b_images = B_images;
 
+                    b_images = B_images;
                     RequestBody requestBody1 = new MultipartBody.Builder()
                             .setType(MultipartBody.FORM)
                             .addFormDataPart("pic", file.getName(), RequestBody.create(MEDIA_TYPE_MARKDOWN, file))
                             .addFormDataPart("oldimages", b_images)
                             .addFormDataPart("name", name)
-                            .addFormDataPart("detail_id", Integer.toString(com_id))
+                            .addFormDataPart("detail_id", Integer.toString(detail_id))
                             .addFormDataPart("type", type)
                             .addFormDataPart("price", price)
                             .addFormDataPart("description", description)
