@@ -11,16 +11,26 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.erhuo.activitiy_erhuo.Me;
 import com.erhuo.activitiy_erhuo.MySellingCommodity;
 import com.erhuo.activitiy_erhuo.R;
 import com.erhuo.activitiy_erhuo.SellingDetail;
 import com.erhuo.entity.CommodityHome;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.List;
+
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * Created by Gary on 2017/12/7.
@@ -109,8 +119,58 @@ public class RoomRecycleAdapter extends RecyclerView.Adapter<RoomRecycleAdapter.
             @Override
             public void onClick(View v) {
 
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try{
+                            OkHttpClient client = new OkHttpClient();
+                            RequestBody requestBody = new FormBody.Builder()
+                                    .add("user_name", commodityHome.getUserName())
+                                    .add("com_id", commodityHome.getUserName())
+                                    .build();
+                            Request request = new Request.Builder()
+                                    .url("http://123.207.161.20/zhangbo/commodity.php/delete.php")
+                                    .post(requestBody)
+                                    .build();
+
+                            Response response = client.newCall(request).execute();
+                            String responseData = response.body().string();
+                            JSONObject jsonObject = new JSONObject(responseData);
+                            int success = jsonObject.getInt("success");
+                            Log.d("ADD", Integer.toString(success));
+                            if(success == 1){
+                                activity.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(activity, "删除成功", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                            else{
+                                activity.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(activity, "删除失败，请重试", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        } catch (IOException e) {
+
+                            activity.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(activity, "无网络连接", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
             }
         });
+
         holder.button_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
