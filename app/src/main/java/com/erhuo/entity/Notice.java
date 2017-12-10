@@ -13,8 +13,9 @@ public class Notice {
     private String com;
     private int comID;
     private String Date;
+    private int messageID;
 
-    public Notice(String owner, String ownerID, String applier, String applierID, String com, int comID, String date) {
+    public Notice(String owner, String ownerID, String applier, String applierID, String com, int comID, String date, int messageID) {
         this.owner = owner;
         this.ownerID = ownerID;
         this.applier = applier;
@@ -22,6 +23,15 @@ public class Notice {
         this.com = com;
         this.comID = comID;
         Date = date;
+        this.messageID = messageID;
+    }
+
+    public int getMessageID() {
+        return messageID;
+    }
+
+    public void setMessageID(int messageID) {
+        this.messageID = messageID;
     }
 
     public String getOwner() {

@@ -50,7 +50,7 @@ public class SellingNoticeFragment extends Fragment {
         NoticeActivity activity = (NoticeActivity) getActivity();
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.notice_rev);
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
-        adapter = new NoticeAdapter(noticeList, (NoticeActivity)getActivity(), 0);
+        adapter = new NoticeAdapter(noticeList, (NoticeActivity)getActivity(), 0, this);
         recyclerView.setAdapter(adapter);
         if(noticeList.size() == 0){
             getItem();
@@ -58,7 +58,7 @@ public class SellingNoticeFragment extends Fragment {
         return view;
     }
 
-    private void getItem(){
+    public void getItem(){
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -113,7 +113,8 @@ public class SellingNoticeFragment extends Fragment {
                 int comId = jsonObject.getInt("com_id");
                 String com = jsonObject.getString("name");
                 String date = jsonObject.getString("send_time");
-                Notice notice = new Notice(owner, ownerID, applier, applierID, com, comId, date);
+                int messageID = jsonObject.getInt("message_id");
+                Notice notice = new Notice(owner, ownerID, applier, applierID, com, comId, date, messageID);
                 tmpList.add(notice);
             }
         } catch (JSONException e) {
