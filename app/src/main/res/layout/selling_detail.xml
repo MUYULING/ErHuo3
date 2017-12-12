@@ -20,23 +20,23 @@
             android:background="#eeeff3"
             android:orientation="vertical">
 
-            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+                <!--xmlns:tools="http://schemas.android.com/tools"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
 
-                <com.bigkoo.convenientbanner.ConvenientBanner xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/convenientBanner"
-                    android:layout_width="match_parent"
-                    android:layout_height="400dp"
-                    app:canLoop="true" />
-            </RelativeLayout>
+                <!--<com.bigkoo.convenientbanner.ConvenientBanner xmlns:app="http://schemas.android.com/apk/res-auto"-->
+                    <!--android:id="@+id/convenientBanner"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="400dp"-->
+                    <!--app:canLoop="true" />-->
+            <!--</RelativeLayout>-->
 
-            <View
+            <ImageView
+                android:id="@+id/good_image"
                 android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:alpha="0.4"
-                android:background="#dddddd" />
+                android:layout_height="400dp"
+                android:scaleType="centerCrop"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -94,21 +94,6 @@
                     android:layout_above="@+id/tv_goods_price"
                     android:layout_alignParentEnd="true" />
 
-                <LinearLayout
-                    android:id="@+id/ll_activity"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:descendantFocusability="afterDescendants"
-                    android:orientation="vertical"
-                    android:focusable="true">
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1px"
-                        android:alpha="0.4"
-                        android:background="#dddddd" />
-                </LinearLayout>
             </RelativeLayout>
 
             <View

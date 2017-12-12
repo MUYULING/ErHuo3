@@ -39,6 +39,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/com_home_itemcard_name"
                 android:layout_below="@+id/com_home_itemcard_name"
+                android:maxEms="9"
+                android:maxLines="2"
+                android:ellipsize="middle"
                 android:textSize="16sp" />
 
             <TextView

@@ -39,25 +39,25 @@ import okhttp3.Response;
 
 public class SellingDetail extends AppCompatActivity {
 
-    private ConvenientBanner convenientBanner;
-    private List<String> images = new ArrayList<>();
+//    private ConvenientBanner convenientBanner;
+//    private List<String> images = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.selling_detail);
-        convenientBanner = (ConvenientBanner) findViewById(R.id.convenientBanner);
-        convenientBanner.setPages(new CBViewHolderCreator() {
-            @Override
-            public Object createHolder() {
-                return new LocalImageHolderView();
-            }
-        }, images)
-                .setPointViewVisible(true)
-                .setPageIndicator(new int[]{R.mipmap.index_white,R.mipmap.index_red})
-                .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT)
-                .startTurning(2000)
-                .setManualPageable(true);
+//        convenientBanner = (ConvenientBanner) findViewById(R.id.convenientBanner);
+//        convenientBanner.setPages(new CBViewHolderCreator() {
+//            @Override
+//            public Object createHolder() {
+//                return new LocalImageHolderView();
+//            }
+//        }, images)
+//                .setPointViewVisible(true)
+//                .setPageIndicator(new int[]{R.mipmap.index_white,R.mipmap.index_red})
+//                .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT)
+//                .startTurning(2000)
+//                .setManualPageable(true);
         LinearLayout fav = (LinearLayout) findViewById(R.id.good_collection);
         LinearLayout cont = (LinearLayout) findViewById(R.id.good_contact);
         LinearLayout buyl = (LinearLayout) findViewById(R.id.good_buy);
@@ -94,27 +94,27 @@ public class SellingDetail extends AppCompatActivity {
                 insertRecord();
             }
         });
-        Toast.makeText(SellingDetail.this, getIntent().getIntExtra("com_id", -1) + getIntent().getStringExtra("user_name"), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(SellingDetail.this, getIntent().getIntExtra("com_id", -1) + getIntent().getStringExtra("user_name"), Toast.LENGTH_SHORT).show();
         getItem(getIntent().getIntExtra("com_id", -1), getIntent().getStringExtra("user_name"), getIntent().getIntExtra("code", 0));
     }
 
-    public class LocalImageHolderView implements Holder<String> {
-
-        private ImageView imageView;
-        @Override
-        public View createView(Context context) {
-            imageView = new ImageView(context);
-            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-            return imageView;
-
-        }
-
-        @Override
-        public void UpdateUI(Context context, int position, String data) {
-            Glide.with(context).load(data).into(imageView);
-
-        }
-    }
+//    public class LocalImageHolderView implements Holder<String> {
+//
+//        private ImageView imageView;
+//        @Override
+//        public View createView(Context context) {
+//            imageView = new ImageView(context);
+//            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+//            return imageView;
+//
+//        }
+//
+//        @Override
+//        public void UpdateUI(Context context, int position, String data) {
+//            Glide.with(context).load(data).into(imageView);
+//
+//        }
+//    }
 
     private void getItem(final int comId, final String user_name, final int code){
         if(comId == -1){
@@ -169,12 +169,15 @@ public class SellingDetail extends AppCompatActivity {
                                 downTimeView.setText("下架 " + msg.getDownTime());
                                 TextView stateView = (TextView) findViewById(R.id.tv_goods_state);
                                 stateView.setText("状态 " + msg.getState());
-                                images.add("http://123.207.161.20" + msg.getImageID());
-                                Log.d("DETAIL", msg.getImageID());
-                                Log.d("DETAIL", images.get(0));
-                                images.add("http://123.207.161.20" + msg.getImageID());
-                                images.add("http://123.207.161.20" + msg.getImageID());
-                                convenientBanner.notifyDataSetChanged();
+                                String image = "http://123.207.161.20" + msg.getImageID();
+                                ImageView imageView = (ImageView) findViewById(R.id.good_image);
+                                Glide.with(SellingDetail.this).load(image).into(imageView);
+//                                images.add("http://123.207.161.20" + msg.getImageID());
+//                                Log.d("DETAIL", msg.getImageID());
+//                                Log.d("DETAIL", images.get(0));
+//                                images.add("http://123.207.161.20" + msg.getImageID());
+//                                images.add("http://123.207.161.20" + msg.getImageID());
+//                                convenientBanner.notifyDataSetChanged();
                             }
                         });
                     } catch (IOException e) {
