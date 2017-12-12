@@ -63,7 +63,7 @@ public class UserHomeAdapter extends RecyclerView.Adapter<UserHomeAdapter.ViewHo
                 Log.d("RORORO", userHome.getUserName());
                 //Toast.makeText(v.getContext(), "hahaha from: " + userHome.getUserName(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(activity, Me.class);
-                intent.putExtra("user_name", activity.getIntent().getStringExtra("user_name"));
+                intent.putExtra("user_name", userHome.getUserName());
                 activity.startActivity(intent);
             }
         });
