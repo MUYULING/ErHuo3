@@ -12,6 +12,15 @@
         android:background="?attr/colorPrimary"
         android:orientation="vertical">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="添加求购商品"
+            android:textSize="20sp"
+            android:textColor="@color/colorDefault"
+            />
+
     </android.support.v7.widget.Toolbar>
 
     <ScrollView
